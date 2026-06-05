@@ -129,16 +129,9 @@ tr:hover td { background: #fafbfc; }
         <div class="chart-wrap"><canvas id="provinceChart"></canvas></div>
     </div>
     <div class="card">
-        <div class="card-title">🏙️ 城市分布 Top10</div>
-        <div class="chart-wrap"><canvas id="cityChart"></canvas></div>
-    </div>
-</div>
-
-<div class="dashboard">
-    <div class="card full-width">
         <div class="card-title">⭐ 高价值客户 Top10</div>
         <table>
-            <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>需求</th><th>所在地</th><th>产品</th></tr></thead>
+            <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>产品</th></tr></thead>
             <tbody>
     <tr>
         <td>1</td>
@@ -146,8 +139,6 @@ tr:hover td { background: #fafbfc; }
         <td>155****2097</td>
         <td>¥2,697</td>
         <td>1单</td>
-        <td>血糖</td>
-        <td>内蒙古自治区 包头市</td>
         <td>益衡+轻路套组</td>
     </tr>
     <tr>
@@ -156,9 +147,7 @@ tr:hover td { background: #fafbfc; }
         <td>152****3510</td>
         <td>¥2,178</td>
         <td>2单</td>
-        <td>轻体</td>
-        <td>新疆维吾尔自治区 和田地区</td>
-        <td>益畅、镜脂·轻（单品）</td>
+        <td>镜脂·轻（单品）、益畅</td>
     </tr>
     <tr>
         <td>3</td>
@@ -166,8 +155,6 @@ tr:hover td { background: #fafbfc; }
         <td>133****6696</td>
         <td>¥1,700</td>
         <td>1单</td>
-        <td>轻体</td>
-        <td>内蒙古自治区 乌海市</td>
         <td>镜脂套组（轻+阻）</td>
     </tr>
     <tr>
@@ -176,8 +163,6 @@ tr:hover td { background: #fafbfc; }
         <td>137****0888</td>
         <td>¥1,010</td>
         <td>1单</td>
-        <td>代谢</td>
-        <td>湖南省 湘西土家族苗族自治州</td>
         <td>益净</td>
     </tr>
     <tr>
@@ -186,9 +171,7 @@ tr:hover td { background: #fafbfc; }
         <td>181****9791</td>
         <td>¥965</td>
         <td>2单</td>
-        <td>家人健康</td>
-        <td>四川省  成都市</td>
-        <td>益家人、镜脂套组（轻+阻）</td>
+        <td>镜脂套组（轻+阻）、益家人</td>
     </tr>
     <tr>
         <td>6</td>
@@ -196,8 +179,6 @@ tr:hover td { background: #fafbfc; }
         <td>135****4294</td>
         <td>¥706</td>
         <td>2单</td>
-        <td>轻体</td>
-        <td>北京市 北京市</td>
         <td>轻路、镜脂套组（轻+阻）</td>
     </tr>
     <tr>
@@ -206,8 +187,6 @@ tr:hover td { background: #fafbfc; }
         <td>151****1927</td>
         <td>¥567</td>
         <td>1单</td>
-        <td>轻体</td>
-        <td>河北省 衡水市</td>
         <td>镜脂套组（轻+阻）</td>
     </tr>
     <tr>
@@ -216,8 +195,6 @@ tr:hover td { background: #fafbfc; }
         <td>135****1510</td>
         <td>¥567</td>
         <td>1单</td>
-        <td>轻体</td>
-        <td>广东省 广州市</td>
         <td>镜脂套组（轻+阻）</td>
     </tr>
     <tr>
@@ -226,8 +203,6 @@ tr:hover td { background: #fafbfc; }
         <td>139****0439</td>
         <td>¥439</td>
         <td>1单</td>
-        <td>肠胃</td>
-        <td>湖北省 孝感市</td>
         <td>益畅</td>
     </tr>
     <tr>
@@ -236,8 +211,6 @@ tr:hover td { background: #fafbfc; }
         <td>159****6712</td>
         <td>¥278</td>
         <td>1单</td>
-        <td>血糖</td>
-        <td>江苏省 苏州市</td>
         <td>轻路</td>
     </tr></tbody>
         </table>
@@ -302,7 +275,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 2026-06-05 17:28
+    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 2026-06-05 09:53
 </div>
 
 <script>
@@ -445,35 +418,8 @@ new Chart(document.getElementById('provinceChart'), {
     options: {
         indexAxis: 'y',
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { left: 10 } },
         plugins: { legend: { display: false } },
-        scales: {
-            x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-            y: {
-                ticks: { font: { size: 12 }, autoSkip: false }
-            }
-        }
-    }
-});
-
-// 城市
-new Chart(document.getElementById('cityChart'), {
-    type: 'bar',
-    data: {
-        labels: ["\u91d1\u534e\u5e02", "\u5317\u4eac\u5e02", "\u548c\u7530\u5730\u533a", "\u6210\u90fd\u5e02", "\u82cf\u5dde\u5e02", "\u5305\u5934\u5e02", "\u4e34\u6c82\u5e02", "\u91cd\u5e86\u5e02", "\u8861\u6c34\u5e02", "\u5357\u4eac\u5e02"],
-        datasets: [{ label: '订单数', data: [3, 3, 2, 2, 1, 1, 1, 1, 1, 1], backgroundColor: '#4facfe', borderRadius: 4 }]
-    },
-    options: {
-        indexAxis: 'y',
-        responsive: true, maintainAspectRatio: false,
-        layout: { padding: { left: 10 } },
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-            y: {
-                ticks: { font: { size: 12 }, autoSkip: false }
-            }
-        }
+        scales: { x: { beginAtZero: true, grid: { color: '#f0f0f0' } } }
     }
 });
 </script>
