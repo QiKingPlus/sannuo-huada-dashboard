@@ -126,9 +126,16 @@ tr:hover td { background: #fafbfc; }
 <div class="dashboard">
     <div class="card">
         <div class="card-title">📍 省份分布 Top10</div>
-        <div class="chart-wrap" style="max-height:380px;"><canvas id="provinceChart"></canvas></div>
+        <div class="chart-wrap"><canvas id="provinceChart"></canvas></div>
     </div>
     <div class="card">
+        <div class="card-title">🏙️ 城市分布 Top10</div>
+        <div class="chart-wrap"><canvas id="cityChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card full-width">
         <div class="card-title">⭐ 高价值客户 Top10</div>
         <table>
             <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>产品</th></tr></thead>
@@ -147,7 +154,7 @@ tr:hover td { background: #fafbfc; }
         <td>152****3510</td>
         <td>¥2,178</td>
         <td>2单</td>
-        <td>镜脂·轻（单品）、益畅</td>
+        <td>益畅、镜脂·轻（单品）</td>
     </tr>
     <tr>
         <td>3</td>
@@ -171,7 +178,7 @@ tr:hover td { background: #fafbfc; }
         <td>181****9791</td>
         <td>¥965</td>
         <td>2单</td>
-        <td>镜脂套组（轻+阻）、益家人</td>
+        <td>益家人、镜脂套组（轻+阻）</td>
     </tr>
     <tr>
         <td>6</td>
@@ -275,7 +282,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 2026-06-05 11:05
+    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 2026-06-05 11:30
 </div>
 
 <script>
@@ -412,18 +419,39 @@ new Chart(document.getElementById('hourChart'), {
 new Chart(document.getElementById('provinceChart'), {
     type: 'bar',
     data: {
-        labels: ["\u6e56\u5357\u7701 \u00b7 3\u5355\n\u6e58\u897f\u571f\u5bb6\u65cf\u82d7\u65cf\u81ea\u6cbb\u5dde(1\u5355)\u3001\u957f\u6c99\u5e02(1\u5355)\u3001\u682a\u6d32\u5e02(1\u5355)", "\u6d59\u6c5f\u7701 \u00b7 3\u5355\n\u91d1\u534e\u5e02(3\u5355)", "\u5317\u4eac\u5e02 \u00b7 3\u5355\n\u5317\u4eac\u5e02(3\u5355)", "\u6c5f\u82cf\u7701 \u00b7 2\u5355\n\u82cf\u5dde\u5e02(1\u5355)\u3001\u5f90\u5dde\u5e02(1\u5355)", "\u5185\u8499\u53e4\u81ea\u6cbb\u533a \u00b7 2\u5355\n\u5305\u5934\u5e02(1\u5355)\u3001\u4e4c\u6d77\u5e02(1\u5355)", "\u65b0\u7586\u7ef4\u543e\u5c14\u81ea\u6cbb\u533a \u00b7 2\u5355\n\u548c\u7530\u5730\u533a(2\u5355)", "\u6cb3\u5317\u7701 \u00b7 2\u5355\n\u8861\u6c34\u5e02(1\u5355)\u3001\u90af\u90f8\u5e02(1\u5355)", "\u56db\u5ddd\u7701  \u00b7 2\u5355\n\u6210\u90fd\u5e02(2\u5355)", "\u5c71\u4e1c\u7701 \u00b7 1\u5355\n\u4e34\u6c82\u5e02(1\u5355)", "\u91cd\u5e86\u5e02 \u00b7 1\u5355\n\u91cd\u5e86\u5e02(1\u5355)"],
+        labels: ["\u6e56\u5357\u7701", "\u6d59\u6c5f\u7701", "\u5317\u4eac\u5e02", "\u6c5f\u82cf\u7701", "\u5185\u8499\u53e4\u81ea\u6cbb\u533a", "\u65b0\u7586\u7ef4\u543e\u5c14\u81ea\u6cbb\u533a", "\u6cb3\u5317\u7701", "\u56db\u5ddd\u7701 ", "\u5c71\u4e1c\u7701", "\u91cd\u5e86\u5e02"],
         datasets: [{ label: '订单数', data: [3, 3, 3, 2, 2, 2, 2, 2, 1, 1], backgroundColor: '#764ba2', borderRadius: 4 }]
     },
     options: {
         indexAxis: 'y',
         responsive: true, maintainAspectRatio: false,
+        layout: { padding: { left: 10 } },
         plugins: { legend: { display: false } },
         scales: {
             x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
             y: {
-                ticks: { font: { size: 11 } },
-                afterFit: function(scale) { scale.height = scale.height + 60; }
+                ticks: { font: { size: 12 }, autoSkip: false }
+            }
+        }
+    }
+});
+
+// 城市
+new Chart(document.getElementById('cityChart'), {
+    type: 'bar',
+    data: {
+        labels: ["\u91d1\u534e\u5e02", "\u5317\u4eac\u5e02", "\u548c\u7530\u5730\u533a", "\u6210\u90fd\u5e02", "\u82cf\u5dde\u5e02", "\u5305\u5934\u5e02", "\u4e34\u6c82\u5e02", "\u91cd\u5e86\u5e02", "\u8861\u6c34\u5e02", "\u5357\u4eac\u5e02"],
+        datasets: [{ label: '订单数', data: [3, 3, 2, 2, 1, 1, 1, 1, 1, 1], backgroundColor: '#4facfe', borderRadius: 4 }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        layout: { padding: { left: 10 } },
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+            y: {
+                ticks: { font: { size: 12 }, autoSkip: false }
             }
         }
     }
