@@ -157,6 +157,9 @@ for r in rows:
     top_customers[p]['products'].add(r['category'])
     if 'name' not in top_customers[p]:
         top_customers[p]['name'] = r['name']
+        top_customers[p]['demand'] = r['demand'] or ''
+        top_customers[p]['province'] = r['province'] or ''
+        top_customers[p]['city'] = r['city'] or ''
 
 top_sorted = sorted(top_customers.items(), key=lambda x: x[1]['total'], reverse=True)
 
@@ -231,6 +234,8 @@ for i, (phone, data) in enumerate(top_sorted[:10], 1):
         <td>{phone[:3]}****{phone[-4:]}</td>
         <td>¥{data['total']:,.0f}</td>
         <td>{data['orders']}单</td>
+        <td>{data.get('demand', '')}</td>
+        <td>{data.get('province', '')} {data.get('city', '')}</td>
         <td>{'、'.join(list(data['products'])[:3])}</td>
     </tr>"""
 
@@ -374,7 +379,7 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="card full-width">
         <div class="card-title">⭐ 高价值客户 Top10</div>
         <table>
-            <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>产品</th></tr></thead>
+            <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>需求</th><th>所在地</th><th>产品</th></tr></thead>
             <tbody>{top_cust_rows}</tbody>
         </table>
     </div>
