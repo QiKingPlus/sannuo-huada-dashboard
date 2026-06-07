@@ -16,10 +16,11 @@ ws = wb.active
 
 rows = []
 for row in ws.iter_rows(min_row=2, values_only=True):
-    if row[0] is None:
+    # 跳过完全空行（产品名和金额都为空），允许顾问为空的行
+    if row[2] is None and row[3] is None:
         continue
     rows.append({
-        'sales': row[0],
+        'sales': row[0] if row[0] else '未知',
         'time_raw': row[1],
         'product': row[2],
         'amount': float(row[3]) if row[3] else 0,
