@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三诺&华大私域成交数据看板（截至6/4）</title>
+<title>三诺&华大私域成交数据看板（截至6/8）</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,19 +41,19 @@ tr:hover td { background: #fafbfc; }
 
 <div class="header">
     <h1>📊 三诺&华大 私域成交数据看板</h1>
-    <p>数据截至 2026年6月4日 | 数据源：三诺&华大成交用户清单 | 自动生成</p>
+    <p>数据截至 2026年6月8日 | 数据源：三诺&华大成交用户清单 | 自动生成</p>
 </div>
 
 <div class="kpi-grid">
     <div class="kpi-card">
         <div class="kpi-label">💰 累计营收</div>
         <div class="kpi-value">¥14,711</div>
-        <div class="kpi-sub">较上期 ¥6,999 → <span class="kpi-up">+¥7,711</span></div>
+        <div class="kpi-sub">较上期 ¥13,216 → <span class="kpi-up">+¥1,495</span></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">📦 累计订单</div>
         <div class="kpi-value">27</div>
-        <div class="kpi-sub">较上期 17单 → <span class="kpi-up">+10单</span></div>
+        <div class="kpi-sub">较上期 25单 → <span class="kpi-up">+2单</span></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">👤 成交客户</div>
@@ -63,7 +63,7 @@ tr:hover td { background: #fafbfc; }
     <div class="kpi-card">
         <div class="kpi-label">📊 平均客单</div>
         <div class="kpi-value">¥545</div>
-        <div class="kpi-sub">较上期 ¥411 → <span class="kpi-up">+¥133</span></div>
+        <div class="kpi-sub">较上期 ¥547 → <span class="kpi-down">-¥3</span></div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">🔁 复购率</div>
@@ -78,7 +78,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="highlight">
-    ⚠️ <strong>新增动态</strong>：6/3-6/4 密集成交，新增大单 糖友专享套组 ¥2,697（黎老师）、镜脂·轻 ¥1,519.80（赵老师）、益净复购 ¥1,009.80（赵老师/彭南其）
+    ⚠️ <strong>新增动态</strong>：6/6 朱老师首单 益衡+轻路套组 ¥734；6/8 朱老师追加 益家人 ¥228 + 益畅 ¥810
 </div>
 
 <div class="dashboard">
@@ -218,7 +218,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>轻体</td>
         <td>北京市 北京市</td>
-        <td>轻路、镜脂套组（轻+阻）</td>
+        <td>镜脂套组（轻+阻）、轻路</td>
     </tr>
     <tr>
         <td>9</td>
@@ -302,7 +302,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 2026-06-08 12:06
+    三诺&华大私域成交数据看板 | 数据截至 2026年6月8日 | 自动生成于 2026-06-08 17:34
 </div>
 
 <script>
@@ -376,7 +376,7 @@ new Chart(document.getElementById('productChart'), {
         responsive: true, maintainAspectRatio: false,
         plugins: {
             legend: { position: 'right', labels: { padding: 12, usePointStyle: true, font: { size: 11 } } },
-            tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': ¥' + ctx.raw.toLocaleString() + ' (' + (ctx.raw / 14710.699999999997 * 100).toFixed(1) + '%)'; } } }
+            tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': ¥' + ctx.raw.toLocaleString() + ' (' + (ctx.raw / 14710.7 * 100).toFixed(1) + '%)'; } } }
         }
     }
 });
