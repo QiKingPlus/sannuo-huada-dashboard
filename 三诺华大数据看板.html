@@ -77,7 +77,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="highlight">
-    ⚠️ <strong>最新动态</strong>：<br>• 2026-06-09 赵老师 轻路 ¥278（李宏梅）<br>• 2026-06-09 朱老师 轻路 ¥139（陈静）<br>• 2026-06-08 朱老师 轻路 ¥417（陈潆）
+    ⚠️ <strong>最新动态</strong>：<br>• 2026-06-09 赵老师 轻路+镜脂阻（合并） ¥278（李宏梅）<br>• 2026-06-09 朱老师 轻路 ¥139（陈静）<br>• 2026-06-08 朱老师 轻路 ¥417（陈潆）
 </div>
 
 <div class="dashboard">
@@ -157,7 +157,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>轻体</td>
         <td>新疆维吾尔自治区 和田地区</td>
-        <td>镜脂·轻（单品）、益畅</td>
+        <td>益畅、镜脂·轻（单品）</td>
     </tr>
     <tr>
         <td>3</td>
@@ -217,7 +217,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>轻体</td>
         <td>北京市 北京市</td>
-        <td>镜脂套组（轻+阻）、轻路</td>
+        <td>轻路、镜脂套组（轻+阻）</td>
     </tr>
     <tr>
         <td>9</td>
@@ -301,7 +301,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-06-09 | 自动生成于 2026-06-09 10:08
+    三诺&华大私域成交数据看板 | 数据截至 2026-06-09 | 自动生成于 2026-06-09 10:24
 </div>
 
 <script>
@@ -368,8 +368,8 @@ new Chart(document.getElementById('counselorChart'), {
 new Chart(document.getElementById('productChart'), {
     type: 'doughnut',
     data: {
-        labels: ["\u955c\u8102\u5957\u7ec4\uff08\u8f7b+\u963b\uff09", "\u76ca\u8861+\u8f7b\u8def\u5957\u7ec4", "\u8f7b\u8def", "\u955c\u8102\u00b7\u8f7b\uff08\u5355\u54c1\uff09", "\u76ca\u7545", "\u76ca\u51c0", "\u76ca\u4f11", "\u5176\u4ed6", "\u76ca\u5bb6\u4eba", "\u7545\u9752"],
-        datasets: [{ data: [3966.2, 3596.0, 2085.0, 1519.8, 1315.8, 1009.8, 759.9, 734.4, 398.0, 159.8], backgroundColor: ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DFE6E9", "#FDCB6E", "#E17055", "#00B894"], borderWidth: 2, borderColor: '#fff' }]
+        labels: ["\u955c\u8102\u5957\u7ec4\uff08\u8f7b+\u963b\uff09", "\u76ca\u8861+\u8f7b\u8def\u5957\u7ec4", "\u8f7b\u8def", "\u955c\u8102\u00b7\u8f7b\uff08\u5355\u54c1\uff09", "\u76ca\u7545", "\u76ca\u51c0", "\u76ca\u4f11", "\u5176\u4ed6", "\u76ca\u5bb6\u4eba", "\u8f7b\u8def+\u955c\u8102\u963b\uff08\u5408\u5e76\uff09", "\u7545\u9752"],
+        datasets: [{ data: [3966.2, 3596.0, 1807.0, 1519.8, 1315.8, 1009.8, 759.9, 734.4, 398.0, 278.0, 159.8], backgroundColor: ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DFE6E9", "#FDCB6E", "#E17055", "#00B894"], borderWidth: 2, borderColor: '#fff' }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,
@@ -385,7 +385,7 @@ new Chart(document.getElementById('demandChart'), {
     type: 'polarArea',
     data: {
         labels: ["\u8f7b\u4f53", "\u8840\u7cd6", "\u80a0\u80c3", "\u7761\u7720", "\u4ee3\u8c22", "\u5bb6\u4eba\u5065\u5eb7"],
-        datasets: [{ data: [13, 7, 4, 3, 1, 1], backgroundColor: ['#667eea','#764ba2','#f093fb','#4facfe','#ff6b6b','#2ecc71','#f39c12'], borderWidth: 2, borderColor: '#fff' }]
+        datasets: [{ data: [13, 8, 4, 3, 1, 1], backgroundColor: ['#667eea','#764ba2','#f093fb','#4facfe','#ff6b6b','#2ecc71','#f39c12'], borderWidth: 2, borderColor: '#fff' }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,
@@ -398,7 +398,7 @@ new Chart(document.getElementById('genderChart'), {
     type: 'doughnut',
     data: {
         labels: ["\u7537", "\u5973"],
-        datasets: [{ data: [16, 13], backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }]
+        datasets: [{ data: [16, 14], backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,
@@ -411,7 +411,7 @@ new Chart(document.getElementById('ageChart'), {
     type: 'bar',
     data: {
         labels: ["<30", "30-39", "40-49", "50-59", "60+"],
-        datasets: [{ label: '人数', data: [2, 4, 11, 7, 4], backgroundColor: '#667eea', borderRadius: 4 }]
+        datasets: [{ label: '人数', data: [2, 4, 11, 8, 4], backgroundColor: '#667eea', borderRadius: 4 }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,

@@ -55,9 +55,12 @@ def simplify_product(name):
     name = str(name)
     if '镜脂·轻+镜脂·阻' in name or '管理套组' in name:
         return '镜脂套组（轻+阻）'
+    # 合并订单：轻路+镜脂阻
+    if ('轻路' in name and ('镜脂' in name or '镜脂阻' in name)):
+        return '轻路+镜脂阻（合并）'
     if '镜脂·轻' in name:
         return '镜脂·轻（单品）'
-    if '镜脂·阻' in name:
+    if '镜脂·阻' in name or '镜脂*阻' in name:
         return '镜脂·阻（单品）'
     if '益衡' in name or '轻路' not in name and '益衡' in name:
         return '益衡+轻路套组'
