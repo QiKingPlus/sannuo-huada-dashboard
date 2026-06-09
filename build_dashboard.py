@@ -240,12 +240,19 @@ for i, (phone, data) in enumerate(top_sorted[:10], 1):
         <td>{'、'.join(list(data['products'])[:3])}</td>
     </tr>"""
 
+latest_date = max(r['date'] for r in rows if r.get('date') != 'unknown')
+latest_date_str = str(latest_date).replace('2026-0', '').replace('2026-', '')
+# 最新动态摘要
+latest_orders = sorted([r for r in rows if r.get('date') != 'unknown'], key=lambda r: r['date'], reverse=True)[:3]
+latest_summary = []
+for r in latest_orders:
+    latest_summary.append(f"{r['date']} {r['sales']} {r['category']} ¥{r['amount']:,.0f}（{r.get('name','') or '未知客户'}）")
+
 html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三诺&华大私域成交数据看板（截至6/4）</title>
+<title>三诺&华大私域成交数据看板（截至{latest_date_str}）</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -283,7 +290,7 @@ tr:hover td {{ background: #fafbfc; }}
 
 <div class="header">
     <h1>📊 三诺&华大 私域成交数据看板</h1>
-    <p>数据截至 2026年6月4日 | 数据源：三诺&华大成交用户清单 | 自动生成</p>
+    <p>数据截至 {max(r['date'] for r in rows if r.get('date') != 'unknown')} | 数据源：三诺&华大成交用户清单 | 自动生成</p>
 </div>
 
 <div class="kpi-grid">
@@ -315,12 +322,12 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="kpi-card">
         <div class="kpi-label">🛒 顾问数量</div>
         <div class="kpi-value">{len(counselor_stats)}</div>
-        <div class="kpi-sub">新增朱老师</div>
+        <div class="kpi-sub">最新成交: {csl_names[0] if csl_names else '-'}</div>
     </div>
 </div>
 
 <div class="highlight">
-    ⚠️ <strong>新增动态</strong>：6/3-6/4 密集成交，新增大单 糖友专享套组 ¥2,697（黎老师）、镜脂·轻 ¥1,519.80（赵老师）、益净复购 ¥1,009.80（赵老师/彭南其）
+    ⚠️ <strong>最新动态</strong>：<br>{'<br>'.join(f'• {s}' for s in latest_summary)}
 </div>
 
 <div class="dashboard">
@@ -417,7 +424,7 @@ html += f"""
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026年6月4日 | 自动生成于 {datetime.now().strftime('%Y-%m-%d %H:%M')}
+    三诺&华大私域成交数据看板 | 数据截至 {latest_date} | 自动生成于 {datetime.now().strftime('%Y-%m-%d %H:%M')}
 </div>
 
 <script>
