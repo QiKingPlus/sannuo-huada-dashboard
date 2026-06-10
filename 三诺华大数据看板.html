@@ -111,6 +111,13 @@ tr:hover td { background: #fafbfc; }
         <div class="card-title">👥 性别×年龄分布</div>
         <div class="chart-wrap"><canvas id="genderAgeChart"></canvas></div>
     </div>
+</div>
+
+<div class="dashboard">
+    <div class="card">
+        <div class="card-title">👫 性别占比</div>
+        <div class="chart-wrap"><canvas id="genderChart"></canvas></div>
+    </div>
     <div class="card">
         <div class="card-title">⏰ 下单时段分布</div>
         <div class="chart-wrap"><canvas id="hourChart"></canvas></div>
@@ -152,7 +159,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>轻体</td>
         <td>新疆维吾尔自治区 和田地区</td>
-        <td>益畅、镜脂·轻（单品）</td>
+        <td>镜脂·轻（单品）、益畅</td>
     </tr>
     <tr>
         <td>3</td>
@@ -182,7 +189,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>家人健康</td>
         <td>四川省  成都市</td>
-        <td>益家人、镜脂套组（轻+阻）</td>
+        <td>镜脂套组（轻+阻）、益家人</td>
     </tr>
     <tr>
         <td>6</td>
@@ -296,7 +303,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-06-10 | 自动生成于 2026-06-10 13:46
+    三诺&华大私域成交数据看板 | 数据截至 2026-06-10 | 自动生成于 2026-06-10 14:22
 </div>
 
 <script>
@@ -401,6 +408,19 @@ new Chart(document.getElementById('demandChart'), {
     options: {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { position: 'bottom', labels: { padding: 10, usePointStyle: true } } }
+    }
+});
+
+// 性别占比
+new Chart(document.getElementById('genderChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["\u5973", "\u7537"],
+        datasets: [{ data: [18, 18], backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
     }
 });
 

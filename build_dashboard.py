@@ -382,6 +382,13 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="card-title">👥 性别×年龄分布</div>
         <div class="chart-wrap"><canvas id="genderAgeChart"></canvas></div>
     </div>
+</div>
+
+<div class="dashboard">
+    <div class="card">
+        <div class="card-title">👫 性别占比</div>
+        <div class="chart-wrap"><canvas id="genderChart"></canvas></div>
+    </div>
     <div class="card">
         <div class="card-title">⏰ 下单时段分布</div>
         <div class="chart-wrap"><canvas id="hourChart"></canvas></div>
@@ -545,6 +552,19 @@ new Chart(document.getElementById('demandChart'), {{
     options: {{
         responsive: true, maintainAspectRatio: false,
         plugins: {{ legend: {{ position: 'bottom', labels: {{ padding: 10, usePointStyle: true }} }} }}
+    }}
+}});
+
+// 性别占比
+new Chart(document.getElementById('genderChart'), {{
+    type: 'doughnut',
+    data: {{
+        labels: {json.dumps(g_labels)},
+        datasets: [{{ data: {json.dumps(g_values)}, backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }}]
+    }},
+    options: {{
+        responsive: true, maintainAspectRatio: false,
+        plugins: {{ legend: {{ position: 'bottom' }} }}
     }}
 }});
 
