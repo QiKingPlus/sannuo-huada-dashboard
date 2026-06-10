@@ -390,6 +390,13 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="chart-wrap"><canvas id="genderChart"></canvas></div>
     </div>
     <div class="card">
+        <div class="card-title">📊 年龄分布</div>
+        <div class="chart-wrap"><canvas id="ageChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card full-width">
         <div class="card-title">⏰ 下单时段分布</div>
         <div class="chart-wrap"><canvas id="hourChart"></canvas></div>
     </div>
@@ -565,6 +572,20 @@ new Chart(document.getElementById('genderChart'), {{
     options: {{
         responsive: true, maintainAspectRatio: false,
         plugins: {{ legend: {{ position: 'bottom' }} }}
+    }}
+}});
+
+// 年龄分布（不区分性别）
+new Chart(document.getElementById('ageChart'), {{
+    type: 'bar',
+    data: {{
+        labels: {json.dumps(ag_labels)},
+        datasets: [{{ label: '人数', data: {json.dumps(ag_values)}, backgroundColor: '#667eea', borderRadius: 4 }}]
+    }},
+    options: {{
+        responsive: true, maintainAspectRatio: false,
+        plugins: {{ legend: {{ display: false }} }},
+        scales: {{ y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }} }} }}
     }}
 }});
 
