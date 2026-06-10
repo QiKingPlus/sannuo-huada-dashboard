@@ -379,7 +379,7 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="chart-wrap"><canvas id="demandChart"></canvas></div>
     </div>
     <div class="card">
-        <div class="card-title">👥 性别×年龄分布</div>
+        <div class="card-title">👥 性别×年龄分布（堆叠）</div>
         <div class="chart-wrap"><canvas id="genderAgeChart"></canvas></div>
     </div>
 </div>
@@ -390,13 +390,6 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="chart-wrap"><canvas id="genderChart"></canvas></div>
     </div>
     <div class="card">
-        <div class="card-title">📊 年龄分布</div>
-        <div class="chart-wrap"><canvas id="ageChart"></canvas></div>
-    </div>
-</div>
-
-<div class="dashboard">
-    <div class="card full-width">
         <div class="card-title">⏰ 下单时段分布</div>
         <div class="chart-wrap"><canvas id="hourChart"></canvas></div>
     </div>
@@ -575,40 +568,53 @@ new Chart(document.getElementById('genderChart'), {{
     }}
 }});
 
-// 年龄分布（不区分性别）
-new Chart(document.getElementById('ageChart'), {{
-    type: 'bar',
-    data: {{
-        labels: {json.dumps(ag_labels)},
-        datasets: [{{ label: '人数', data: {json.dumps(ag_values)}, backgroundColor: '#667eea', borderRadius: 4 }}]
-    }},
-    options: {{
-        responsive: true, maintainAspectRatio: false,
-        plugins: {{ legend: {{ display: false }} }},
-        scales: {{ y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }} }} }}
-    }}
-}});
-
-// 性别×年龄分组柱状图
+// 性别×年龄堆叠柱状图（含总体）
 const gaMale = {json.dumps([gender_age.get('男', {}).get(k, 0) for k in ag_labels])};
 const gaFemale = {json.dumps([gender_age.get('女', {}).get(k, 0) for k in ag_labels])};
+const gaTotal = gaMale.map((v,i) => v + gaFemale[i]);
 new Chart(document.getElementById('genderAgeChart'), {{
     type: 'bar',
     data: {{
         labels: {json.dumps(ag_labels)},
         datasets: [
-            {{ label: '👨 男', data: gaMale, backgroundColor: '#4facfe', borderRadius: 4 }},
-            {{ label: '👩 女', data: gaFemale, backgroundColor: '#f093fb', borderRadius: 4 }}
+            {{ label: '👨 男', data: gaMale, backgroundColor: '#4facfe' }},
+            {{ label: '👩 女', data: gaFemale, backgroundColor: '#f093fb' }}
         ]
     }},
     options: {{
         responsive: true, maintainAspectRatio: false,
-        plugins: {{ legend: {{ position: 'top', labels: {{ usePointStyle: true }} }} }},
+        plugins: {{
+            legend: {{ position: 'top', labels: {{ usePointStyle: true }} }},
+            tooltip: {{
+                callbacks: {{
+                    footer: function(items) {{
+                        const idx = items[0].dataIndex;
+                        return '合计: ' + gaTotal[idx] + '人';
+                    }}
+                }}
+            }}
+        }},
         scales: {{
-            x: {{ grid: {{ display: false }} }},
-            y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '人数' }} }}
+            x: {{ stacked: true, grid: {{ display: false }} }},
+            y: {{ stacked: true, beginAtZero: true, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '人数' }} }}
         }}
-    }}
+    }},
+    plugins: [{{
+        id: 'totalLabels',
+        afterDatasetsDraw(chart) {{
+            const ctx = chart.ctx;
+            const meta = chart.getDatasetMeta(0);
+            ctx.font = 'bold 13px -apple-system, sans-serif';
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'center';
+            meta.data.forEach((bar, i) => {{
+                const t = gaTotal[i];
+                if (t > 0) {{
+                    ctx.fillText(t + '人', bar.x, bar.y - 8);
+                }}
+            }});
+        }}
+    }}]
 }});
 
 // 时段
