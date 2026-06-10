@@ -549,8 +549,8 @@ new Chart(document.getElementById('demandChart'), {{
 }});
 
 // 性别×年龄分组柱状图
-const gaMale = [{json.dumps([gender_age.get('男', {}).get(k, 0) for k in ag_labels])}];
-const gaFemale = [{json.dumps([gender_age.get('女', {}).get(k, 0) for k in ag_labels])}];
+const gaMale = {json.dumps([gender_age.get('男', {}).get(k, 0) for k in ag_labels])};
+const gaFemale = {json.dumps([gender_age.get('女', {}).get(k, 0) for k in ag_labels])};
 new Chart(document.getElementById('genderAgeChart'), {{
     type: 'bar',
     data: {{
