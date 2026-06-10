@@ -134,6 +134,18 @@ for a in ages:
     elif a < 60: age_groups['50-59'] += 1
     else: age_groups['60+'] += 1
 
+# 性别×年龄交叉分析
+gender_age = defaultdict(lambda: {'<30': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60+': 0})
+for r in rows:
+    g = r['gender']
+    a = r['age']
+    if g and a is not None:
+        if a < 30: gender_age[g]['<30'] += 1
+        elif a < 40: gender_age[g]['30-39'] += 1
+        elif a < 50: gender_age[g]['40-49'] += 1
+        elif a < 60: gender_age[g]['50-59'] += 1
+        else: gender_age[g]['60+'] += 1
+
 # 地域分布 Top — 省份+城市明细
 province_raw = Counter(r['province'] for r in rows if r['province'])
 # 省→城市→单数
@@ -192,6 +204,12 @@ date_orders_json = json.dumps([d[1]['orders'] for d in daily_sorted])
 prod_labels = [p[0] for p in product_sorted]
 prod_values = [round(p[1]['revenue'], 2) for p in product_sorted]
 prod_colors = ['#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DFE6E9','#FDCB6E','#E17055','#00B894']
+
+# 产品数量数据（按订单数排序）
+product_qty_sorted = sorted(product_stats.items(), key=lambda x: x[1]['orders'], reverse=True)
+prod_qty_labels = [p[0] for p in product_qty_sorted]
+prod_qty_values = [p[1]['orders'] for p in product_qty_sorted]
+total_qty = sum(prod_qty_values)
 
 # 需求数据
 demand_labels = [d[0] for d in demand_sorted]
@@ -350,24 +368,19 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="chart-wrap"><canvas id="productChart"></canvas></div>
     </div>
     <div class="card">
-        <div class="card-title">🎯 客户需求分布</div>
-        <div class="chart-wrap"><canvas id="demandChart"></canvas></div>
+        <div class="card-title">📦 产品销量结构</div>
+        <div class="chart-wrap"><canvas id="productQtyChart"></canvas></div>
     </div>
 </div>
 
 <div class="dashboard">
     <div class="card">
-        <div class="card-title">👥 客户画像</div>
-        <div class="dashboard" style="grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div>
-                <div style="font-size:12px;color:#888;margin-bottom:8px;">性别分布</div>
-                <div class="chart-wrap"><canvas id="genderChart"></canvas></div>
-            </div>
-            <div>
-                <div style="font-size:12px;color:#888;margin-bottom:8px;">年龄分布</div>
-                <div class="chart-wrap"><canvas id="ageChart"></canvas></div>
-            </div>
-        </div>
+        <div class="card-title">🎯 客户需求分布</div>
+        <div class="chart-wrap"><canvas id="demandChart"></canvas></div>
+    </div>
+    <div class="card">
+        <div class="card-title">👥 性别×年龄分布</div>
+        <div class="chart-wrap"><canvas id="genderAgeChart"></canvas></div>
     </div>
     <div class="card">
         <div class="card-title">⏰ 下单时段分布</div>
@@ -506,6 +519,22 @@ new Chart(document.getElementById('productChart'), {{
     }}
 }});
 
+// 产品销量结构
+new Chart(document.getElementById('productQtyChart'), {{
+    type: 'doughnut',
+    data: {{
+        labels: {json.dumps(prod_qty_labels)},
+        datasets: [{{ data: {json.dumps(prod_qty_values)}, backgroundColor: {json.dumps(prod_colors[:len(prod_qty_labels)])}, borderWidth: 2, borderColor: '#fff' }}]
+    }},
+    options: {{
+        responsive: true, maintainAspectRatio: false,
+        plugins: {{
+            legend: {{ position: 'right', labels: {{ padding: 12, usePointStyle: true, font: {{ size: 11 }} }} }},
+            tooltip: {{ callbacks: {{ label: function(ctx) {{ return ctx.label + ': ' + ctx.raw + '单 (' + (ctx.raw / {total_qty} * 100).toFixed(1) + '%)'; }} }} }}
+        }}
+    }}
+}});
+
 // 需求分布
 new Chart(document.getElementById('demandChart'), {{
     type: 'polarArea',
@@ -519,30 +548,25 @@ new Chart(document.getElementById('demandChart'), {{
     }}
 }});
 
-// 性别
-new Chart(document.getElementById('genderChart'), {{
-    type: 'doughnut',
-    data: {{
-        labels: {json.dumps(g_labels)},
-        datasets: [{{ data: {json.dumps(g_values)}, backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }}]
-    }},
-    options: {{
-        responsive: true, maintainAspectRatio: false,
-        plugins: {{ legend: {{ position: 'bottom' }} }}
-    }}
-}});
-
-// 年龄
-new Chart(document.getElementById('ageChart'), {{
+// 性别×年龄分组柱状图
+const gaMale = [{json.dumps([gender_age.get('男', {}).get(k, 0) for k in ag_labels])}];
+const gaFemale = [{json.dumps([gender_age.get('女', {}).get(k, 0) for k in ag_labels])}];
+new Chart(document.getElementById('genderAgeChart'), {{
     type: 'bar',
     data: {{
         labels: {json.dumps(ag_labels)},
-        datasets: [{{ label: '人数', data: {json.dumps(ag_values)}, backgroundColor: '#667eea', borderRadius: 4 }}]
+        datasets: [
+            {{ label: '👨 男', data: gaMale, backgroundColor: '#4facfe', borderRadius: 4 }},
+            {{ label: '👩 女', data: gaFemale, backgroundColor: '#f093fb', borderRadius: 4 }}
+        ]
     }},
     options: {{
         responsive: true, maintainAspectRatio: false,
-        plugins: {{ legend: {{ display: false }} }},
-        scales: {{ y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }} }} }}
+        plugins: {{ legend: {{ position: 'top', labels: {{ usePointStyle: true }} }} }},
+        scales: {{
+            x: {{ grid: {{ display: false }} }},
+            y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '人数' }} }}
+        }}
     }}
 }});
 
