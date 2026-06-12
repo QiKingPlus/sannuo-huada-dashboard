@@ -3,481 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三诺&华大成交话术SOP分析报告 v4</title>
+<title>三诺×华大 成交话术SOP分析报告 · 2026-06-12 16:16</title>
 <style>
-* {margin:0;padding:0;box-sizing:border-box}
-body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f0f4f8;color:#2c3e50;line-height:1.8}
-.container {max-width:960px;margin:0 auto;padding:20px}
-
-/* 封面 */
-.hero {background:linear-gradient(135deg,#1a5276 0%,#2e86c1 40%,#3498db 70%,#85c1e9 100%);color:white;padding:60px 40px;border-radius:16px;margin:20px 0 30px;position:relative;overflow:hidden}
-.hero::after {content:"";position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:rgba(255,255,255,.05);border-radius:50%}
-.hero h1 {font-size:2.2em;margin-bottom:10px;position:relative;z-index:1}
-.hero .subtitle {font-size:1.1em;opacity:.9;margin-bottom:25px;position:relative;z-index:1}
-.hero .meta {display:flex;gap:30px;font-size:.9em;opacity:.85;position:relative;z-index:1;flex-wrap:wrap}
-.hero .meta span {background:rgba(255,255,255,.15);padding:4px 14px;border-radius:20px}
-
-/* KPI cards */
-.kpis {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:30px}
-.kpi {background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.kpi .num {font-size:2em;font-weight:700;color:#2e86c1}
-.kpi .label {font-size:.85em;color:#7f8c8d;margin-top:4px}
-.kpi .delta {font-size:.8em;font-weight:600;margin-top:2px}
-.kpi .delta.up {color:#27ae60}
-.kpi .delta.new {color:#e67e22}
-
-/* 章节 */
-.section {background:white;border-radius:12px;padding:30px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.section h2 {font-size:1.5em;color:#1a5276;border-bottom:2px solid #2e86c1;padding-bottom:8px;margin-bottom:20px}
-.section h3 {font-size:1.15em;color:#2c3e50;margin:20px 0 10px}
-.section h4 {font-size:1em;color:#2e86c1;margin:15px 0 8px}
-
-/* 7步法流程图 */
-.flow {display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0}
-.flow-step {background:linear-gradient(135deg,#2e86c1,#3498db);color:white;padding:10px 16px;border-radius:8px;font-size:.85em;text-align:center;min-width:80px}
-.flow-step .step-num {font-size:1.4em;font-weight:700}
-.flow-step .step-name {font-size:.75em;opacity:.9}
-.flow-arrow {display:flex;align-items:center;color:#3498db;font-size:1.2em;font-weight:700}
-
-/* 表格 */
-table {width:100%;border-collapse:collapse;margin:15px 0;font-size:.9em}
-thead {background:#2e86c1;color:white}
-th,td {padding:10px 12px;text-align:center;border:1px solid #e8e8e8}
-tbody tr:nth-child(even) {background:#f7f9fc}
-tbody tr:hover {background:#eaf2f8}
-
-/* 条形图 */
-.bar-bg {background:#e8e8e8;border-radius:4px;height:20px;overflow:hidden}
-.bar-fill {background:linear-gradient(90deg,#2e86c1,#3498db);color:white;font-size:.7em;line-height:20px;padding-left:6px;border-radius:4px;white-space:nowrap;min-width:30px}
-
-/* 话术卡片 */
-.stage-block {border-left:4px solid #2e86c1;padding:12px 16px;margin:15px 0;background:#f7f9fc;border-radius:0 8px 8px 0}
-.stage-block h3 {margin-top:0;color:#1a5276;font-size:1em}
-.stage-block ul {margin:8px 0 0;padding-left:18px}
-.stage-block li {margin-bottom:8px;font-size:.88em;line-height:1.7}
-.stage-block li i {color:#7f8c8d;font-style:italic}
-
-/* 因子卡片 */
-.factor-cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin:15px 0}
-.factor {background:linear-gradient(135deg,#eaf2f8,#f7f9fc);border-radius:10px;padding:20px;border-top:3px solid #2e86c1}
-.factor .rank {font-size:2em;font-weight:700;color:#2e86c1;line-height:1}
-.factor .name {font-weight:700;margin:6px 0;font-size:1.05em}
-.factor .pct {color:#e67e22;font-weight:600;font-size:.9em}
-.factor .desc {font-size:.85em;color:#555;margin-top:6px}
-
-/* 话术速查表 */
-.quick-table {background:#fef9e7;border:1px solid #f9e79f;border-radius:10px;padding:20px;margin:15px 0}
-.quick-table h3 {color:#7d6608;margin-top:0}
-
-/* 底部 */
-.footer {text-align:center;color:#95a5a6;font-size:.8em;padding:30px 0}
-
-/* 响应式 */
-@media (max-width:600px) {
-    .hero {padding:30px 20px}
-    .hero h1 {font-size:1.5em}
-    .kpis {grid-template-columns:repeat(2,1fr)}
-    .section {padding:20px}
-    table {font-size:.8em}
-    th,td {padding:6px 8px}
-}
-
-.tag {display:inline-block;background:#2e86c1;color:white;padding:2px 8px;border-radius:4px;font-size:.75em;margin:1px}
-.tag.green {background:#27ae60}
-.tag.orange {background:#e67e22}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:#F7F7FA; color:#1A1A1A; line-height:1.6; }
+.container { max-width:1100px; margin:0 auto; padding:40px 24px 100px; }
+.hero { text-align:center; padding:50px 0 40px; }
+.hero .badge { display:inline-block; background:linear-gradient(135deg,#534AB7,#7C6FF7); color:#FFF; padding:6px 18px; border-radius:20px; font-size:13px; font-weight:500; margin-bottom:12px; }
+.hero h1 { font-size:32px; font-weight:600; }
+.hero .meta { font-size:13px; color:#888; margin-top:8px; }
+.hero .date-range { font-size:12px; color:#AAA; }
+.metrics { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:30px 0; }
+.metric { background:#FFF; border:1px solid #E8E8E8; border-radius:12px; padding:18px; text-align:center; }
+.metric .val { font-size:22px; font-weight:600; }
+.metric .val.green { color:#1D9E75; }
+.metric .val.purple { color:#534AB7; }
+.metric .val.amber { color:#EF9F27; }
+.metric .val.coral { color:#D85A30; }
+.metric .lbl { font-size:11px; color:#888; margin-top:4px; }
+.section { margin-top:48px; }
+.section h2 { font-size:20px; font-weight:600; margin-bottom:6px; display:flex; align-items:center; gap:10px; }
+.section h2 .num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; background:#EEEDFE; color:#534AB7; border-radius:8px; font-size:14px; font-weight:600; flex-shrink:0; }
+.section .desc { font-size:13px; color:#888; margin-bottom:20px; margin-left:40px; }
+.cards { display:grid; gap:12px; }
+.cards.c2 { grid-template-columns:1fr 1fr; }
+.cards.c3 { grid-template-columns:repeat(3,1fr); }
+.cards.c4 { grid-template-columns:repeat(4,1fr); }
+.card { background:#FFF; border:1px solid #E8E8E8; border-radius:12px; padding:20px; }
+.card.purple { border-left:3px solid #534AB7; }
+.card.blue { border-left:3px solid #378ADD; }
+.card.teal { border-left:3px solid #1D9E75; }
+.card.coral { border-left:3px solid #D85A30; }
+.card h3 { font-size:14px; font-weight:600; margin-bottom:8px; }
+.card p { font-size:13px; color:#555; line-height:1.7; }
+.bar-container { background:#FFF; border:1px solid #E8E8E8; border-radius:12px; padding:18px 22px; }
+.bar-row { display:flex; align-items:center; gap:10px; padding:7px 0; font-size:13px; }
+.bar-row .label { width:130px; flex-shrink:0; color:#555; }
+.bar-row .count { width:50px; flex-shrink:0; text-align:right; font-weight:500; color:#333; font-size:12px; }
+.bar-row .bar-wrapper { flex:1; background:#F3F4F6; border-radius:4px; height:20px; overflow:hidden; }
+.bar-row .bar-fill { height:100%; border-radius:4px; }
+.bar-row .bar-fill.top { background:linear-gradient(90deg,#534AB7,#7C6FF7); }
+.bar-row .bar-fill.mid { background:linear-gradient(90deg,#1D9E75,#4ADE80); }
+.bar-row .bar-fill.low { background:linear-gradient(90deg,#EF9F27,#FBBF24); }
+.charts-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.pie-box { background:#FFF; border:1px solid #E8E8E8; border-radius:12px; padding:18px; text-align:center; }
+.pie-box .pie-title { font-size:13px; font-weight:600; margin-bottom:12px; color:#555; }
+.donut { position:relative; width:160px; height:160px; margin:0 auto 10px; border-radius:50%; }
+.donut-inner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; }
+.donut-inner .pct { font-size:22px; font-weight:600; color:#1A1A1A; }
+.donut-inner .tag { font-size:10px; color:#888; }
+.legend { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:8px; font-size:11px; }
+.legend-item { display:flex; align-items:center; gap:4px; }
+.legend-dot { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
+.quote-card { background:#FFF; border:1px solid #E8E8E8; border-radius:10px; padding:14px; margin-bottom:10px; border-left:3px solid #534AB7; }
+.quote-card .stage-tag { font-size:10px; padding:2px 8px; border-radius:4px; background:#EEEDFE; color:#534AB7; font-weight:500; }
+.quote-card .text { font-size:12px; color:#555; line-height:1.7; margin-top:6px; max-height:100px; overflow:hidden; }
+.quote-card .text.expanded { max-height:none; }
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
+.data-table th { text-align:left; padding:9px 12px; background:#F9FAFB; font-weight:600; color:#555; border-bottom:1px solid #E8E8E8; font-size:11px; }
+.data-table td { padding:9px 12px; border-bottom:1px solid #F3F4F6; color:#333; }
+.data-table .hl { color:#1D9E75; font-weight:600; }
+.data-table .wl { color:#D85A30; font-weight:600; }
+.insight-box { background:#F5F3FF; border:1px solid #DDD6FE; border-radius:10px; padding:14px 18px; font-size:13px; color:#4C1D95; line-height:1.7; margin-top:16px; }
+.tag { padding:3px 8px; border-radius:4px; font-size:10px; font-weight:500; }
+.tag.green { background:#DCFCE7; color:#166534; }
+.tag.amber { background:#FEF3C7; color:#92400E; }
+.tag.red { background:#FEE2E2; color:#991B1B; }
+.tag.blue { background:#DBEAFE; color:#1E40AF; }
+.tag.purple { background:#EDE9FE; color:#5B21B6; }
+.footer { text-align:center; margin-top:60px; padding:40px 0; border-top:1px solid #E8E8E8; font-size:12px; color:#888; }
+@media (max-width:768px) { .metrics,.cards.c2,.cards.c3,.cards.c4,.charts-row { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 <div class="container">
-
-<!-- ═══ 封面 ═══ -->
 <div class="hero">
-    <h1>📋 三诺&华大 · 成交话术SOP分析报告 v4</h1>
-    <div class="subtitle">基于 29 份成交用户聊天记录的全量分析 · 萃取可复制的销售方法论</div>
-    <div class="meta">
-        <span>📅 2026-06-09 12:05</span>
-        <span>💬 2598 条消息</span>
-        <span>👥 29 位成交客户</span>
-        <span>📊 5 位健康顾问</span>
-        <span>🔖 v4.0 同步至31订单</span>
-    </div>
+  <div class="badge">话术数据分析 · 2026-06-12 16:16 更新</div>
+  <h1>三诺×华大 成交话术SOP分析报告</h1>
+  <div class="meta">45 份成交客户聊天记录 · 3,741 条消息 · 5 位顾问</div>
+  <div class="date-range">260521 ~ 260612 · 每份记录均已完成成交</div>
 </div>
 
-<!-- ═══ KPI 速览 ═══ -->
-<div class="kpis">
-    <div class="kpi"><div class="num">31</div><div class="label">累计成交订单</div><div class="delta">31单 / 28位客户</div></div>
-    <div class="kpi"><div class="num">¥16,444</div><div class="label">总营收</div><div class="delta">5位顾问团队</div></div>
-    <div class="kpi"><div class="num">10.7%</div><div class="label">客户复购率</div><div class="delta">3/28人复购</div></div>
-    <div class="kpi"><div class="num">¥530</div><div class="label">平均客单价</div><div class="delta">单品¥139~组合¥899+</div></div>
-    <div class="kpi"><div class="num">51.4%</div><div class="label">最高回复率</div><div class="delta new">朱老师 标杆顾问</div></div>
+<!-- ====== KEY METRICS ====== -->
+<div class="metrics">
+  <div class="metric"><div class="val purple">45</div><div class="lbl">成交客户</div></div>
+  <div class="metric"><div class="val green">3,741</div><div class="lbl">总消息数</div></div>
+  <div class="metric"><div class="val amber">41.0%</div><div class="lbl">平均客户回复率</div></div>
+  <div class="metric"><div class="val coral">4</div><div class="lbl">高互动客户(&gt;50%)</div></div>
+  <div class="metric"><div class="val purple">13</div><div class="lbl">有成交动作客户</div></div>
 </div>
 
-<!-- ═══ 一、数据概览 ═══ -->
-<div class="section">
-<h2>📊 一、数据概览（29份聊天记录 vs v1的25份）</h2>
+<div class="section"><h2><span class="num">1</span>顾问成交话术总览</h2>
+<p class="desc">5位顾问的服务风格、话术模式与客户互动深度对比。</p>
+<table class="data-table">
+<tr><th>顾问</th><th>成交客户</th><th>总消息</th><th>平均回复率</th><th>平均消息/客户</th><th>高互动占比</th><th>风格标签</th></tr>
+<tr><td style="font-weight:600;color:#534AB7">姣姣</td><td>12</td><td>1108</td><td>46.5%</td><td>92.3</td><td>8.3%</td><td style="font-size:11px;color:#888">深度专业型 · 话术信息密度最高</td></tr>
+<tr><td style="font-weight:600;color:#378ADD">赵老师</td><td>12</td><td>1017</td><td>37.7%</td><td>84.8</td><td>0.0%</td><td style="font-size:11px;color:#888">产品知识型 · 多产品组合推荐</td></tr>
+<tr><td style="font-weight:600;color:#1D9E75">朱国银</td><td>7</td><td>739</td><td>49.7%</td><td>105.6</td><td>42.9%</td><td style="font-size:11px;color:#888">需求驱动型 · 高互动长对话</td></tr>
+<tr><td style="font-weight:600;color:#EF9F27">诺诺</td><td>9</td><td>476</td><td>35.4%</td><td>52.9</td><td>0.0%</td><td style="font-size:11px;color:#888">标准执行型 · 流程规范但缺逼单</td></tr>
+<tr><td style="font-weight:600;color:#D85A30">黎老师</td><td>5</td><td>401</td><td>34.0%</td><td>80.2</td><td>0.0%</td><td style="font-size:11px;color:#888">实战效率型 · 精简短平快</td></tr>
+</table></div>
 
-<h3>1.1 核心指标</h3>
-<table>
-<tr><th>指标</th><th>v1 (25份)</th><th>v3 (29份)</th><th>变化</th></tr>
-<tr><td>分析聊天记录</td><td>25份</td><td><strong>29份</strong></td><td>+4 <span class="tag green">新增</span></td></tr>
-<tr><td>累计成交订单</td><td>30单</td><td><strong>31单</strong></td><td>+1 <span class="tag green">新增</span></td></tr>
-<tr><td>总营收</td><td>¥15,545</td><td><strong>¥16,444</strong></td><td>+¥899</td></tr>
-<tr><td>成交客户数</td><td>27人</td><td><strong>28人</strong></td><td>+1</td></tr>
-<tr><td>平均客单价</td><td>¥518</td><td><strong>¥530</strong></td><td>+¥12</td></tr>
-<tr><td>复购率</td><td>11.1%</td><td><strong>10.7%</strong></td><td>3/28人</td></tr>
-<tr><td>顾问数</td><td>5人</td><td><strong>5人</strong></td><td>— <span class="tag">赵/吴/朱/王/黎</span></td></tr>
-</table>
+<div class="section"><h2><span class="num">2</span>成交话术阶段分布</h2>
+<p class="desc">顾问消息按话术阶段分类，评估成交SOP的侧重点和薄弱环节。</p>
+<div class="charts-row">
+<div class="bar-container">
+<div class="bar-row"><span class="label">需求诊断</span><span class="count">297</span><div class="bar-wrapper"><div class="bar-fill top" style="width:100.0%"></div></div></div>
+<div class="bar-row"><span class="label">方案推荐</span><span class="count">80</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:26.9%"></div></div></div>
+<div class="bar-row"><span class="label">数据诊断</span><span class="count">78</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:26.3%"></div></div></div>
+<div class="bar-row"><span class="label">产品介绍</span><span class="count">62</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:20.9%"></div></div></div>
+<div class="bar-row"><span class="label">破冰/建立信任</span><span class="count">61</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:20.5%"></div></div></div>
+<div class="bar-row"><span class="label">跟进/关怀</span><span class="count">23</span><div class="bar-wrapper"><div class="bar-fill low" style="width:7.7%"></div></div></div>
+<div class="bar-row"><span class="label">成交确认</span><span class="count">14</span><div class="bar-wrapper"><div class="bar-fill low" style="width:4.7%"></div></div></div>
+<div class="bar-row"><span class="label">促单/优惠</span><span class="count">10</span><div class="bar-wrapper"><div class="bar-fill low" style="width:3.4%"></div></div></div>
+<div class="bar-row"><span class="label">异议处理</span><span class="count">9</span><div class="bar-wrapper"><div class="bar-fill low" style="width:3.0%"></div></div></div>
+</div><div class="pie-box"><div class="pie-title">客户需求分布（多选）</div><div class="donut" style="background:conic-gradient(#534AB7 0deg 75.34883720930233deg,#378ADD 75.34883720930233deg 149.02325581395348deg,#1D9E75 149.02325581395348deg 212.65116279069767deg,#EF9F27 212.65116279069767deg 276.27906976744185deg,#D85A30 276.27906976744185deg 336.5581395348837deg,#7C6FF7 336.5581395348837deg 349.95348837209303deg,#F97316 349.95348837209303deg 360.0deg);"><div class="donut-inner" style="background:#FFF;width:100px;height:100px;border-radius:50%;"><div class="pct">7</div><div class="tag">个需求标签</div></div></div><div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#534AB7"></span>血糖管理 100.0%</div><div class="legend-item"><span class="legend-dot" style="background:#378ADD"></span>体重管理 97.8%</div><div class="legend-item"><span class="legend-dot" style="background:#1D9E75"></span>肠道健康 84.4%</div><div class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>代谢综合征 84.4%</div><div class="legend-item"><span class="legend-dot" style="background:#D85A30"></span>睡眠改善 80.0%</div><div class="legend-item"><span class="legend-dot" style="background:#7C6FF7"></span>脂肪肝 17.8%</div><div class="legend-item"><span class="legend-dot" style="background:#F97316"></span>免疫力提升 13.3%</div></div></div></div></div>
 
-<h3>1.2 新增4份聊天记录分析 (vs v1)</h3>
-<table>
-<tr><th>客户</th><th>聊天日期</th><th>顾问</th><th>总消息</th><th>回复率</th></tr>
+<div class="section"><h2><span class="num">3</span>产品推荐热度</h2>
+<p class="desc">成交对话中的产品提及频次。益衡以压倒性优势领跑，镜脂套组/轻路紧随其后。</p>
+<div class="bar-container">
+<div class="bar-row"><span class="label">益衡</span><span class="count">590</span><div class="bar-wrapper"><div class="bar-fill top" style="width:100.0%"></div></div></div>
+<div class="bar-row"><span class="label">益畅</span><span class="count">211</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:35.8%"></div></div></div>
+<div class="bar-row"><span class="label">益休</span><span class="count">186</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:31.5%"></div></div></div>
+<div class="bar-row"><span class="label">新益修</span><span class="count">164</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:27.8%"></div></div></div>
+<div class="bar-row"><span class="label">轻路</span><span class="count">154</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:26.1%"></div></div></div>
+<div class="bar-row"><span class="label">镜脂阻</span><span class="count">48</span><div class="bar-wrapper"><div class="bar-fill low" style="width:8.1%"></div></div></div>
+<div class="bar-row"><span class="label">镜脂轻</span><span class="count">44</span><div class="bar-wrapper"><div class="bar-fill low" style="width:7.5%"></div></div></div>
+<div class="bar-row"><span class="label">益净</span><span class="count">6</span><div class="bar-wrapper"><div class="bar-fill low" style="width:1.0%"></div></div></div>
+<div class="bar-row"><span class="label">益家人</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill low" style="width:0.7%"></div></div></div>
+<div class="bar-row"><span class="label">益舒</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill low" style="width:0.7%"></div></div></div>
+<div class="bar-row"><span class="label">畅青</span><span class="count">3</span><div class="bar-wrapper"><div class="bar-fill low" style="width:0.5%"></div></div></div>
 
-<tr><td>李宏梅</td><td>6/9</td><td>赵老师</td><td>64条</td><td>41%</td></tr>
-<tr><td>陈静</td><td>6/8</td><td>朱老师</td><td>116条</td><td>45%</td></tr>
-<tr><td>陈潆</td><td>6/8</td><td>朱老师</td><td>288条</td><td>59%</td></tr>
-<tr><td>丁宁</td><td>6/9</td><td>姣姣</td><td>101条</td><td>43%</td></tr>
-</table>
-<p style="margin-top:12px;color:#555;font-size:.9em">💡 <strong>朱老师</strong> 保持标杆地位：陈潆对话达 <strong>288条</strong>（全团队最长），回复率 <strong>59%</strong>（全团队最高）。<strong>姣姣</strong> 新增丁宁客户（101条/43%回复率），已服务8位客户，保持稳定高效的服务节奏。</p>
 </div>
-
-<!-- ═══ 二、成交7步法 ═══ -->
-<div class="section">
-<h2>🔄 二、成交7步法（基于2598条消息分析）</h2>
-
-<div class="flow">
-    <div class="flow-step"><div class="step-num">①</div><div class="step-name">破冰<br>建立信任</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">②</div><div class="step-name">需求<br>诊断</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">③</div><div class="step-name">数据<br>诊断</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">④</div><div class="step-name">方案<br>推荐</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">⑤</div><div class="step-name">产品<br>介绍</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">⑥</div><div class="step-name">促单<br>异议处理</div></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step"><div class="step-num">⑦</div><div class="step-name">成交<br>关怀跟进</div></div>
-</div>
-
-<table>
-<tr><th>排名</th><th>关键阶段</th><th>出现频次</th><th>占比</th><th>关键洞察</th></tr>
-<tr><td>🥇</td><td><strong>需求诊断</strong></td><td>183</td><td>45.8%</td><td>占比最高，是所有成交的起点</td></tr>
-<tr><td>🥈</td><td><strong>方案推荐</strong></td><td>54</td><td>13.5%</td><td>有无方案文档，客单价差2倍</td></tr>
-<tr><td>🥉</td><td><strong>数据诊断</strong></td><td>48</td><td>12.0%</td><td>朱老师72%诊断率=高转化标杆</td></tr>
-<tr><td>4</td><td>破冰/建立信任</td><td>40</td><td>10.0%</td><td>统一模板：专属顾问+体验营邀约</td></tr>
-<tr><td>5</td><td>产品介绍</td><td>35</td><td>8.8%</td><td>含专利号/CFU/成分的专业介绍转化更高</td></tr>
-<tr><td>6</td><td>跟进/关怀</td><td>17</td><td>4.2%</td><td>成交后7/14/30天三级打卡可提升复购</td></tr>
-<tr><td>7</td><td>成交确认</td><td>9</td><td>2.2%</td><td>"试用保障"政策有效降低决策门槛</td></tr>
-<tr><td>8</td><td>促单/优惠</td><td>9</td><td>2.2%</td><td>周年庆三盒装活动是当前核心促单手段</td></tr>
-<tr><td>9</td><td>异议处理</td><td>5</td><td>1.2%</td><td>「益生元≠益生菌」是最常见需解释的概念</td></tr>
-</table>
-
-<div style="background:#eaf2f8;border-radius:10px;padding:20px;margin:15px 0">
-<h4>🔑 v3 更新</h4>
-<p style="font-size:.9em">相比 v1 报告，v2 最重要的新洞察是：<strong>朱老师（朱国银）以 51.4% 的客户回复率和 133 条/客户的消息密度，成为新的标杆顾问</strong>。其核心模式是：<br>
-① 深度需求诊断（15+次/客户） → ② 提供详细方案文档 → ③ 包含饮食运动建议的关怀打卡 → ④ 使用「试用保障」降低决策门槛。这一模式值得全员推广。</p>
+<div class="insight-box">
+💡 <strong>产品话术洞察：</strong>益衡（血糖管理）提及590次，覆盖所有客户，是核心交付品。轻路154次和益畅211次是第二梯队。镜脂套组（轻+阻）仅92次，但针对体重+血糖双需求客户转化率更高。建议根据客户需求标签匹配产品组合话术，而非全部推益衡。
 </div>
 </div>
 
-<!-- ═══ 三、TOP3成交因子 ═══ -->
-<div class="section">
-<h2>🎯 三、TOP3成交转化因子</h2>
-<div class="factor-cards">
+<div class="section"><h2><span class="num">4</span>顾问话术差异分析</h2>
+<p class="desc">比较每位顾问的话术阶段分布和产品推荐偏好，识别团队最佳实践。</p>
+<div class="cards c3"><div class="card" style="border-left:3px solid #534AB7"><h3 style="color:#534AB7">姣姣 · 12位客户</h3><p style="font-size:12px;line-height:1.6;"><strong>话术强项：</strong>需求诊断(111次) · 数据诊断(30次) · 方案推荐(22次)<br><strong>主推产品：</strong>益衡(223) · 益休(65) · 益畅(61)</p></div>
+<div class="card" style="border-left:3px solid #378ADD"><h3 style="color:#378ADD">赵老师 · 12位客户</h3><p style="font-size:12px;line-height:1.6;"><strong>话术强项：</strong>需求诊断(36次) · 方案推荐(20次) · 破冰/建立信任(18次)<br><strong>主推产品：</strong>益衡(88) · 新益修(39) · 益畅(38)</p></div>
+<div class="card" style="border-left:3px solid #1D9E75"><h3 style="color:#1D9E75">朱国银 · 7位客户</h3><p style="font-size:12px;line-height:1.6;"><strong>话术强项：</strong>需求诊断(86次) · 产品介绍(16次) · 方案推荐(13次)<br><strong>主推产品：</strong>益衡(132) · 益畅(67) · 新益修(51)</p></div>
+<div class="card" style="border-left:3px solid #EF9F27"><h3 style="color:#EF9F27">诺诺 · 9位客户</h3><p style="font-size:12px;line-height:1.6;"><strong>话术强项：</strong>需求诊断(44次) · 数据诊断(20次) · 方案推荐(11次)<br><strong>主推产品：</strong>益衡(88) · 益休(32) · 益畅(31)</p></div>
+<div class="card" style="border-left:3px solid #D85A30"><h3 style="color:#D85A30">黎老师 · 5位客户</h3><p style="font-size:12px;line-height:1.6;"><strong>话术强项：</strong>需求诊断(20次) · 产品介绍(11次) · 方案推荐(6次)<br><strong>主推产品：</strong>益衡(59) · 轻路(37) · 新益修(17)</p></div>
+</div></div>
 
-<div class="factor" style="border-top-color:#e74c3c">
-    <div class="rank">#1</div>
-    <div class="name">📊 数据诊断驱动</div>
-    <div class="pct">诊断率 12.0% · 出现 48 次</div>
-    <div class="desc">有数据诊断的对话转化率显著更高。朱老师每位客户平均15+次需求诊断，回复率51.4%。核心动作：要求客户提供血糖/体重/BMI数据 → 基于数据做病因分析 → 引出产品方案。</div>
-</div>
+<div class="section"><h2><span class="num">5</span>核心话术模板精选</h2>
+<p class="desc">从3,741条对话中提取各阶段最具代表性的顾问话术。</p>
+<div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 破冰/建立信任</h3><div class="quote-card"><div class="text">您好艺，我是您的专属健康顾问三诺健康管家 | 诺诺，感谢您对三诺的认可，接下来由我全程给您服务！您具体想了解哪个方案，或者咱们这边主要想调理哪方面问题都可以和我说说。</div></div>
+<div class="quote-card"><div class="text"> 亲亲～我是您的专属健康顾问。华大营养和三诺健康联合为血糖用户准备了一份福利——《7天肠道健康体验营》，每天1节直播课，从肠道出发帮你改善血糖/睡眠/体重问题。回复"参加"我帮您报名</div></div>
+<div class="quote-card"><div class="text">您好晨，我是您的专属健康顾问三诺健康顾问丨朱国银，感谢您对三诺的认可，接下来由我全程给您服务！您具体想了解哪个方案，或者咱们这边主要想调理哪方面问题都可以和我说说。</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 需求诊断</h3><div class="quote-card"><div class="text">那还好，说明目前没有明显胃肠道不适症状。但您胃镜已经提示糜烂性胃炎伴肠化，所以即使不胃胀、不反酸，也说明胃黏膜基础还是偏弱的。您现在想增重，不能靠多吃米饭、甜食、油腻食物去硬补，这样血糖和胃都会有压力</div></div>
+<div class="quote-card"><div class="text">
+第7节·结营日
+🎉 最后一节课了！也是大家最关注的内容！《慢病正在"悄悄"腐蚀你的生命》——7天下来你已经了解了肠道健康的全貌，今天我们把视野拉得更远：肠道菌群失衡与慢性病的关系。高血压、糖尿病、炎症……很多慢病的根源，都能追溯到肠道。这节课是总结，更是行动的号角！📢 带上你的家人一起听，健康这件事越早重视越好！感谢7天的陪伴，我们直播间见！❤️</div></div>
+<div class="quote-card"><div class="text">
 
-<div class="factor" style="border-top-color:#3498db">
-    <div class="rank">#2</div>
-    <div class="name">📋 方案文档输出</div>
-    <div class="pct">覆盖 13.5% 的阶段对话 · 54 次</div>
-    <div class="desc">有详细方案文档（含病因分析+产品搭配+服用建议+预期效果）的客户，客单价比无方案客户高约2倍。黎老师模式为标杆：每客1份深度方案 → 客单 ¥1,418。</div>
-</div>
+轻路的原理就是“物理包裹 + 益生元养菌 + 代谢调节”，三管齐下。
 
-<div class="factor" style="border-top-color:#27ae60">
-    <div class="rank">#3</div>
-    <div class="name">💬 高频深度沟通</div>
-    <div class="pct">82%双向对话 · 平均65条/客户</div>
-    <div class="desc">双向对话率100%，平均对话长度持续提升。朱老师以133条/客户领先（vs 黎老师126条）。消息越长的客户信任度越高——陈潆288条消息的深度对话就是典型案例，朱老师用持续跟进建立了极强的信任关系。</div>
-</div>
+1. 物理包裹：形成凝胶，延缓吸收
 
-</div>
+轻路里的圆苞车前子壳粉、魔芋粉、果胶这些可溶性膳食纤维，遇水会膨胀形成凝胶状物质。这个凝胶在胃里能：
+· 显著延缓胃排空，让食物在胃里待久一点
+· 像网一样包裹住碳水化合物和脂肪，减慢它们的吸收速度
+· 有效平抑餐后血糖峰值，避免血糖过山车
 
-<div style="background:#fef9e7;border-radius:10px;padding:20px;margin:15px 0">
-<h4>💡 新发现：轻路产品爆发背后的因子</h4>
-<p style="font-size:.9em">轻路（¥139）作为引流爆品增长迅猛，核心驱动因子是：<strong>「三盒装促销+试用保障」组合策略</strong>——客户先拆一盒试用，不满意可退剩余两盒。这一策略将决策门槛从 ¥139 降至「先试用再说」，大大降低了成交阻力。朱老师在陈潆的288条对话中反复使用此策略，展示了深度需求诊断+试用保障的组合打法。</p>
-</div>
-</div>
+同时，凝胶在胃里大幅膨胀，给你提供强大又持久的饱腹感，自然就吃得少了。
 
-<!-- ═══ 四、顾问能力对比 ═══ -->
-<div class="section">
-<h2>👩‍⚕️ 四、顾问能力对比（基于29份聊天记录）</h2>
-<table>
-<tr><th>顾问</th><th>成交客户</th><th>平均回复率</th><th>平均消息/客户</th><th>双向对话率</th><th>总消息数</th><th>标杆话术</th></tr>
+2. 益生元养菌：给好菌喂食
 
-    <tr>
-        <td><strong>赵老师</strong></td>
-        <td>10</td>
-        <td>38.2%</td>
-        <td>88.1</td>
-        <td>100.0%</td>
-        <td>881</td>
-    </tr>
-    <tr>
-        <td><strong>姣姣</strong></td>
-        <td>8</td>
-        <td>46.9%</td>
-        <td>83.5</td>
-        <td>100.0%</td>
-        <td>668</td>
-    </tr>
-    <tr>
-        <td><strong>诺诺</strong></td>
-        <td>5</td>
-        <td>34.6%</td>
-        <td>53.0</td>
-        <td>100.0%</td>
-        <td>265</td>
-    </tr>
-    <tr>
-        <td><strong>黎老师</strong></td>
-        <td>2</td>
-        <td>40.5%</td>
-        <td>126.0</td>
-        <td>100.0%</td>
-        <td>252</td>
-    </tr>
-    <tr>
-        <td><strong>朱老师</strong></td>
-        <td>4</td>
-        <td>51.4%</td>
-        <td>133.0</td>
-        <td>100.0%</td>
-        <td>532</td>
-    </tr>
-</table>
+轻路里的抗性糊精和低聚果糖是优质益生…</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 数据诊断</h3><div class="quote-card"><div class="text">【轻路膳食纤维粉】618活动优选✨
 
-<div style="margin:20px 0;padding:15px;background:#eaf2f8;border-radius:10px">
-<h4>📈 v3 核心洞察</h4>
-<ul style="font-size:.9em;padding-left:20px">
-    <li><strong>朱老师异军突起</strong>：51.4%回复率（全团队最高）+ 133条/客户（全团队最高），以「深度诊断+持续跟进」模式成为新标杆，陈潆对话达288条创全团队记录</li>
-    <li><strong>姣姣稳中有进</strong>：46.9%回复率（第二高），8客户全覆盖，新增丁宁客户，是团队最稳定的中坚力量</li>
-    <li><strong>黎老师客单最高</strong>：虽仅2单，但平均客单¥1,418，126条/客户的深度沟通模式值得推广</li>
-    <li><strong>赵老师规模最大</strong>：13单/¥8,495（51.7%），10客户，回复率38.2%需提升个性化沟通</li>
-</ul>
-</div>
-</div>
+控糖体重管理，失眠或胃肠不好的家庭刚需好物，原价139元/盒，现在买一赠二，到手3盒（共45袋）每天只需3元，就可以养好肠道菌群！
 
-<!-- ═══ 五、产品推荐矩阵 ═══ -->
-<div class="section">
-<h2>📦 五、产品推荐矩阵</h2>
+餐前一袋，包裹米面油脂，稳住餐后血糖。饱腹抗饿，主食不用严格忌口。
 
-<h3>5.1 聊天中产品提及热度（29份记录）</h3>
-<table>
-<tr><th>排名</th><th>产品</th><th>提及次数</th><th>热度指数</th></tr>
+特别适合长期吃降糖药的人群，帮助改善服药后腹胀不适。肠道菌群紊乱，售后全程放心！
 
-    <tr>
-        <td>1</td>
-        <td>益衡</td>
-        <td><span class="badge">352</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:100.0%">100%</div></div></td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>益畅</td>
-        <td><span class="badge">141</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:40.0%">40%</div></div></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>新益修</td>
-        <td><span class="badge">135</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:38.0%">38%</div></div></td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>益休</td>
-        <td><span class="badge">119</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:34.0%">34%</div></div></td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>轻路复合益生元膳食纤维</td>
-        <td><span class="badge">87</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:25.0%">25%</div></div></td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>镜脂·轻</td>
-        <td><span class="badge">40</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:11.0%">11%</div></div></td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>镜脂·阻</td>
-        <td><span class="badge">33</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:9.0%">9%</div></div></td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td>益净</td>
-        <td><span class="badge">6</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:2.0%">2%</div></div></td>
-    </tr>
-    <tr>
-        <td>9</td>
-        <td>益家人</td>
-        <td><span class="badge">4</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:1.0%">1%</div></div></td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>畅青</td>
-        <td><span class="badge">2</span></td>
-        <td><div class="bar-bg"><div class="bar-fill" style="width:1.0%">1%</div></div></td>
-    </tr>
-</table>
+👉 选购链接：【三诺专享】【轻路 复合益生元膳食纤维固体饮料】补菌之外，更要养菌！五元复配，好菌工作事半功倍（15袋/盒）】https://j.youzan.com/hsf9…</div></div>
+<div class="quote-card"><div class="text">你的这个情况我帮你分析了，问题其实都串在一起了。
 
-<h3>5.2 产品热度排行（基于聊天提及频次）</h3>
-<p style="color:#888;font-size:.85em;margin-top:-8px">以下数据来自29份聊天记录中的产品名称出现频次</p>
-<table>
-<tr><th>产品</th><th>订单数</th><th>占比</th><th>典型客单</th></tr>
-<tr><td>🥇 轻路（单品）</td><td>11</td><td>35.5%</td><td>¥139-417</td></tr>
-<tr><td>🥈 镜脂套组（轻+阻）</td><td>6</td><td>19.4%</td><td>¥278-566</td></tr>
-<tr><td>🥉 益衡+轻路套组</td><td>3</td><td>9.7%</td><td>¥899</td></tr>
-<tr><td>4 益畅</td><td>3</td><td>9.7%</td><td>¥219-658</td></tr>
-<tr><td>5 益休</td><td>3</td><td>9.7%</td><td>¥253</td></tr>
-</table>
+首先病情分析：
 
-<div style="margin-top:15px;background:#fef9e7;border-radius:10px;padding:18px">
-<h4>💡 产品策略建议</h4>
-<ul style="font-size:.9em;padding-left:20px">
-    <li><strong>轻路作为引流爆品</strong>：11单/35.5%，聊天中提及87次，三盒装策略+试用保障有效降低决策门槛</li>
-    <li><strong>镜脂套组作为升级主力</strong>：6单/19.4%，客单价¥278-566，沟通中应优先从轻路引导升级</li>
-    <li><strong>益衡+轻路组合推荐</strong>：3单/9.7%，血糖需求客户的核心组合，客单¥899，提升整体ARPU</li>
-</ul>
+你32岁，身高172，体重85公斤，属于超重。超重本身就会导致肠道菌群紊乱，坏菌多好菌少，然后引发三个连锁反应：
+
+1.[烟花] 血糖偏高：菌群紊乱引发慢性炎症，加重胰岛素抵抗，血糖就容易偏高。你平时运动少，肌肉对葡萄糖的利用效率低，也会让血糖更难控制。
+2.[烟花] 睡眠浅、易早醒：肠道菌群通过“脑肠轴”影响神经递质和褪黑素分泌。菌群乱了，GABA（抑制性神经递质）和褪黑素分泌不足，睡眠节律就乱了，容易浅睡、早醒。
+3. […</div></div>
+<div class="quote-card"><div class="text">通俗点讲。
+
+镜脂阻的核心原理就是“物理阻断 + 代谢调节”，双管齐下。
+
+1. 物理阻断：像海绵一样吸走油脂和糖分
+
+镜脂阻里加了白芸豆纤维、柑橘纤维、魔芋粉、圆苞车前子壳这些高膳食纤维成分。它们遇水会膨胀，在肠道里形成一张“网”，像海绵一样把食物里的油脂和糖分包裹住，不让它们被肠道吸收，直接排出体外。这样你吃进去的热量就少了，体重自然好控制。
+
+2. 代谢调节：从源头减少脂肪合成
+
+镜脂阻里还有个大亮点——美藤果肽。美藤果肽能调节脂质代谢相关基因的表达，促进脂肪细胞内的脂肪分解，同时抑制新的…</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 方案推荐</h3><div class="quote-card"><div class="text">稍后我会给您发一份健康方案，里面既有饮食和生活方面的建议，也会有针对您的情况靶向辅助减脂产品。两者搭配使用，针对性会更强，更适合您目前这种低代谢状态。您可以根据自己的情况参考看看</div></div>
+<div class="quote-card"><div class="text">你的这个情况我帮你分析了，问题其实都串在一起了。
+
+首先病情分析：
+
+你32岁，身高172，体重85公斤，属于超重。超重本身就会导致肠道菌群紊乱，坏菌多好菌少，然后引发三个连锁反应：
+
+1.[烟花] 血糖偏高：菌群紊乱引发慢性炎症，加重胰岛素抵抗，血糖就容易偏高。你平时运动少，肌肉对葡萄糖的利用效率低，也会让血糖更难控制。
+2.[烟花] 睡眠浅、易早醒：肠道菌群通过“脑肠轴”影响神经递质和褪黑素分泌。菌群乱了，GABA（抑制性神经递质）和褪黑素分泌不足，睡眠节律就乱了，容易浅睡、早醒。
+3. […</div></div>
+<div class="quote-card"><div class="text">哥，[拥抱]运动方面——核心是“餐后运动、避免空腹运动”
+1，餐后运动：每餐后休息15-20分钟，散步15-20分钟。这是最直接、最有效的平稳餐后血糖的方法，尤其适合胰岛素治疗期间。,
+2，有氧运动：每周5天，每次30-40分钟，以快走、慢跑、游泳、骑自行车为主。运动时心率控制在（220-63）×60%-70%，即约94-110次/分。
+3，抗阻运动：每周2次，如深蹲、俯卧撑、弹力带、哑铃等，增加肌肉量、提升基础代谢和胰岛素敏感性。
+4，运动前后监测血糖：如果运动前血糖<5.6mmol/L，建议…</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 产品介绍</h3><div class="quote-card"><div class="text">【轻路膳食纤维粉】618活动优选✨
+
+控糖体重管理，失眠或胃肠不好的家庭刚需好物，原价139元/盒，现在买一赠二，到手3盒（共45袋）每天只需3元，就可以养好肠道菌群！
+
+餐前一袋，包裹米面油脂，稳住餐后血糖。饱腹抗饿，主食不用严格忌口。
+
+特别适合长期吃降糖药的人群，帮助改善服药后腹胀不适。肠道菌群紊乱，售后全程放心！
+
+👉 选购链接：【三诺专享】【轻路 复合益生元膳食纤维固体饮料】补菌之外，更要养菌！五元复配，好菌工作事半功倍（15袋/盒）】https://j.youzan.com/hsf9…</div></div>
+<div class="quote-card"><div class="text">不是不吃主食，要控量、换成低升糖搭配，第二就是每餐先吃菜和蛋白，最后吃主食，延缓吸收，第三，慢慢减脂、养肠道，提高胰岛素敏感性。所以咱们后面就是按这个方向来：晚餐主食先减到小半碗，少油少甜，饭后走路，能配上复合益生元膳食纤维就放在晚餐前，帮助增加饱腹感、减慢碳水吸收，</div></div>
+<div class="quote-card"><div class="text">益衡益生菌含有专利菌株鼠李糖乳杆菌ASD-9。该菌株经实验验证具有以下功效：
+显著降血糖：对α-葡萄糖苷酶具有抑制效果，可延缓肠道碳水化合物吸收，降低餐后血糖。
+改善胰岛素抵抗：通过调节肠道菌群和免疫反应，增强胰岛素敏感性。
+调节情绪与月经：益生菌通过“脑肠轴”影响神经递质（如5-羟色胺、GABA），有助于缓解压力、改善情绪，从而辅助调节月经周期。</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 促单/优惠</h3><div class="quote-card"><div class="text">【三诺专享】【轻路 复合益生元膳食纤维固体饮料】（15袋/盒）】分享给你看看。https://j.youzan.com/hsf9tk
+姐上面的轻路您可以拍，我知道您之前可能犹豫的是"不知道适不适合自己"，现在周年庆活动，我特别说一下我们的政策：三盒套餐，您先拆一盒试用。吃了觉得不舒服——15 天内跟我说，我申请把剩下两盒给您退掉，您只用把另外两盒没拆封的寄回来，快递费我们出。就是说，您最差的结果是：吃了一盒（15 天的量），不满意，剩下没拆封的给退。不亏哦。[玫瑰]</div></div>
+<div class="quote-card"><div class="text">*A【财商】博悦财税 施俊威您好，🎉爱看有礼，100%抽奖
+
+🎁【京东自营店铺】购买的仪器，提供订单截图参与抽奖
+
+🎁淘宝、天猫、抖音等店铺点击：https://dwz.cn/UJeu5WY8((不适用于京东自营店铺!) 填写三诺官方店铺的爱看动态血糖仪订单号，领取福利~
+
+注：活动仅限近半年内订单参与，每人1次机会。中实物奖请及时填写地址。别忘使用随赠的加固贴，有疑问可随时咨询。</div></div>
+<div class="quote-card"><div class="text">好的，那咱们就先按一个月来试试。赠品这块我也理解您想争取一下，不过目前这个套组已经是活动价了，暂时没有额外赠品可以搭配哈。后面如果平台有新的活动或回购福利，我也会第一时间帮您留意的</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 异议处理</h3><div class="quote-card"><div class="text">它不是益生菌，是益生元。益生菌是直接补充菌；益生元是给您肠道里原本的好菌提供营养，让它们自己
+繁殖壮大——相当于"养鱼"而不是"放鱼"，效果更稳定，不依赖外部补充。
+每天一袋，冲水喝，没有特别的味道，跟日常饮食不冲突。[玫瑰]</div></div>
+<div class="quote-card"><div class="text">您的情况是高龄长者常见的代谢与消化功能综合问题
+核心关联分析：腹胀与高血糖看似独立，实则可能存在内在联系。年龄增长、饮食结构、活动减少以及长期服药等因素，都可能导致肠道蠕动减慢、消化功能减弱和肠道菌群失衡。这种肠道环境的改变，不仅是腹胀的直接原因之一，还可能加剧身体的慢性低度炎症和胰岛素抵抗，使得血糖更难以控制。同时，您正在服用的二甲双胍，其常见的副作用就包括胃肠道反应（如腹胀、腹泻），这与药物改变了肠道菌群有关。因此，腹胀、药物副作用和血糖控制不佳三者可能相互影响。
+调理侧重点：对于您的调理，…</div></div>
+<div class="quote-card"><div class="text">没有关系，轻路是膳食纤维，不影响，肠道里原本的好菌提供营养，让它们自己繁殖壮大——相当于"养鱼"而不是"放鱼"，效果更稳定，不依赖外部补充。可以减脂稳血糖，减轻药物对胃肠道的刺激</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 跟进/关怀</h3><div class="quote-card"><div class="text">确实是有点贵了，[拥抱]非常能理解您，只要对咱们有效果，多贵都值得，如果没有用，花一块钱都觉得贵，想想去医院要花多少钱，我记得之前多囊那几年，一个礼拜去一次医院，吃西药，还喝中药，那几年的工资，真的一分不剩[擦汗]</div></div>
+<div class="quote-card"><div class="text">这是一条引用/回复消息：
+"指纹：
+毕竟真金白银买的，价格也不便宜[呲牙]"
+------
+是的，这两款本身就是更适合搭配使用的。您之前可能主要是单独用了助眠饮，所以感觉效果没有那么明显。两者配合起来，对改善入睡困难、睡不踏实会更完整一些。</div></div>
+<div class="quote-card"><div class="text">我们是买1盒送2盒，共三盒正装，您可以先拆一盒体验一下，另外两盒先不要拆封，保持完整。吃几天看看餐后血糖、饱腹感和整体体感怎么样；如果感觉合适，咱们就继续调理，如果不满意，也可以按售后流程退回来，给您退全款。</div></div>
+</div><div style="margin-top:14px;"><h3 style="font-size:14px;font-weight:600;color:#534AB7;margin-bottom:8px;">📌 成交确认</h3><div class="quote-card"><div class="text">【三诺专享】【轻路 复合益生元膳食纤维固体饮料】（15袋/盒）】分享给你看看。https://j.youzan.com/hsf9tk
+姐上面的轻路您可以拍，我知道您之前可能犹豫的是"不知道适不适合自己"，现在周年庆活动，我特别说一下我们的政策：三盒套餐，您先拆一盒试用。吃了觉得不舒服——15 天内跟我说，我申请把剩下两盒给您退掉，您只用把另外两盒没拆封的寄回来，快递费我们出。就是说，您最差的结果是：吃了一盒（15 天的量），不满意，剩下没拆封的给退。不亏哦。[玫瑰]</div></div>
+<div class="quote-card"><div class="text">*A【财商】博悦财税 施俊威您好，🎉爱看有礼，100%抽奖
+
+🎁【京东自营店铺】购买的仪器，提供订单截图参与抽奖
+
+🎁淘宝、天猫、抖音等店铺点击：https://dwz.cn/UJeu5WY8((不适用于京东自营店铺!) 填写三诺官方店铺的爱看动态血糖仪订单号，领取福利~
+
+注：活动仅限近半年内订单参与，每人1次机会。中实物奖请及时填写地址。别忘使用随赠的加固贴，有疑问可随时咨询。</div></div>
+<div class="quote-card"><div class="text">上面这个就是三诺商城的链接，可以直接买，买好截图给我哦[玫瑰]
+我和您说下我们的政策：[拥抱]
+三盒套餐，您收到后先拆一盒试用。吃半个月觉得好，就继续吃，如果觉得没有什么效果，或者喝了不舒服——15 天内跟我说哦，到时我申请下，您只用把另外两盒没拆封的寄回来，快递费我们出。
+就是说，您最差的结果是：吃了一盒（15 天的量），没效果，给退。不亏哦。[玫瑰]</div></div>
+</div></div>
+
+<div class="section"><h2><span class="num">6</span>关键洞察与改善建议</h2>
+
+<div class="cards c2">
+  <div class="card coral">
+    <h3>⚠️ 成交动作薄弱</h3>
+    <p>成交确认和促单/优惠合计仅24次提及（占比&lt;1%），绝大多数对话集中在需求诊断和方案推荐阶段。促单话术相对保守，缺乏紧迫感营造。</p>
+    <div style="margin-top:8px;"><span class="tag red">需加强</span> <span class="tag amber">促单/优惠话术</span></div>
+  </div>
+  <div class="card teal">
+    <h3>✅ 需求诊断充分</h3>
+    <p>需求诊断297次，覆盖血糖(100%)、体重(98%)、肠道(84%)。顾问对客户健康问题的挖掘非常深入，方案定制感强。</p>
+    <div style="margin-top:8px;"><span class="tag green">团队优势</span></div>
+  </div>
+  <div class="card blue">
+    <h3>💡 产品组合话术机会</h3>
+    <p>38位客户(88.9%)有4+需求标签，说明客户普遍多问题并存。多产品组合方案（如益衡+轻路+益休）比单品推荐更有说服力。</p>
+    <div style="margin-top:8px;"><span class="tag blue">话术迭代方向</span></div>
+  </div>
+  <div class="card">
+    <h3>📊 团队标杆</h3>
+    <p>朱国银平均回复率49.7%、平均105.6消息/客户，是互动深度最强的顾问。姣姣12客户46.5%回复率，话术信息密度最高。建议萃取二人话术作为团队SOP基线。</p>
+    <div style="margin-top:8px;"><span class="tag purple">标杆萃取</span></div>
+  </div>
 </div>
 </div>
 
-<!-- ═══ 六、客户需求画像 ═══ -->
-<div class="section">
-<h2>👥 六、客户需求画像（29位成交客户）</h2>
+<div class="section"><h2><span class="num">7</span>成交客户时间分布</h2>
+<p class="desc">按天统计成交记录数量。</p>
+<div class="bar-container">
+<div class="bar-row"><span class="label">05/21</span><span class="count">3</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:42.9%"></div></div></div>
+<div class="bar-row"><span class="label">05/22</span><span class="count">1</span><div class="bar-wrapper"><div class="bar-fill low" style="width:14.3%"></div></div></div>
+<div class="bar-row"><span class="label">05/25</span><span class="count">2</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:28.6%"></div></div></div>
+<div class="bar-row"><span class="label">05/26</span><span class="count">6</span><div class="bar-wrapper"><div class="bar-fill top" style="width:85.7%"></div></div></div>
+<div class="bar-row"><span class="label">05/27</span><span class="count">1</span><div class="bar-wrapper"><div class="bar-fill low" style="width:14.3%"></div></div></div>
+<div class="bar-row"><span class="label">06/02</span><span class="count">1</span><div class="bar-wrapper"><div class="bar-fill low" style="width:14.3%"></div></div></div>
+<div class="bar-row"><span class="label">06/03</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill top" style="width:57.1%"></div></div></div>
+<div class="bar-row"><span class="label">06/04</span><span class="count">3</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:42.9%"></div></div></div>
+<div class="bar-row"><span class="label">06/05</span><span class="count">1</span><div class="bar-wrapper"><div class="bar-fill low" style="width:14.3%"></div></div></div>
+<div class="bar-row"><span class="label">06/06</span><span class="count">1</span><div class="bar-wrapper"><div class="bar-fill low" style="width:14.3%"></div></div></div>
+<div class="bar-row"><span class="label">06/08</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill top" style="width:57.1%"></div></div></div>
+<div class="bar-row"><span class="label">06/09</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill top" style="width:57.1%"></div></div></div>
+<div class="bar-row"><span class="label">06/10</span><span class="count">3</span><div class="bar-wrapper"><div class="bar-fill mid" style="width:42.9%"></div></div></div>
+<div class="bar-row"><span class="label">06/11</span><span class="count">4</span><div class="bar-wrapper"><div class="bar-fill top" style="width:57.1%"></div></div></div>
+<div class="bar-row"><span class="label">06/12</span><span class="count">7</span><div class="bar-wrapper"><div class="bar-fill top" style="width:100.0%"></div></div></div>
+</div></div>
 
-<h3>6.1 健康需求分布（聊天记录关键词提取）</h3>
-<table>
-<tr><th>排名</th><th>需求类型</th><th>关注客户数</th><th>覆盖率</th></tr>
-<tr><td>1</td><td>血糖管理</td><td>29</td><td>100.0%</td></tr><tr><td>2</td><td>体重管理</td><td>29</td><td>100.0%</td></tr><tr><td>3</td><td>肠道健康</td><td>24</td><td>82.8%</td></tr><tr><td>4</td><td>代谢综合征</td><td>24</td><td>82.8%</td></tr><tr><td>5</td><td>睡眠改善</td><td>21</td><td>72.4%</td></tr><tr><td>6</td><td>脂肪肝</td><td>5</td><td>17.2%</td></tr><tr><td>7</td><td>免疫力提升</td><td>4</td><td>13.8%</td></tr>
-</table>
-
-<h3>6.2 v3 需求洞察</h3>
-<div style="font-size:.9em;line-height:2">
-    <p>🔍 <strong>代谢综合征群体扩大</strong>：24/29（83%）客户同时关注2个及以上代谢指标（血糖+体重+血脂+尿酸），说明三诺用户的核心痛点已从单一血糖管理转向多维度代谢调理。</p>
-    <p>🆕 <strong>脂肪肝新需求</strong>：5位客户明确提及脂肪肝（与v1持平），与代谢综合征高度关联，可作为差异化卖点。</p>
-    <p>🔄 <strong>睡眠改善需求</strong>：21位客户关注睡眠，益休产品提及119次（但实际成交仅3单），说明睡眠需求存在但转化路径不清晰，需优化推荐逻辑。</p>
-    <p>📊 <strong>血糖+体重重叠率100%</strong>：29位成交客户全部关注血糖和体重，说明「控糖+减重」是最高转化的双需求组合。</p>
-</div>
-</div>
-
-<!-- ═══ 七、话术模板库 ═══ -->
-<div class="section">
-<h2>💬 七、话术模板库（29份记录萃取）</h2>
-
-    <div class="stage-block">
-        <h3>📌 需求诊断</h3>
-        <ul><li><i>💬 示例 1</i>：这是一条引用/回复消息：<br>&quot;A          冯琳：<br>我不喜欢那些糊糊&quot;<br>------<br>理解的，有些人确实不喜欢糊糊口感。不过您现在食欲不好，晚餐又容易不知道怎么吃，您可以冲稀一点，搭配鸡蛋、豆腐或熟蔬菜一起吃，口感会好些，也更利于血糖和睡眠稳定。先试几天看看，如果实在不适应我们再调整</li><li><i>💬 示例 2</i>：您好！感谢关注，我是您的专属健康顾问~<br>根据糖友们最常咨询的问题，我整理了这几个调理方向，您看看最关心哪一个？<br>【A】控血糖、改善代谢 <br>【B】肠道调理（便秘/腹胀/消化差） <br>【C】改善睡眠质量 <br>【D】体重管理<br>回复 A/B/C/D，我给您发针对性的健康建议～</li><li><i>💬 示例 3</i>：三诺商城其实有代餐的，您之前可能没注意。这个是和华大营养合作的，配料比较干净，也含有膳食纤维。像您现在食欲不好，晚餐不知道怎么吃的时候，就可以先冲一袋，既方便，也比吃水果、冰凉食物更规律，对血糖和睡眠也更友好。</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 跟进/关怀</h3>
-        <ul><li><i>💬 示例 1</i>：这是一条引用/回复消息：<br>&quot;指纹：<br>毕竟真金白银买的，价格也不便宜[呲牙]&quot;<br>------<br>是的，这两款本身就是更适合搭配使用的。您之前可能主要是单独用了助眠饮，所以感觉效果没有那么明显。两者配合起来，对改善入睡困难、睡不踏实会更完整一些。</li><li><i>💬 示例 2</i>：我们是买1盒送2盒，共三盒正装，您可以先拆一盒体验一下，另外两盒先不要拆封，保持完整。吃几天看看餐后血糖、饱腹感和整体体感怎么样；如果感觉合适，咱们就继续调理，如果不满意，也可以按售后流程退回来，给您退全款。</li><li><i>💬 示例 3</i>：[玫瑰]您目前只散步，这对改善心肺功能有好处，但单纯散步对减内脏脂肪效果有限。需要加入抗阻训练（力量训练），这是减内脏脂肪最有效的方法之一。<br>每日必修（有氧）：继续您习惯的餐后散步，但建议升级为快走30分钟（达到微喘出汗、能交谈不能唱歌的程度）。安排在早餐后、午餐后或晚餐后半小时进行。这能直接消耗餐后血糖，并开始动员内脏脂肪。<br>每周2~3次抗阻训练（核心关键）：这是减内脏脂肪的“核武器”。增肌能提高基础代谢，让身体全天都在消耗更多能量，并显著改善胰岛素敏感性。<br>推荐动作（在家就能做）：<br>靠墙静蹲：背靠墙，像坐椅子一样下蹲，膝盖不超过脚尖，坚持30秒~1分钟，重复3组。<...</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 产品介绍</h3>
-        <ul><li><i>💬 示例 1</i>：华大本身是上市公司，华大营养也是依托华大在基因检测、肠道菌群研究和菌株专利方面的积累来做产品的。它和市面上很多普通益生菌不太一样，不是简单补充有益菌，而是会根据不同人群的代谢、肠道、体重管理需求，做更有针对性的菌株搭配</li><li><i>💬 示例 2</i>：<br><br>咱们重新梳理一下病因：这其实是[庆祝]肝脾代谢失调 + 糖代谢异常的复合问题[烟花]<br><br>1. 早上口苦、面部易油 → 肝胆湿热 + 糖代谢负担<br><br>口苦是典型的胆汁反流信号，说明肝脏代谢负担重、胆汁排泄不畅。面部出油也是肝胆湿热的表现。现在加上血糖异常，说明肝脏处理糖分的能力也下降了——肝脏是糖代谢的核心器官，肝脏负担重了，血糖自然容易出问题。两者互相加重。<br><br>2. 喉咙清不干净、睡觉流口水 → 脾虚湿盛<br><br>脾主运化水湿，脾虚了，水液代谢不掉就变成“痰湿”，在喉咙那儿堵着，睡觉时口水就流出来。血糖异常也会加重湿气——高血糖状态本身就...</li><li><i>💬 示例 3</i>：为您定制的减重与血糖管理整合方案<br><br>一、 基本情况与核心目标<br>·   基本信息：42岁男性，身高168cm，体重120公斤（240斤）。经计算，身体质量指数（BMI）高达42.5 kg/m²，属于重度肥胖。<br>·   健康状况：确诊2型糖尿病，目前服用吡格列酮二甲双胍（每日2片）。<br>·   核心诉求：在控制血糖的前提下，实现有效减脂减重。<br><br>二、 核心方案：饮食为本，产品协同<br>您的情况需要“饮食控制、产品辅助，运动结合”三管齐下。其中，饮食是基石，产品是加速器。<br><br>1. 一日三餐饮食推荐<br>   早餐（约7:00-8:00）：保证蛋...</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 数据诊断</h3>
-        <ul><li><i>💬 示例 1</i>：您现在不能单纯靠“少吃”来控制，不然容易吃得少但血糖还是高、体重也不明显下降。接下来重点是把三餐规律起来，主食不要完全不吃，但要控制量和种类，比如米饭控制小半碗，优先搭配粗杂粮/薯类；每餐保证蛋白质和蔬菜，饭后走动15-20分钟，对餐后血糖会更友好。</li><li><i>💬 示例 2</i>：这是一条引用/回复消息：<br>&quot;A          冯琳：<br>午饭前怎么又是5.8了，不降反而升了&quot;<br>------<br>这种一点波动是正常的，只要在正常的范围内就好，早餐午餐的餐后血糖都在正常值以内，主要是晚餐偏高了</li><li><i>💬 示例 3</i>：你好，你的情况我仔细分析了：主要血糖异常【糖化偏高】、血脂异常、尿酸高，这其实是典型的代谢综合征三联征。三个问题看似独立，但病根是同一个——胰岛素抵抗。<br><br>咱们来拆解一下病因：<br><br>1. 胰岛素抵抗是核心  <br> 身体对胰岛素不敏感了，胰腺就得拼命分泌更多胰岛素来降血糖，结果就是血糖波动、容易饿、容易囤积脂肪。胰岛素抵抗还会让肝脏合成更多脂肪（血脂高）、肾脏排泄尿酸能力下降（尿酸高）。三个问题互相加重，形成恶性循环。<br><br>2. 肠道菌群失衡是关键推手  <br> 大量研究证实，血糖、血脂、尿酸异常的人群，肠道菌群普遍紊乱——有益菌（双歧杆菌、乳杆菌）减少，有...</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 促单/优惠</h3>
-        <ul><li><i>💬 示例 1</i>：*A【财商】博悦财税 施俊威您好，🎉爱看有礼，100%抽奖<br><br>🎁【京东自营店铺】购买的仪器，提供订单截图参与抽奖<br><br>🎁淘宝、天猫、抖音等店铺点击：https://dwz.cn/UJeu5WY8((不适用于京东自营店铺!) 填写三诺官方店铺的爱看动态血糖仪订单号，领取福利~<br><br>注：活动仅限近半年内订单参与，每人1次机会。中实物奖请及时填写地址。别忘使用随赠的加固贴，有疑问可随时咨询。</li><li><i>💬 示例 2</i>：好的，那咱们就先按一个月来试试。赠品这块我也理解您想争取一下，不过目前这个套组已经是活动价了，暂时没有额外赠品可以搭配哈。后面如果平台有新的活动或回购福利，我也会第一时间帮您留意的</li><li><i>💬 示例 3</i>：【三诺专享】【轻路 复合益生元膳食纤维固体饮料】（15袋/盒）】分享给你看看。https://j.youzan.com/hsf9tk<br>姐上面的轻路您可以拍，我知道您之前可能犹豫的是&quot;不知道适不适合自己&quot;，现在周年庆活动，我特别说一下我们的政策：三盒套餐，您先拆一盒试用。吃了觉得不舒服——15 天内跟我说，我申请把剩下两盒给您退掉，您只用把另外两盒没拆封的寄回来，快递费我们出。就是说，您最差的结果是：吃了一盒（15 天的量），不满意，剩下没拆封的给退。不亏哦。[玫瑰]</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 成交确认</h3>
-        <ul><li><i>💬 示例 1</i>：*A【财商】博悦财税 施俊威您好，🎉爱看有礼，100%抽奖<br><br>🎁【京东自营店铺】购买的仪器，提供订单截图参与抽奖<br><br>🎁淘宝、天猫、抖音等店铺点击：https://dwz.cn/UJeu5WY8((不适用于京东自营店铺!) 填写三诺官方店铺的爱看动态血糖仪订单号，领取福利~<br><br>注：活动仅限近半年内订单参与，每人1次机会。中实物奖请及时填写地址。别忘使用随赠的加固贴，有疑问可随时咨询。</li><li><i>💬 示例 2</i>：上面这个就是三诺商城的链接，可以直接买，买好截图给我哦[玫瑰]<br>我和您说下我们的政策：[拥抱]<br>三盒套餐，您收到后先拆一盒试用。吃半个月觉得好，就继续吃，如果觉得没有什么效果，或者喝了不舒服——15 天内跟我说哦，到时我申请下，您只用把另外两盒没拆封的寄回来，快递费我们出。<br>就是说，您最差的结果是：吃了一盒（15 天的量），没效果，给退。不亏哦。[玫瑰]</li><li><i>💬 示例 3</i>：【三诺专享】【轻路 复合益生元膳食纤维固体饮料】（15袋/盒）】分享给你看看。https://j.youzan.com/hsf9tk<br>姐上面的轻路您可以拍，我知道您之前可能犹豫的是&quot;不知道适不适合自己&quot;，现在周年庆活动，我特别说一下我们的政策：三盒套餐，您先拆一盒试用。吃了觉得不舒服——15 天内跟我说，我申请把剩下两盒给您退掉，您只用把另外两盒没拆封的寄回来，快递费我们出。就是说，您最差的结果是：吃了一盒（15 天的量），不满意，剩下没拆封的给退。不亏哦。[玫瑰]</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 方案推荐</h3>
-        <ul><li><i>💬 示例 1</i>：这是一条引用/回复消息：<br>&quot;指纹：<br>毕竟真金白银买的，价格也不便宜[呲牙]&quot;<br>------<br>是的，这两款本身就是更适合搭配使用的。您之前可能主要是单独用了助眠饮，所以感觉效果没有那么明显。两者配合起来，对改善入睡困难、睡不踏实会更完整一些。</li><li><i>💬 示例 2</i>：您好！感谢关注，我是您的专属健康顾问~<br>根据糖友们最常咨询的问题，我整理了这几个调理方向，您看看最关心哪一个？<br>【A】控血糖、改善代谢 <br>【B】肠道调理（便秘/腹胀/消化差） <br>【C】改善睡眠质量 <br>【D】体重管理<br>回复 A/B/C/D，我给您发针对性的健康建议～</li><li><i>💬 示例 3</i>：好的，那咱们就先按一个月来试试。赠品这块我也理解您想争取一下，不过目前这个套组已经是活动价了，暂时没有额外赠品可以搭配哈。后面如果平台有新的活动或回购福利，我也会第一时间帮您留意的</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 破冰/建立信任</h3>
-        <ul><li><i>💬 示例 1</i>： 亲亲～我是您的专属健康顾问。华大营养和三诺健康联合为血糖用户准备了一份福利——《7天肠道健康体验营》，每天1节直播课，从肠道出发帮你改善血糖/睡眠/体重问题。回复&quot;参加&quot;我帮您报名</li><li><i>💬 示例 2</i>：您好！感谢关注，我是您的专属健康顾问~<br>根据糖友们最常咨询的问题，我整理了这几个调理方向，您看看最关心哪一个？<br>【A】控血糖、改善代谢 <br>【B】肠道调理（便秘/腹胀/消化差） <br>【C】改善睡眠质量 <br>【D】体重管理<br>回复 A/B/C/D，我给您发针对性的健康建议～</li><li><i>💬 示例 3</i>：您好夜月，我是您的专属健康顾问三诺健康顾问丨朱国银，感谢您对三诺的认可，接下来由我全程给您服务！您具体想了解哪个方案，或者咱们这边主要想调理哪方面问题都可以和我说说。</li></ul>
-    </div>
-
-    <div class="stage-block">
-        <h3>📌 异议处理</h3>
-        <ul><li><i>💬 示例 1</i>：[拥抱]它不是益生菌，是益生元。益生菌是直接补充菌；益生元是给您肠道里原本的好菌提供营养，让它们自己<br>繁殖壮大——相当于&quot;养鱼&quot;而不是&quot;放鱼&quot;，效果更稳定，不依赖外部补充。</li><li><i>💬 示例 2</i>：嗯，奇亚籽是可以辅助代餐的，可以辅助控糖，我和您的方案是益衡益生菌+轻路一起，是给肠道有益菌补充食物的，它不是益生菌，是益生元。益生菌是直接补充菌；益生元是给您肠道里原本的好菌提供营养，让它们自己繁殖壮大——相当于&quot;养鱼&quot;而不是&quot;放鱼&quot;，效果更稳定，不依赖外部补充。<br>轻路每天一袋，冲水喝，没有特别的味道，跟日常饮食吃奇亚籽不冲突。</li><li><i>💬 示例 3</i>：您需要补充轻路复合益生元膳食纤维。不是益生菌，是益生元，让肠道益生菌繁殖壮大——相当于&quot;养鱼&quot;而不是&quot;放鱼&quot;，效果更稳定，不依赖外部补充。它不是益生菌，是益生元。益生菌是直接补充菌；益生元是给您肠道里原本的好菌提供营养，让它们自己每天一袋，冲水喝，没有特别的味道，跟日常饮食不冲突。[强]</li></ul>
-    </div>
-</div>
-
-<!-- ═══ 八、30天提升日历 ═══ -->
-<div class="section">
-<h2>📅 八、30天执行日历</h2>
-<table>
-<tr><th>时间</th><th>主题</th><th>具体动作</th></tr>
-<tr><td><strong>第1-3天</strong></td><td>💡 破冰标准化</td><td>统一开场白模板：『专属健康顾问+7天体验营邀约』，确保每位客户接到相同的专业第一印象</td></tr><tr><td><strong>第4-7天</strong></td><td>📊 数据诊断强化</td><td>推动客户完成健康问卷/血糖数据提交，参考朱老师的72%诊断率，将数据诊断作为必走流程</td></tr><tr><td><strong>第8-10天</strong></td><td>📋 方案文档输出</td><td>为每位意向客户生成个性化方案文档（含病因分析+产品搭配+服用建议+预期效果），参考黎老师模式</td></tr><tr><td><strong>第11-14天</strong></td><td>📞 电话沟通跟进</td><td>对有数据但未成交客户进行电话跟进，参考成交因子：电话沟通客户平均客单¥1,200+</td></tr><tr><td><strong>第15-17天</strong></td><td>🎯 异议处理话术</td><td>学习朱老师异议处理模板，将「益生元≠益生菌」等概念讲透，消除客户疑惑</td></tr><tr><td><strong>第18-20天</strong></td><td>🛒 促单时机把控</td><td>参考朱老师促单节奏：方案推荐后24h内完成促单，使用『试用保障』打消顾虑</td></tr><tr><td><strong>第21-23天</strong></td><td>💬 关怀打卡体系</td><td>建立成交后7天/14天/30天三级关怀打卡机制，提升复购率（当前10.7%）</td></tr><tr><td><strong>第24-26天</strong></td><td>📈 组合推荐升级</td><td>推广镜脂套组（轻+阻）和益衡+轻路组合，提升客单价（组合客单¥500+ vs 单品¥139）</td></tr><tr><td><strong>第27-28天</strong></td><td>🔄 效果复购引导</td><td>对已用满1个月的客户进行效果回访，引导复购/升级套组</td></tr><tr><td><strong>第29-30天</strong></td><td>📊 复盘&迭代</td><td>对比月度数据，优化各阶段话术模板，沉淀高效话术到SOP库</td></tr>
-</table>
-</div>
-
-<!-- ═══ 九、分客群SOP速查表 ═══ -->
-<div class="section">
-<h2>📋 九、分客群SOP速查表</h2>
-<table>
-<tr><th>客群</th><th>占比</th><th>推荐产品</th><th>客单区间</th><th>核心话术策略</th></tr>
-<tr><td>🟢 低客单<br>（血糖/轻体初筛）</td><td>35.5%</td><td>轻路三盒装</td><td>¥139-417</td><td>「试用保障」+ 周年庆活动 + 轻路线下健康教育</td></tr>
-<tr><td>🔵 中客单<br>（血糖+轻体）</td><td>19.4%</td><td>镜脂套组<br>（轻+阻）</td><td>¥278-566</td><td>数据诊断 → 病因分析 → 镜脂双管齐下方案 → 85折优惠</td></tr>
-<tr><td>🟡 高客单<br>（综合代谢）</td><td>45.2%</td><td>益衡+轻路<br>益休/益畅/益净</td><td>¥500-1,520</td><td>深度方案文档 + 电话沟通 + 3个月调理周期推荐</td></tr>
-</table>
-</div>
-
-<!-- ═══ 十、总结 ═══ -->
-<div class="section">
-<h2>✅ 十、核心结论与建议</h2>
-
-<h3>🔑 最新动态（截至6/9 14:44）</h3>
-<ol style="font-size:.9em;line-height:2.2;padding-left:20px">
-    <li><strong>第31单：吴老师成交丁宁 ¥899 益衡+轻路</strong>：丁宁（血糖需求，39岁男性）通过姣姣的深度沟通（101条）后由吴老师完成成交，吴老师以8单/¥2,849巩固第二位置</li>
-    <li><strong>复购率10.7%有提升空间</strong>：3/28人复购（北辰×2、张文生×2、王一博×2），成交后的关怀打卡体系需继续强化，目标提升至20%+</li>
-    <li><strong>轻路爆品效应持续</strong>：11单/35.5%，聊天中提及87次，需加速引导轻路→镜脂套组的升级路径</li>
-</ol>
-
-<h3>🎯 下一步行动</h3>
-<ol style="font-size:.9em;line-height:2.2;padding-left:20px">
-    <li>建立「朱老师标杆话术库」，将陈潆（288条/¥278）的完整对话流程作为培训案例</li>
-    <li>优化益休-睡眠需求的转化路径，20位关注睡眠但仅3单成交</li>
-    <li>推动轻路→镜脂升级话术：轻路体验15天→效果反馈→镜脂套组升级推荐</li>
-    <li>赵老师回复率38.2%偏低，建议减少服务客户数、增加单客户沟通深度</li>
-</ol>
-</div>
+<div class="section"><h2><span class="num">8</span>成交客户明细</h2>
+<p class="desc">45位成交客户的话术分析摘要。</p>
+<div style="overflow-x:auto;">
+<table class="data-table">
+<tr><th>客户</th><th>日期</th><th>顾问</th><th>消息</th><th>回复率</th><th>主推产品</th><th>需求标签</th></tr>
+<tr><td style="font-weight:500;">北辰</td><td>05/21</td><td style="font-size:11px;">赵老师</td><td>121</td><td class="">47.9%</td><td style="font-size:11px;">新益修 · 益衡</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">张文生</td><td>05/21</td><td style="font-size:11px;">赵老师</td><td>45</td><td class="">33.3%</td><td style="font-size:11px;">镜脂阻 · 镜脂轻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 代谢综合征</td></tr>
+<tr><td style="font-weight:500;">杨先斋</td><td>05/21</td><td style="font-size:11px;">姣姣</td><td>34</td><td class="">38.2%</td><td style="font-size:11px;">益畅 · 新益修</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 代谢综合征</td></tr>
+<tr><td style="font-weight:500;">秦帅</td><td>05/22</td><td style="font-size:11px;">姣姣</td><td>42</td><td class="hl">50.0%</td><td style="font-size:11px;">轻路 · 益衡</td><td style="font-size:10px;">血糖管理 · 体重管理</td></tr>
+<tr><td style="font-weight:500;">沈善明</td><td>05/25</td><td style="font-size:11px;">姣姣</td><td>89</td><td class="hl">49.4%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">谢红</td><td>05/25</td><td style="font-size:11px;">姣姣</td><td>60</td><td class="">46.7%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理</td></tr>
+<tr><td style="font-weight:500;">施俊威</td><td>05/26</td><td style="font-size:11px;">诺诺</td><td>66</td><td class="">34.8%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">温晓炜</td><td>05/26</td><td style="font-size:11px;">诺诺</td><td>100</td><td class="">47.0%</td><td style="font-size:11px;">新益修 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">王庆丰</td><td>05/26</td><td style="font-size:11px;">赵老师</td><td>184</td><td class="">44.0%</td><td style="font-size:11px;">益衡 · 镜脂阻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 代谢综合征</td></tr>
+<tr><td style="font-weight:500;">谢贵</td><td>05/26</td><td style="font-size:11px;">姣姣</td><td>93</td><td class="hl">49.5%</td><td style="font-size:11px;">益衡 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">贾仁</td><td>05/26</td><td style="font-size:11px;">赵老师</td><td>90</td><td class="">41.1%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 代谢综合征</td></tr>
+<tr><td style="font-weight:500;">陈志</td><td>05/26</td><td style="font-size:11px;">姣姣</td><td>130</td><td class="">41.5%</td><td style="font-size:11px;">益衡 · 新益修</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">冯琳</td><td>05/27</td><td style="font-size:11px;">姣姣</td><td>119</td><td class="hl">57.1%</td><td style="font-size:11px;">益衡 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">胡桂娟</td><td>06/02</td><td style="font-size:11px;">黎老师</td><td>122</td><td class="">41.0%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 代谢综合征</td></tr>
+<tr><td style="font-weight:500;">尹红月</td><td>06/03</td><td style="font-size:11px;">赵老师</td><td>45</td><td class="">33.3%</td><td style="font-size:11px;">益衡 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">彭南其</td><td>06/03</td><td style="font-size:11px;">赵老师</td><td>84</td><td class="">38.1%</td><td style="font-size:11px;">益衡 · 益净</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">铜梁区</td><td>06/03</td><td style="font-size:11px;">朱国银</td><td>60</td><td class="hl">50.0%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">顾加友</td><td>06/03</td><td style="font-size:11px;">诺诺</td><td>32</td><td class="wl">28.1%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 脂肪肝</td></tr>
+<tr><td style="font-weight:500;">林萌</td><td>06/04</td><td style="font-size:11px;">黎老师</td><td>130</td><td class="">40.0%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">王一博</td><td>06/04</td><td style="font-size:11px;">赵老师</td><td>138</td><td class="">40.6%</td><td style="font-size:11px;">益畅 · 镜脂轻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">鲁瑜</td><td>06/04</td><td style="font-size:11px;">赵老师</td><td>41</td><td class="">31.7%</td><td style="font-size:11px;">益畅 · 新益修</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">杨卫红</td><td>06/05</td><td style="font-size:11px;">诺诺</td><td>28</td><td class="">32.1%</td><td style="font-size:11px;">益休 · 益衡</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">燕归来</td><td>06/06</td><td style="font-size:11px;">赵老师</td><td>69</td><td class="">31.9%</td><td style="font-size:11px;">益衡 · 镜脂阻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">刘益军</td><td>06/08</td><td style="font-size:11px;">朱国银</td><td>68</td><td class="hl">51.5%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">苏永玲</td><td>06/08</td><td style="font-size:11px;">诺诺</td><td>39</td><td class="">30.8%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">陈潆</td><td>06/08</td><td style="font-size:11px;">朱国银</td><td>288</td><td class="hl">59.4%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">陈静</td><td>06/08</td><td style="font-size:11px;">朱国银</td><td>116</td><td class="">44.8%</td><td style="font-size:11px;">益衡 · 新益修</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">丁宁</td><td>06/09</td><td style="font-size:11px;">姣姣</td><td>101</td><td class="">42.6%</td><td style="font-size:11px;">益衡 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">彭蓉</td><td>06/09</td><td style="font-size:11px;">姣姣</td><td>69</td><td class="">46.4%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">李宏梅</td><td>06/09</td><td style="font-size:11px;">赵老师</td><td>64</td><td class="">40.6%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">谢祖财</td><td>06/09</td><td style="font-size:11px;">黎老师</td><td>86</td><td class="">31.4%</td><td style="font-size:11px;">益衡 · 益休</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">徐家玲</td><td>06/10</td><td style="font-size:11px;">朱国银</td><td>66</td><td class="">47.0%</td><td style="font-size:11px;">益衡 · 新益修</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">王娟</td><td>06/10</td><td style="font-size:11px;">姣姣</td><td>193</td><td class="hl">48.7%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">白凡奇</td><td>06/10</td><td style="font-size:11px;">朱国银</td><td>86</td><td class="">40.7%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">张珏霖</td><td>06/11</td><td style="font-size:11px;">赵老师</td><td>123</td><td class="">46.3%</td><td style="font-size:11px;">益休 · 益衡</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">王瑶</td><td>06/11</td><td style="font-size:11px;">诺诺</td><td>72</td><td class="">43.1%</td><td style="font-size:11px;">益衡 · 镜脂阻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">蛋卷猫</td><td>06/11</td><td style="font-size:11px;">黎老师</td><td>54</td><td class="">35.2%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">陈冰冰</td><td>06/11</td><td style="font-size:11px;">诺诺</td><td>66</td><td class="">30.3%</td><td style="font-size:11px;">益衡 · 镜脂阻</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">万里涛</td><td>06/12</td><td style="font-size:11px;">黎老师</td><td>9</td><td class="wl">22.2%</td><td style="font-size:11px;">轻路 · 益衡</td><td style="font-size:10px;">血糖管理 · 体重管理 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">吴华芳</td><td>06/12</td><td style="font-size:11px;">赵老师</td><td>13</td><td class="wl">23.1%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">李金彪</td><td>06/12</td><td style="font-size:11px;">姣姣</td><td>127</td><td class="">42.5%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">王方宜</td><td>06/12</td><td style="font-size:11px;">诺诺</td><td>54</td><td class="">35.2%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">艺</td><td>06/12</td><td style="font-size:11px;">诺诺</td><td>19</td><td class="">36.8%</td><td style="font-size:11px;">益衡 · 轻路</td><td style="font-size:10px;">血糖管理</td></tr>
+<tr><td style="font-weight:500;">蔡长华</td><td>06/12</td><td style="font-size:11px;">姣姣</td><td>51</td><td class="">45.1%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+<tr><td style="font-weight:500;">郭长俊</td><td>06/12</td><td style="font-size:11px;">朱国银</td><td>55</td><td class="hl">54.5%</td><td style="font-size:11px;">益衡 · 益畅</td><td style="font-size:10px;">血糖管理 · 体重管理 · 肠道健康 · 睡眠改善</td></tr>
+</table></div></div>
 
 <div class="footer">
-    <p>三诺&华大 · 成交话术SOP分析报告 v4.0 | 基于29份聊天记录 · 2598条消息 | 31笔订单</p>
-    <p>分析日期：2026-06-09 12:05 | 数据来源：微伴助手消息存档</p>
+  <div style="font-size:14px;font-weight:600;color:#534AB7;">三诺×华大 成交话术SOP分析报告</div>
+  <div style="margin-top:6px;">45份成交记录 · 3,741条对话 · 纯话术数据驱动</div>
+  <div style="margin-top:4px;color:#BBB;">基于企微消息存档数据 · 关键词+语义双引擎分析 · 2026-06-12 16:16</div>
 </div>
-
-</div>
-</body>
-</html>
+</div></body></html>
