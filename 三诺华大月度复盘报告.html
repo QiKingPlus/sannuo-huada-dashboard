@@ -113,7 +113,7 @@ tr:hover td { background: #fafbfc; }
 </style>
 </head>
 <body>
-<div id="debug" style="background:#ffeeee;border:2px solid red;padding:12px;margin:10px;font-size:13px;font-family:monospace;display:none;" id="debug"></div>
+<div id="debug" style="display:none !important;visibility:hidden;height:0;overflow:hidden;" aria-hidden="true"></div>
 <div class="container">
 <div class="report-header">
   <h1>三诺 & 华大 私域运营复盘报告</h1>
@@ -146,7 +146,7 @@ tr:hover td { background: #fafbfc; }
     <tr><td>套组订单</td><td class="text-right bold">10 单</td><td class="text-center">—</td><td class="text-right">营收占比 54.8%</td></tr>
     <tr><td>顾问人数</td><td class="text-right bold">5 人</td><td class="text-center">—</td><td class="text-right">人均 9.6 单</td></tr>
   </table>
-  <div class="callout callout-blue" style="margin-top:16px;"><strong>核心结论</strong>：首月验证了"私域健康产品"的商业模式可行性。48单/¥25,303证明三诺糖尿病用户群对益生菌产品有真实需求。W4单周23单的爆发式增长显示团队产能正在释放，但<strong>人效稳定性和复购率（6.7%）是下一阶段的核心瓶颈</strong>。</div>
+  <div class="callout callout-blue" style="margin-top:16px;"><strong>核心结论</strong>：首月跑通了从触达到成交的最短路径，证明三诺糖尿病用户群对健康产品存在初始购买意愿。但在盈利模型、复购留存和规模化人效三个维度上，商业模式尚未得到验证，W4单周23单的爆发式增长显示团队产能正在释放，但<strong>人效稳定性和复购率（6.7%）是下一阶段的核心瓶颈</strong>，需要继续优化数据才是真正的检验。</div>
 </div>
 
 <!-- 二、自然周趋势 -->
@@ -593,35 +593,29 @@ tr:hover td { background: #fafbfc; }
             <p style="font-size:12px;color:#3a4a6a;margin:0 0 6px 0;">1. 收到包裹 → 发现卡片<br>2. 扫码 → 企微自动通过<br>3. 自动推送欢迎语 + 新人福利<br>4. Day1-7 培育内容自动推送<br>5. Day7 触发转化话术</p>
             <div style="font-size:12px;color:#666;padding:6px 8px;background:#f8fafc;border-radius:4px;margin-top:6px;"><strong>关键：</strong>扫码后30秒内的"第一印象"决定留存率，欢迎语必须包含明确价值（如"您已获得¥20优惠券"）</div>
           </div>
-          <div style="padding:12px;background:#fff;border-radius:8px;border:1px solid #e0e8f0;">
-            <div style="font-size:13px;font-weight:700;color:#378ADD;margin-bottom:6px;">不同产品匹配不同卡片</div>
-            <table style="width:100%;border-collapse:collapse;font-size:12px;">
-              <tr style="background:#f0f7ff;"><th style="padding:5px 8px;text-align:left;">产品</th><th style="padding:5px 8px;text-align:left;">卡片利益点</th><th style="padding:5px 8px;text-align:left;">预期扫码率</th></tr>
-              <tr><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">血糖仪</td><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">"扫码领血糖管理7天体验"</td><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">15-25%</td></tr>
-              <tr style="background:#fafcfe;"><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">试纸</td><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">"扫码领¥20试纸抵扣券"</td><td style="padding:5px 8px;border-bottom:1px solid #f0f0f0;">8-15%</td></tr>
-              <tr><td style="padding:5px 8px;">轻路/益衡</td><td style="padding:5px 8px;">"扫码加入健康管家"</td><td style="padding:5px 8px;">10-18%</td></tr>
-            </table>
+          <div class="callout callout-blue" style="margin-top:12px;">
+            <strong>验证方向：</strong>转为<strong>华大益生菌</strong>投放包裹卡，以验证"<strong>首因效应</strong>"——用户扫码后第一条消息（首因）是否决定后续转化走向。通过对比"健康科普型首因"与"优惠券型首因"的后续转化率差异，找到最优开场策略。
           </div>
         </div>
         <div style="padding:10px 14px;background:#f0f7ff;border-radius:8px;font-size:12px;color:#3a4a6a;">
-          <strong>提升引流率的核心抓手：</strong>① 卡片设计——二维码占比≥40%卡片面积，利益点用大字号；② 利益点明确——"扫码领¥20优惠券"比"扫码添加健康顾问"扫码率高3倍；③ 分批次A/B测试——4个版本卡片同时投放，统计各版本扫码率，快速迭代。
+          <strong>提升引流率的核心抓手：</strong>① 卡片设计——二维码占比≥40%卡片面积，利益点用大字号；② 利益点明确——"扫码领85折优惠券"比"扫码添加健康顾问"扫码率高；③ 分批次A/B测试——多个版本卡片同时投放，统计各版本扫码率，快速迭代。
         </div>
       </div>
     </div>
 
     <!-- 策略二：AI辅助提效 -->
     <div style="margin-top:20px;padding:16px 20px;background:linear-gradient(135deg,#f0faf4 0%,#e8f5ee 100%);border-radius:12px;border-left:4px solid #1D9E75;">
-      <div style="font-size:15px;font-weight:700;color:#1a2a4a;margin-bottom:4px;">策略二：AI辅助提效——突破质量·规模·成本的不可能三角</div>
-      <p style="font-size:13px;color:#3a4a6a;margin-bottom:16px;">传统私域运营面临一个根本性矛盾：<strong>质量、规模、成本三者无法同时兼得</strong>。AI的引入正在打破这一限制，让"高质量个性化服务 + 大规模覆盖 + 低成本运营"成为现实。</p>
+      <div style="font-size:15px;font-weight:700;color:#1a2a4a;margin-bottom:4px;">策略二：AI辅助提效——突破质量·规模·效率的不可能三角</div>
+      <p style="font-size:13px;color:#3a4a6a;margin-bottom:16px;">传统私域运营面临一个根本性矛盾：<strong>质量、规模、成本三者无法同时兼得</strong>。AI的引入正在打破这一限制，让"高质量个性化服务 + 大规模覆盖 + 高效运营"成为现实。</p>
 
       <!-- 不可能三角图示 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
         <div style="padding:14px;background:#fff;border-radius:8px;border:1px solid #e0e8f0;">
           <div style="font-size:13px;font-weight:700;color:#888;margin-bottom:8px;text-decoration:line-through;">传统模式：不可能三角</div>
           <div style="font-size:12px;color:#666;line-height:1.8;">
-            ✗ <strong>高质量 + 大规模</strong> = 高成本（需要大量专业顾问）<br>
-            ✗ <strong>高质量 + 低成本</strong> = 小规模（只能服务少量用户）<br>
-            ✗ <strong>低成本 + 大规模</strong> = 低质量（群发轰炸，无个性化）
+            ✗ <strong>高质量 + 大规模</strong> = 低效率（人力瓶颈，响应滞后）<br>
+            ✗ <strong>高质量 + 高效率</strong> = 小规模（受限于个人精力）<br>
+            ✗ <strong>高效率 + 大规模</strong> = 低质量（群发轰炸，无个性化）
           </div>
         </div>
         <div style="padding:14px;background:#fff;border-radius:8px;border:2px solid #1D9E75;">
@@ -629,7 +623,7 @@ tr:hover td { background: #fafbfc; }
           <div style="font-size:12px;color:#3a4a6a;line-height:1.8;">
             ✓ <strong>质量：</strong>AI生成个性化内容，每个用户收到不同信息<br>
             ✓ <strong>规模：</strong>AI同时处理1000+用户的个性化沟通<br>
-            ✓ <strong>成本：</strong>AI边际成本接近零，不随用户量线性增长
+            ✓ <strong>效率：</strong>AI处理速度是人工的数十倍，顾问专注于高价值转化
           </div>
         </div>
       </div>
@@ -749,8 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Debug helper
   function showErr(msg) {
-    var d = document.getElementById('debug');
-    if (d) { d.style.display = 'block'; d.textContent += msg + '\n'; }
+    if (msg && msg.toLowerCase().indexOf('error') >= 0) { console.error('[Chart]', msg); }
   }
 
   if (typeof Chart === 'undefined') { showErr('Chart.js not loaded!'); return; }

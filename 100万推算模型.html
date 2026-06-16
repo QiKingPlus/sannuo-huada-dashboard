@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100万销售推算模型 — 三诺华大私域</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f5f6f8;color:#2C2C2A;line-height:1.6;padding:24px}
+.container{max-width:1100px;margin:0 auto}
+.header{text-align:center;margin-bottom:32px}
+.header h1{font-size:22px;font-weight:500;color:#2C2C2A}
+.header p{font-size:13px;color:#888;margin-top:6px}
+.card{background:#fff;border-radius:12px;border:0.5px solid #e0e0de;padding:20px 24px;margin-bottom:20px}
+.card-title{font-size:15px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card-title .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.section-label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:500}
+
+/* KPI Row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.kpi-box{background:#fff;border-radius:8px;padding:14px 16px;border:0.5px solid #e0e0de;text-align:center}
+.kpi-box .label{font-size:12px;color:#888;margin-bottom:4px}
+.kpi-box .value{font-size:22px;font-weight:500}
+.kpi-box .sub{font-size:11px;color:#aaa;margin-top:2px}
+
+/* Scenario Tabs */
+.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid #e0e0de}
+.tab{padding:10px 20px;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;transition:all .2s}
+.tab:hover{color:#2C2C2A}
+.tab.active{color:#185FA5;border-bottom-color:#185FA5;font-weight:500}
+
+/* Scenario Panel */
+.scenario-panel{display:none}
+.scenario-panel.active{display:block}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#f7f7f5;font-weight:500;text-align:left;padding:10px 12px;border-bottom:1px solid #e0e0de;font-size:12px;color:#666}
+td{padding:10px 12px;border-bottom:0.5px solid #f0f0ee}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.highlight{background:#f0f7ff}
+tr.warn{background:#fff8ed}
+tr.critical{background:#fef2f2}
+
+/* Funnel visualization */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:4px;margin:20px 0}
+.funnel-step{display:flex;align-items:center;gap:16px;width:100%;max-width:700px}
+.funnel-bar{height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:500;transition:all .3s;min-width:60px}
+.funnel-label{font-size:12px;color:#666;width:120px;flex-shrink:0;text-align:right}
+.funnel-detail{font-size:11px;color:#888;margin-left:8px;white-space:nowrap}
+.funnel-arrow{text-align:center;font-size:11px;color:#aaa;margin:2px 0}
+
+/* Slider control */
+.control-row{display:grid;grid-template-columns:140px 1fr 60px;align-items:center;gap:12px;margin-bottom:12px}
+.control-row label{font-size:13px;color:#444}
+.control-row input[type=range]{width:100%;accent-color:#185FA5}
+.control-row .val{font-size:14px;font-weight:500;color:#185FA5;text-align:right}
+
+/* Result box */
+.result-box{background:linear-gradient(135deg,#f0f7ff 0%,#e8f4fd 100%);border-radius:10px;padding:20px 24px;text-align:center;margin-top:20px;border:1px solid #b5d4f4}
+.result-box .big{font-size:28px;font-weight:500;color:#185FA5}
+.result-box .desc{font-size:13px;color:#666;margin-top:6px}
+
+/* Comparison */
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+.compare-card{background:#fff;border-radius:10px;border:1px solid #e0e0de;padding:16px 18px}
+.compare-card.recommended{border:2px solid #185FA5;background:#f8fbff}
+.compare-card .cc-title{font-size:14px;font-weight:500;margin-bottom:10px}
+.compare-card .cc-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f3}
+.compare-card .cc-row:last-child{border-bottom:none}
+.compare-card .cc-row .cc-label{color:#888}
+.compare-card .cc-row .cc-val{font-weight:500}
+.compare-badge{font-size:10px;background:#185FA5;color:#fff;padding:2px 8px;border-radius:10px;margin-left:6px;font-weight:500}
+
+/* Tag */
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.tag-green{background:#EAF3DE;color:#27500A}
+.tag-amber{background:#FAEEDA;color:#854F0B}
+.tag-red{background:#FCEBEB;color:#A32D2D}
+.tag-blue{background:#E6F1FB;color:#0C447C}
+
+/* Insight */
+.insight{font-size:13px;color:#555;line-height:1.8;margin-top:12px;padding:12px 16px;background:#fafafa;border-radius:8px;border-left:3px solid #185FA5}
+.insight strong{color:#2C2C2A}
+
+/* Responsive */
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .compare-grid{grid-template-columns:1fr}
+  .funnel-step{flex-direction:column;gap:4px}
+  .funnel-label{text-align:center;width:auto}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>三诺华大私域 — ¥100万销售推算模型</h1>
+  <p>基于首月（5/18-6/14）实际转化数据，推演达成100万所需资源</p>
+</div>
+
+<!-- 基准数据 -->
+<div class="section-label">首月基准数据</div>
+<div class="kpi-row">
+  <div class="kpi-box"><div class="label">客户池</div><div class="value">2,464</div><div class="sub">企微好友总量</div></div>
+  <div class="kpi-box"><div class="label">成交订单</div><div class="value">48</div><div class="sub">月度 1.95% 转化</div></div>
+  <div class="kpi-box"><div class="label">总营收</div><div class="value" style="color:#185FA5">¥25,303</div><div class="sub">月均 ¥904/日</div></div>
+  <div class="kpi-box"><div class="label">平均客单</div><div class="value">¥527</div><div class="sub">首月基准线</div></div>
+  <div class="kpi-box"><div class="label">顾问人数</div><div class="value">5</div><div class="sub">人均 9.6 单/月</div></div>
+  <div class="kpi-box"><div class="label">复购率</div><div class="value" style="color:#993556">6.7%</div><div class="sub">3/45 人复购</div></div>
+</div>
+
+<!-- 场景切换 -->
+<div class="tabs" id="scenarioTabs">
+  <div class="tab active" onclick="switchTab(0)">月度 ¥100万</div>
+  <div class="tab" onclick="switchTab(1)">年度 ¥100万</div>
+  <div class="tab" onclick="switchTab(2)">交互推算器</div>
+</div>
+
+<!-- ========== 场景1: 月度100万 ========== -->
+<div class="scenario-panel active" id="panel0">
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:#E24B4A"></span>场景A: 纯线性外推（维持现状不动）</div>
+    <table>
+      <tr><th>指标</th><th class="num">首月实际</th><th class="num">月度100万需要</th><th class="num">倍数</th></tr>
+      <tr class="critical"><td>客户池</td><td class="num">2,464</td><td class="num" style="color:#A32D2D;font-weight:500">97,333</td><td class="num">39.5x</td></tr>
+      <tr class="critical"><td>顾问人数</td><td class="num">5</td><td class="num" style="color:#A32D2D;font-weight:500">198</td><td class="num">39.5x</td></tr>
+      <tr class="warn"><td>月订单量</td><td class="num">48</td><td class="num" style="font-weight:500">1,898</td><td class="num">39.5x</td></tr>
+      <tr><td>客单价</td><td class="num">¥527</td><td class="num">¥527</td><td class="num">1x（不变）</td></tr>
+      <tr><td>转化率</td><td class="num">1.95%</td><td class="num">1.95%</td><td class="num">1x（不变）</td></tr>
+    </table>
+    <div class="insight">
+      <strong>结论：完全不现实。</strong>需要将近10万客户和200个顾问——相当于把整个团队膨胀40倍，而转化率和客单价一个都没改善。这不是"做100万"的路径，是"烧钱40倍"的路径。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:#BA7517"></span>场景B: 客单价提升 + 转化优化（最可能路径）</div>
+    <table>
+      <tr><th>关键杠杆</th><th>当前值</th><th>优化目标</th><th>提升幅度</th></tr>
+      <tr><td>深度沟通占比</td><td class="num">15.5%</td><td class="num" style="color:#0F6E56;font-weight:500">28%</td><td class="num">+81%</td></tr>
+      <tr><td>深度层转化率</td><td class="num">8.4%</td><td class="num" style="color:#0F6E56;font-weight:500">16%</td><td class="num">+90%</td></tr>
+      <tr><td>套组占比</td><td class="num">21%</td><td class="num" style="color:#0F6E56;font-weight:500">45%</td><td class="num">+114%</td></tr>
+      <tr><td>综合客单价</td><td class="num">¥527</td><td class="num" style="color:#0F6E56;font-weight:500">¥1,050</td><td class="num">+99%</td></tr>
+      <tr><td>复购率</td><td class="num">6.7%</td><td class="num" style="color:#0F6E56;font-weight:500">20%</td><td class="num">+198%</td></tr>
+    </table>
+    <div style="margin-top:16px">
+      <div class="section-label">优化后漏斗推算</div>
+      <div class="funnel">
+        <div class="funnel-step">
+          <div class="funnel-label">客户池</div>
+          <div class="funnel-bar" style="width:100%;background:#185FA5">20,000 人</div>
+          <div class="funnel-detail">目标客户池（8x增长）</div>
+        </div>
+        <div class="funnel-arrow">&#9660; 28% 进入深度沟通</div>
+        <div class="funnel-step">
+          <div class="funnel-label">深度沟通</div>
+          <div class="funnel-bar" style="width:56%;background:#534AB7">5,600 人</div>
+          <div class="funnel-detail">当前仅15.5%</div>
+        </div>
+        <div class="funnel-arrow">&#9660; 16% 成交转化</div>
+        <div class="funnel-step">
+          <div class="funnel-label">新客成交</div>
+          <div class="funnel-bar" style="width:25%;background:#0F6E56">896 单</div>
+          <div class="funnel-detail">当前32单/383人</div>
+        </div>
+      </div>
+    </div>
+    <table>
+      <tr><th>指标</th><th class="num">优化后值</th><th class="num">备注</th></tr>
+      <tr class="highlight"><td>新客订单</td><td class="num" style="font-weight:500">896 单</td><td class="num">20,000 x 28% x 16%</td></tr>
+      <tr><td>复购订单</td><td class="num">约 100 单</td><td class="num">累计成交客户 x 20%</td></tr>
+      <tr class="highlight"><td>总订单</td><td class="num" style="font-weight:500">~996 单</td><td class="num"></td></tr>
+      <tr class="highlight"><td>月营收</td><td class="num" style="font-weight:500;color:#185FA5">~¥1,046,000</td><td class="num">996 x ¥1,050</td></tr>
+      <tr><td>顾问需求</td><td class="num">20-25 人</td><td class="num">人均40-50单（需AI提效）</td></tr>
+    </table>
+    <div class="insight">
+      <strong>核心杠杆排序</strong>：客单价翻倍（¥527→¥1,050）贡献50%增量，深度沟通占比提升（15.5%→28%）贡献30%增量，客户池扩展（2,464→20,000）贡献20%增量。<br>
+      <strong>关键前提</strong>：20-25人顾问团队若要人均40-50单/月（当前仅9.6单），必须借助AI辅助提效，否则人效不支撑。
+    </div>
+  </div>
+</div>
+
+<!-- ========== 场景2: 年度100万 ========== -->
+<div class="scenario-panel" id="panel1">
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:#1D9E75"></span>年度 ¥100万 = 月均 ¥83,333</div>
+    <p style="font-size:13px;color:#666;margin-bottom:16px">这是一个更务实的目标。以下对比三个路径的难易度：</p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="cc-title">路径1: 纯线性增长 <span class="tag tag-red">极难</span></div>
+        <div class="cc-row"><span class="cc-label">需要客户池</span><span class="cc-val" style="color:#A32D2D">8,100</span></div>
+        <div class="cc-row"><span class="cc-label">需要顾问</span><span class="cc-val" style="color:#A32D2D">17 人</span></div>
+        <div class="cc-row"><span class="cc-label">月订单</span><span class="cc-val">158 单</span></div>
+        <div class="cc-row"><span class="cc-label">客单价</span><span class="cc-val">¥527</span></div>
+        <div class="cc-row"><span class="cc-label">转化率</span><span class="cc-val">1.95%</span></div>
+        <div style="font-size:11px;color:#888;margin-top:8px">客服端翻倍扩人，客单价和转化率不变</div>
+      </div>
+      <div class="compare-card recommended">
+        <div class="cc-title">路径2: 客单价优化 <span class="tag tag-green">推荐</span><span class="compare-badge">性价比最高</span></div>
+        <div class="cc-row"><span class="cc-label">需要客户池</span><span class="cc-val">5,300</span></div>
+        <div class="cc-row"><span class="cc-label">需要顾问</span><span class="cc-val">10 人</span></div>
+        <div class="cc-row"><span class="cc-label">月订单</span><span class="cc-val">104 单</span></div>
+        <div class="cc-row"><span class="cc-label">客单价</span><span class="cc-val" style="color:#0F6E56">¥800</span></div>
+        <div class="cc-row"><span class="cc-label">转化率</span><span class="cc-val">1.95%</span></div>
+        <div style="font-size:11px;color:#888;margin-top:8px">套组占比提升至35%，客单价+52%</div>
+      </div>
+      <div class="compare-card">
+        <div class="cc-title">路径3: 转化率优化 <span class="tag tag-amber">中等</span></div>
+        <div class="cc-row"><span class="cc-label">需要客户池</span><span class="cc-val">4,500</span></div>
+        <div class="cc-row"><span class="cc-label">需要顾问</span><span class="cc-val">8 人</span></div>
+        <div class="cc-row"><span class="cc-label">月订单</span><span class="cc-val">104 单</span></div>
+        <div class="cc-row"><span class="cc-label">客单价</span><span class="cc-val">¥527</span></div>
+        <div class="cc-row"><span class="cc-label">转化率</span><span class="cc-val" style="color:#BA7517">3.5%</span></div>
+        <div style="font-size:11px;color:#888;margin-top:8px">深度沟通率25%+深度转化12%</div>
+      </div>
+    </div>
+    <div class="insight">
+      <strong>年度100万最现实路径</strong>：路径2（客单价优化）。核心操作是把套组推荐率从当前21%提升到35%，客单价从¥527拉到¥800。这不需要扩太多人，也不需要大规模拉新，纯粹是<strong>顾问销售能力</strong>的提升——教他们怎么从卖¥139轻路自然过渡到推¥1,978的益衡+轻路套组。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:#185FA5"></span>6个月渐进路径</div>
+    <table>
+      <tr><th>月份</th><th class="num">客户池</th><th class="num">转化率</th><th class="num">客单价</th><th class="num">月订单</th><th class="num">月营收</th><th class="num">顾问</th><th>关键动作</th></tr>
+      <tr style="background:#f9f9f7"><td>首月(已完成)</td><td class="num">2,464</td><td class="num">1.95%</td><td class="num">¥527</td><td class="num">48</td><td class="num">¥25,303</td><td class="num">5</td><td>跑通路径</td></tr>
+      <tr><td>M2</td><td class="num">3,500</td><td class="num">2.5%</td><td class="num">¥620</td><td class="num">88</td><td class="num">¥54,400</td><td class="num">7</td><td>套组话术培训 + 死亡之谷攻坚</td></tr>
+      <tr><td>M3</td><td class="num">4,500</td><td class="num">3.0%</td><td class="num">¥720</td><td class="num">135</td><td class="num">¥97,200</td><td class="num">8</td><td>升单SOP落地 + 首因效应包裹卡</td></tr>
+      <tr class="highlight"><td>M4</td><td class="num">5,500</td><td class="num">3.5%</td><td class="num">¥780</td><td class="num">193</td><td class="num">¥150,300</td><td class="num">10</td><td>复购体系启动 + 内容培育</td></tr>
+      <tr><td>M5</td><td class="num">6,500</td><td class="num">3.8%</td><td class="num">¥820</td><td class="num">247</td><td class="num">¥202,540</td><td class="num">12</td><td>AI辅助提效 + 规模化</td></tr>
+      <tr><td>M6</td><td class="num">7,500</td><td class="num">4.0%</td><td class="num">¥850</td><td class="num">300</td><td class="num">¥255,000</td><td class="num">14</td><td>稳定运营 + 复购率15%+</td></tr>
+    </table>
+    <div class="result-box">
+      <div class="big">6个月累计: ¥784,743</div>
+      <div class="desc">M1-M6合计营收，第7个月可突破月度¥25万，全年可达 ¥300万+</div>
+    </div>
+    <div class="insight">
+      <strong>增长飞轮</strong>：每个月的新增成交客户会沉淀为下个月的复购基础。M4开始复购贡献约15-20%订单，M6可贡献25%+。<br>
+      <strong>人才节奏</strong>：每月新增1-2人顾问，6个月从5人→14人。每新增1人需2-4周培训期达到人均10单/月。
+    </div>
+  </div>
+</div>
+
+<!-- ========== 场景3: 交互推算器 ========== -->
+<div class="scenario-panel" id="panel2">
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:#534AB7"></span>自定义推算器 — 拖动滑块实时计算</div>
+
+    <div class="section-label">输入参数</div>
+
+    <div class="control-row">
+      <label>目标月营收</label>
+      <input type="range" id="sliderRevenue" min="10" max="500" value="100" step="10" oninput="calc()">
+      <div class="val" id="valRevenue">100万</div>
+    </div>
+    <div class="control-row">
+      <label>客户池规模</label>
+      <input type="range" id="sliderPool" min="1000" max="50000" value="5000" step="500" oninput="calc()">
+      <div class="val" id="valPool">5,000</div>
+    </div>
+    <div class="control-row">
+      <label>深度沟通占比</label>
+      <input type="range" id="sliderDeep" min="10" max="40" value="20" step="1" oninput="calc()">
+      <div class="val" id="valDeep">20%</div>
+    </div>
+    <div class="control-row">
+      <label>深度层成交率</label>
+      <input type="range" id="sliderCVR" min="5" max="25" value="10" step="0.5" oninput="calc()">
+      <div class="val" id="valCVR">10%</div>
+    </div>
+    <div class="control-row">
+      <label>综合客单价</label>
+      <input type="range" id="sliderAOV" min="300" max="2000" value="700" step="50" oninput="calc()">
+      <div class="val" id="valAOV">¥700</div>
+    </div>
+    <div class="control-row">
+      <label>人均月服务量</label>
+      <input type="range" id="sliderEff" min="10" max="80" value="20" step="5" oninput="calc()">
+      <div class="val" id="valEff">20人/顾问</div>
+    </div>
+    <div class="control-row">
+      <label>复购率</label>
+      <input type="range" id="sliderRepeat" min="0" max="30" value="10" step="1" oninput="calc()">
+      <div class="val" id="valRepeat">10%</div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">计算结果</div>
+
+    <div class="kpi-row" id="resultKpis">
+      <!-- JS fills -->
+    </div>
+
+    <div id="resultSummary" class="result-box">
+      <!-- JS fills -->
+    </div>
+  </div>
+</div>
+
+<!-- 底部洞察 -->
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#D85A30"></span>三个核心判断</div>
+  <div class="insight">
+    <strong>1. 客单价是第一杠杆</strong>：当前¥527的客单价中，¥139轻路占了23单（48%），但只贡献17%营收。如果把20%的轻路客户升单到¥1,978套组，仅此一项就能增加 ¥3,000+ 营收（+12%），而不需要多一个客户或一个顾问。
+  </div>
+  <div class="insight" style="margin-top:12px">
+    <strong>2. "死亡之谷"是效率黑洞</strong>：197人聊了16-30条消息但0成交。这些人已经花了顾问大量时间（约占总沟通时间的35%），却产出为0。如果能把这197人的转化率从0%拉到2%，就是4单/¥2,000+增量——这比拉200个新客户成本低得多。
+  </div>
+  <div class="insight" style="margin-top:12px">
+    <strong>3. 月度100万 ≠ 纯线性叠加</strong>：100万/月意味着需要8倍于当前的客户池和4倍顾问团队，且客单价和转化率必须同步翻倍。这本质上是"换一个商业模式"——从"小团队手把手服务"变成"标准化+AI辅助的规模化运营"。
+  </div>
+</div>
+
+</div>
+
+<script>
+function switchTab(idx) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.scenario-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  if (idx === 2) calc();
+}
+
+function calc() {
+  var rev = +document.getElementById('sliderRevenue').value;
+  var pool = +document.getElementById('sliderPool').value;
+  var deep = +document.getElementById('sliderDeep').value / 100;
+  var cvr = +document.getElementById('sliderCVR').value / 100;
+  var aov = +document.getElementById('sliderAOV').value;
+  var eff = +document.getElementById('sliderEff').value;
+  var repeat = +document.getElementById('sliderRepeat').value / 100;
+
+  document.getElementById('valRevenue').textContent = rev + '万';
+  document.getElementById('valPool').textContent = pool.toLocaleString();
+  document.getElementById('valDeep').textContent = (deep*100) + '%';
+  document.getElementById('valCVR').textContent = (cvr*100) + '%';
+  document.getElementById('valAOV').textContent = '¥' + aov;
+  document.getElementById('valEff').textContent = eff + '人/顾问';
+  document.getElementById('valRepeat').textContent = (repeat*100) + '%';
+
+  var targetYuan = rev * 10000;
+  var totalOrders = targetYuan / aov;
+  var newOrders = totalOrders / (1 + repeat * 3); // 3 = avg repeat frequency
+  var repeatOrders = totalOrders - newOrders;
+
+  var neededPoolForNew = newOrders / (deep * cvr);
+  var ratio = neededPoolForNew / pool;
+  var feasible = ratio <= 1;
+
+  var consultants = Math.ceil(totalOrders / eff);
+
+  var shallowOrders = (1 - deep) * neededPoolForNew * 0.004;
+  var midOrders = (deep * 0.3) * neededPoolForNew * 0.015;
+  var deepOrders = (deep * 0.7) * neededPoolForNew * cvr;
+
+  var kpiHtml = '';
+  kpiHtml += '<div class="kpi-box"><div class="label">需要月订单</div><div class="value">' + Math.round(totalOrders) + '</div><div class="sub">新客' + Math.round(newOrders) + ' + 复购' + Math.round(repeatOrders) + '</div></div>';
+  kpiHtml += '<div class="kpi-box"><div class="label">所需客户池</div><div class="value" style="color:' + (feasible?'#0F6E56':'#A32D2D') + '">' + (feasible ? pool.toLocaleString() : Math.round(neededPoolForNew).toLocaleString()) + '</div><div class="sub">' + (feasible ? '当前池可满足' : '需扩至' + Math.round(neededPoolForNew).toLocaleString()) + '</div></div>';
+  kpiHtml += '<div class="kpi-box"><div class="label">需要顾问</div><div class="value">' + consultants + '</div><div class="sub">人均' + Math.round(totalOrders/consultants) + '单/月</div></div>';
+  kpiHtml += '<div class="kpi-box"><div class="label">可行性</div><div class="value" style="color:' + (feasible?'#0F6E56':'#BA7517') + '">' + (feasible ? '可达标' : (ratio < 2 ? '需扩池' : '需重构')) + '</div><div class="sub">池利用率' + Math.round(100/ratio) + '%</div></div>';
+  document.getElementById('resultKpis').innerHTML = kpiHtml;
+
+  var summaryHtml = '';
+  if (feasible) {
+    summaryHtml = '<div class="big">达标: ¥' + (totalOrders * aov / 10000).toFixed(1) + '万/月</div>';
+    summaryHtml += '<div class="desc">当前' + pool.toLocaleString() + '客户池 + ' + consultants + '人顾问即可支撑目标</div>';
+  } else {
+    summaryHtml = '<div class="big" style="color:#A32D2D">缺口: 需' + Math.round(neededPoolForNew).toLocaleString() + '客户</div>';
+    summaryHtml += '<div class="desc">当前池利用率' + Math.round(100/ratio) + '%，需将客户池扩大至' + Math.round(neededPoolForNew).toLocaleString() + '人或提升转化率/客单价</div>';
+  }
+  document.getElementById('resultSummary').innerHTML = summaryHtml;
+}
+
+// Init
+calc();
+</script>
+</body>
+</html>
