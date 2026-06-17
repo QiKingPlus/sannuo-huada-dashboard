@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三诺×华大 AI项目规划 v3 · 基于深护智康</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #F7F7FA; color: #1A1A1A; line-height: 1.6;
+}
+.container { max-width: 1024px; margin: 0 auto; padding: 40px 24px 100px; }
+
+/* Hero */
+.hero { text-align: center; padding: 60px 0 40px; }
+.hero .badge { display: inline-block; background: linear-gradient(135deg,#534AB7,#7C6FF7); color: #FFF; padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; margin-bottom: 16px; }
+.hero h1 { font-size: 34px; font-weight: 600; color: #1A1A1A; margin-bottom: 8px; }
+.hero .sub { font-size: 15px; color: #666; max-width: 680px; margin: 0 auto 24px; line-height: 1.7; }
+.hero .dual { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.hero .dual .chip { padding: 10px 24px; border-radius: 12px; font-size: 14px; font-weight: 500; }
+.hero .chip.a { background: #E6F1FB; color: #185FA5; border: 1px solid #C5DDF5; }
+.hero .chip.b { background: #E1F5EE; color: #0F6E56; border: 1px solid #B7E0D0; }
+.hero .system-badge { display: inline-flex; align-items: center; gap: 6px; background: #FFF; border: 1px solid #DDD; border-radius: 8px; padding: 6px 14px; font-size: 12px; color: #777; margin-top: 16px; }
+
+/* Sections */
+.section { margin-top: 56px; }
+.section h2 { font-size: 22px; font-weight: 600; color: #1A1A1A; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.section h2 .num { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: #EEEDFE; color: #534AB7; border-radius: 8px; font-size: 16px; font-weight: 600; flex-shrink: 0; }
+.section .desc { font-size: 14px; color: #888; margin-bottom: 24px; margin-left: 46px; }
+
+/* Metrics */
+.metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.metric { background: #FFF; border: 1px solid #E8E8E8; border-radius: 12px; padding: 20px; text-align: center; }
+.metric .val { font-size: 26px; font-weight: 600; }
+.metric .val.up { color: #1D9E75; }
+.metric .val.down { color: #D85A30; }
+.metric .val.neutral { color: #534AB7; }
+.metric .lbl { font-size: 12px; color: #888; margin-top: 4px; line-height: 1.4; }
+
+/* Compare */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.compare .col { border-radius: 14px; padding: 22px; }
+.compare .col.bad { background: #FEF2F2; border: 1px solid #FECACA; }
+.compare .col.good { background: #F0FDF4; border: 1px solid #BBF7D0; }
+.compare .col h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.compare .col p { font-size: 13px; color: #555; line-height: 1.7; }
+
+/* Cards */
+.cards { display: grid; gap: 14px; }
+.cards.c2 { grid-template-columns: 1fr 1fr; }
+.cards.c3 { grid-template-columns: repeat(3,1fr); }
+.cards.c4 { grid-template-columns: repeat(4,1fr); }
+
+.card { background: #FFF; border: 1px solid #E8E8E8; border-radius: 12px; padding: 22px; }
+.card.purple { border-left: 3px solid #534AB7; }
+.card.blue { border-left: 3px solid #378ADD; }
+.card.teal { border-left: 3px solid #1D9E75; }
+.card.coral { border-left: 3px solid #D85A30; }
+.card.amber { border-left: 3px solid #EF9F27; }
+.card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.card p { font-size: 13px; color: #555; line-height: 1.7; }
+
+/* Flow */
+.flow { background: #FFF; border: 1px solid #E8E8E8; border-radius: 12px; padding: 24px; }
+.flow-steps { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 10px 0; }
+.flow-step { flex: 0 0 auto; text-align: center; min-width: 90px; }
+.flow-step .dot { width: 50px; height: 50px; border-radius: 50%; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: #FFF; }
+.flow-step .dot.blue { background: #378ADD; }
+.flow-step .dot.teal { background: #1D9E75; }
+.flow-step .dot.purple { background: #534AB7; }
+.flow-step .dot.amber { background: #EF9F27; }
+.flow-step .dot.gray { background: #888; }
+.flow-step .label { font-size: 12px; color: #555; max-width: 86px; margin: 0 auto; line-height: 1.4; }
+.flow-arrow { flex: 0 0 auto; padding: 16px 6px 0; color: #CCC; font-size: 15px; font-weight: 600; }
+
+/* Timeline */
+.timeline { background: #FFF; border: 1px solid #E8E8E8; border-radius: 12px; padding: 24px; }
+.timeline-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; align-items: flex-start; }
+.timeline-item:last-child { border-bottom: none; }
+.timeline-item .dot-sm { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #FFF; }
+.timeline-item .dot-sm.d0 { background: #378ADD; }
+.timeline-item .dot-sm.d3 { background: #1D9E75; }
+.timeline-item .dot-sm.d7 { background: #EF9F27; }
+.timeline-item .dot-sm.d14 { background: #D85A30; }
+.timeline-item .dot-sm.d30 { background: #534AB7; }
+.timeline-item .dot-sm.d45 { background: #888; }
+.timeline-item .info { flex: 1; min-width: 0; }
+.timeline-item .info .t { font-size: 13px; font-weight: 600; }
+.timeline-item .info .d { font-size: 12px; color: #666; margin-top: 3px; line-height: 1.5; }
+
+/* Tags */
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tags .tag { padding: 3px 9px; border-radius: 5px; font-size: 11px; font-weight: 500; }
+.tags .tag.green { background: #DCFCE7; color: #166534; }
+.tags .tag.amber { background: #FEF3C7; color: #92400E; }
+.tags .tag.red { background: #FEE2E2; color: #991B1B; }
+.tags .tag.blue { background: #DBEAFE; color: #1E40AF; }
+.tags .tag.purple { background: #EDE9FE; color: #5B21B6; }
+
+/* Task view mock */
+.task-view { background: #FFF; border: 1px solid #E8E8E8; border-radius: 14px; overflow: hidden; }
+.task-view-header { background: #F9FAFB; padding: 14px 20px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E8E8E8; }
+.task-view-body { padding: 16px 20px; }
+.task-section { margin-bottom: 16px; }
+.task-section:last-child { margin-bottom: 0; }
+.task-section .section-title { font-size: 13px; font-weight: 600; color: #888; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.task-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #F9FAFB; border-radius: 8px; margin-bottom: 6px; font-size: 13px; }
+.task-item:last-child { margin-bottom: 0; }
+.task-item .task-priority { font-size: 11px; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+.task-item .task-priority.urgent { background: #FEE2E2; color: #991B1B; }
+.task-item .task-priority.normal { background: #FEF3C7; color: #92400E; }
+.task-batch { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.task-batch-card { background: #F9FAFB; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #E8E8E8; }
+.task-batch-card .count { font-size: 24px; font-weight: 600; color: #534AB7; }
+.task-batch-card .type { font-size: 12px; color: #555; margin-top: 2px; }
+.task-batch-card .items { font-size: 11px; color: #888; margin-top: 6px; }
+.task-batch-card .action { margin-top: 10px; }
+.task-batch-card .btn { display: inline-block; padding: 4px 14px; background: #534AB7; color: #FFF; border-radius: 6px; font-size: 11px; cursor: default; }
+
+/* Profile card mock */
+.profile-card { background: #FFF; border: 2px solid #534AB7; border-radius: 14px; padding: 22px; }
+.profile-card .pc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.profile-card .pc-title { font-size: 14px; font-weight: 600; }
+.profile-card .pc-badge { font-size: 11px; padding: 3px 10px; border-radius: 4px; background: #EEEDFE; color: #534AB7; }
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; margin-bottom: 14px; }
+.profile-grid div { padding: 6px 10px; background: #F9FAFB; border-radius: 6px; }
+.profile-grid .k { color: #888; }
+.profile-grid .v { color: #333; font-weight: 500; }
+.profile-analysis { padding: 14px; background: #F5F3FF; border-radius: 8px; margin-bottom: 10px; }
+.profile-analysis .pa-title { font-size: 12px; font-weight: 600; color: #534AB7; margin-bottom: 6px; }
+.profile-updates { border-top: 1px dashed #DDD; padding-top: 12px; margin-top: 12px; }
+.profile-updates .pu-title { font-size: 12px; font-weight: 600; color: #888; margin-bottom: 6px; }
+.profile-updates .pu-item { font-size: 11px; color: #555; padding: 2px 0; }
+
+/* Three locks */
+.locks { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.lock { background: #FFF; border: 1px solid #E8E8E8; border-radius: 12px; padding: 20px; text-align: center; }
+.lock .icon { font-size: 32px; margin-bottom: 8px; }
+.lock h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.lock p { font-size: 12px; color: #666; line-height: 1.6; }
+
+/* Stages */
+.stages { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stage { background: #FFF; border: 1px solid #E8E8E8; border-radius: 14px; padding: 20px; text-align: center; position: relative; }
+.stage .stage-icon { font-size: 28px; margin-bottom: 8px; }
+.stage h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.stage .stage-count { font-size: 28px; font-weight: 600; color: #534AB7; }
+.stage p { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.5; }
+.stage-arrow { display: flex; align-items: center; justify-content: center; font-size: 20px; color: #CCC; }
+
+/* Report mock */
+.report-card { background: #FFF; border: 1px solid #E8E8E8; border-radius: 14px; padding: 22px; }
+.report-card .rc-header { font-size: 14px; font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #F0F0F0; }
+.report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.report-item { background: #F9FAFB; border-radius: 8px; padding: 14px; }
+.report-item .ri-title { font-size: 12px; font-weight: 600; color: #534AB7; margin-bottom: 6px; }
+.report-item .ri-data { font-size: 13px; color: #333; line-height: 1.6; }
+.report-item .ri-eval { font-size: 12px; color: #1D9E75; margin-top: 4px; }
+
+/* Tables */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 10px 14px; background: #F9FAFB; font-weight: 600; color: #555; border-bottom: 1px solid #E8E8E8; font-size: 12px; }
+.data-table td { padding: 10px 14px; border-bottom: 1px solid #F3F4F6; color: #333; }
+.data-table .hl { color: #1D9E75; font-weight: 600; }
+.data-table .hl-up { color: #534AB7; font-weight: 600; }
+
+/* Risks */
+.risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.risk-card { background: #FFF; border: 1px solid #E8E8E8; border-radius: 10px; padding: 16px; }
+.risk-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.risk-title { font-size: 14px; font-weight: 600; }
+.risk-level { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+.risk-level.high { background: #FEE2E2; color: #991B1B; }
+.risk-level.mid { background: #FEF3C7; color: #92400E; }
+.risk-desc { font-size: 12px; color: #666; line-height: 1.6; }
+
+/* Comparison table */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.comp-table th { text-align: left; padding: 10px 14px; background: #F9FAFB; font-weight: 600; color: #555; border-bottom: 1px solid #E8E8E8; font-size: 12px; }
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid #F3F4F6; color: #333; vertical-align: top; }
+.comp-table .v3-col { background: #F5F3FF; }
+
+/* Full journey */
+.journey { background: #FFF; border: 1px solid #E8E8E8; border-radius: 14px; padding: 24px; }
+.journey-step { padding: 16px; margin-bottom: 12px; border-radius: 10px; border-left: 3px solid; }
+.journey-step:last-child { margin-bottom: 0; }
+.journey-step .js-day { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+.journey-step .js-content { font-size: 13px; color: #555; line-height: 1.6; }
+.journey-step.ai { background: #F0F4FF; border-color: #534AB7; }
+.journey-step.ai .js-day { color: #534AB7; }
+.journey-step.human { background: #F0FDF4; border-color: #1D9E75; }
+.journey-step.human .js-day { color: #1D9E75; }
+.journey-step.result { background: #FFF7ED; border-color: #EF9F27; }
+.journey-step.result .js-day { color: #EF9F27; }
+
+/* Callout */
+.callout { background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 10px; padding: 14px 18px; font-size: 13px; color: #4C1D95; line-height: 1.7; margin-top: 16px; }
+
+/* Section divider */
+.divider { height: 1px; background: #E8E8E8; margin: 48px 0 0; }
+
+@media (max-width: 768px) {
+  .metrics, .cards.c2, .cards.c3, .cards.c4, .compare, .locks, .stages, .risk-grid, .report-grid, .task-batch { grid-template-columns: 1fr; }
+  .comp-table { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <div class="badge">2026年6月 · v3 · 系统落地版</div>
+    <h1>三诺×华大 AI 项目规划</h1>
+    <p class="sub">基于深护智康「小诺」AI健管系统，聚焦两个核心命题：AI问诊初筛提人效 + AI生命周期关怀保执行。<br>不做万能员工，做顾问的超级助理。</p>
+    <div class="dual">
+      <span class="chip a">引擎一：AI问诊初筛</span>
+      <span class="chip b">引擎二：AI生命周期关怀</span>
+    </div>
+    <div class="system-badge">🔧 系统底座：深护智康「小诺」AI数字人</div>
+  </div>
+
+  <!-- ======== KEY METRICS ======== -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="val down">~10人/天</div>
+      <div class="lbl">现在：顾问日服务上限</div>
+    </div>
+    <div class="metric">
+      <div class="val up">40-60人/天</div>
+      <div class="lbl">v3上线后：日服务上限<br><span style="color:#888;">(v2: 30-50)</span></div>
+    </div>
+    <div class="metric">
+      <div class="val down">8.1%</div>
+      <div class="lbl">现在：复购率</div>
+    </div>
+    <div class="metric">
+      <div class="val up">25-30%</div>
+      <div class="lbl">v3上线后：复购率预期<br><span style="color:#888;">(v2: 20-25%)</span></div>
+    </div>
+  </div>
+
+  <!-- ======== v2→v3 变化总览 ======== -->
+  <div class="section">
+    <h2><span class="num">0</span>v2 → v3：升级了什么？</h2>
+    <p class="desc">v2 是方法论设计（4题对话 + 线性格子），v3 基于深护智康真实系统能力，把"怎么做"变成"用什么做"。</p>
+
+    <table class="comp-table" style="margin-top:16px;">
+      <tr><th>维度</th><th>v2（思路版）</th><th class="v3-col">v3（系统版）▲</th></tr>
+      <tr><td>系统底座</td><td>方法论</td><td class="v3-col"><strong>深护智康「小诺」已产品化</strong></td></tr>
+      <tr><td>问诊方式</td><td>4题对话</td><td class="v3-col"><strong>双通道</strong>：采集链接 + 群聊自动建档</td></tr>
+      <tr><td>输出物</td><td>静态初筛卡</td><td class="v3-col"><strong>动态客户档案</strong>（持续更新）</td></tr>
+      <tr><td>人机控制</td><td>无</td><td class="v3-col"><strong>一键开关 + 敏感词转人工 + 手机弹窗</strong></td></tr>
+      <tr><td>售后执行</td><td>D0-D45线性格子</td><td class="v3-col"><strong>服务包→任务模板→按类型集中处理</strong></td></tr>
+      <tr><td>客户状态</td><td>无</td><td class="v3-col"><strong>潜客→在管→出管</strong> 三阶段 + 倒计时</td></tr>
+      <tr><td>月度复盘</td><td>无</td><td class="v3-col"><strong>AI专家团自动生成健康报告</strong></td></tr>
+      <tr><td>日服务预期</td><td>30-50人</td><td class="v3-col"><strong>40-60人</strong></td></tr>
+      <tr><td>复购率预期</td><td>20-25%</td><td class="v3-col"><strong>25-30%</strong></td></tr>
+    </table>
+  </div>
+
+  <!-- ======== PRINCIPLES ======== -->
+  <div class="section">
+    <h2><span class="num">1</span>人机协同三原则</h2>
+    <p class="desc">v3核心设计哲学：AI做不累的事，人做不可替代的事。</p>
+
+    <div class="locks">
+      <div class="lock">
+        <div class="icon">🤖</div>
+        <h4>AI做什么</h4>
+        <p>信息采集 + 规则执行 + 定时触发<br>100%标准、不遗漏、不疲劳<br>7×24运行</p>
+      </div>
+      <div class="lock">
+        <div class="icon">👤</div>
+        <h4>人做什么</h4>
+        <p>深度沟通 + 转化决策 + 异常处理<br>同理心、判断力、成交能力<br>把时间花在刀刃上</p>
+      </div>
+      <div class="lock">
+        <div class="icon">🔗</div>
+        <h4>交接点</h4>
+        <p>AI整理好数据交付<br>顾问拿到直接行动<br>手机弹窗紧急事件零延迟</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== THREE LOCKS ======== -->
+  <div class="section">
+    <h2><span class="num">2</span>人机协同三把锁</h2>
+    <p class="desc">深护智康已有机制，确保AI不乱来、人不失控。</p>
+
+    <div class="locks">
+      <div class="lock" style="border-left: 3px solid #378ADD;">
+        <div class="icon">🔒</div>
+        <h4>锁一：一键开关AI</h4>
+        <p>顾问在对话中随时「关闭AI」<br>小诺停止发言，回归人工<br>需要时再「开启AI」<br>顾问100%控制权</p>
+      </div>
+      <div class="lock" style="border-left: 3px solid #D85A30;">
+        <div class="icon">🚨</div>
+        <h4>锁二：敏感词自动转人工</h4>
+        <p>药品/价格/安全关键词触发<br>AI停止回复 → 推顾问手机弹窗<br>"不舒服""过敏"→ 30分钟超时升级主管<br>宁可误报，不可漏报</p>
+      </div>
+      <div class="lock" style="border-left: 3px solid #1D9E75;">
+        <div class="icon">🔄</div>
+        <h4>锁三：无缝衔交接管</h4>
+        <p>顾问看到AI与客户完整对话历史<br>档案字段已预填，不需重新采集<br>处理完后「交回AI」继续服务<br>人机切换无痕迹</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== MODULE 1: AI INTAKE ======== -->
+  <div class="section">
+    <h2><span class="num">3</span>引擎一：AI问诊初筛</h2>
+    <p class="desc">双通道（采集链接 + 群聊自动建档）+ 人机协同三把锁。顾问拿到手的不是陌生人，是一张已填好的档案。</p>
+
+    <!-- Dual Channel -->
+    <div class="cards c2">
+      <div class="card blue">
+        <h3>通道一：AI采集链接</h3>
+        <p style="margin-bottom:10px;">顾问发送链接 → 客户手机端填写结构化表单 → 自动生成档案 → 顾问收到提醒 → 直入深度沟通</p>
+        <div class="tags"><span class="tag blue">适合主动推送</span><span class="tag green">1-2分钟完成</span></div>
+      </div>
+      <div class="card teal">
+        <h3>通道二：群聊自动建档</h3>
+        <p style="margin-bottom:10px;">顾问拉群+拉小诺 → 客户在群里发言 → 小诺自动抓取健康信息 → 实时写入档案 → 顾问还没聊，档案就有了</p>
+        <div class="tags"><span class="tag green">适合自然互动</span><span class="tag amber">零客户操作成本</span></div>
+      </div>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="profile-card" style="margin-top:16px;">
+      <div class="pc-header">
+        <div class="pc-title">📋 客户档案卡（升级版·动态更新）</div>
+        <div class="pc-badge">AI自动抓取 + 人工补充</div>
+      </div>
+      <div class="profile-grid">
+        <div><span class="k">年龄段</span><br><span class="v">45-60岁</span></div>
+        <div><span class="k">主诉关注</span><br><span class="v">血糖管理 + 体重控制</span></div>
+        <div><span class="k">用药情况</span><br><span class="v">二甲双胍</span></div>
+        <div><span class="k">健康自评</span><br><span class="v">4分 / 10分</span></div>
+      </div>
+      <div class="profile-analysis">
+        <div class="pa-title">AI分析 & 沟通建议</div>
+        <div style="font-size:13px;color:#555;line-height:1.7;">
+          风险等级：⚠️ 中高风险（用药+自评低）<br>
+          产品方向：镜脂套组 ★（血糖+减重双管齐下）<br>
+          注意事项：正在用药，产品与药物间隔2小时<br>
+          引子话术：「血糖和体重互相影响，单管一个效果都打折……」
+        </div>
+      </div>
+      <div class="profile-updates">
+        <div class="pu-title">📈 档案动态更新记录（随着跟进自动补充）</div>
+        <div class="pu-item">· D3：已开始使用镜脂套组</div>
+        <div class="pu-item">· D7：食欲下降，对甜食兴趣减退</div>
+        <div class="pu-item">· D14：体重 ↓1.5kg</div>
+        <div class="pu-item">· D30：空腹血糖 8.2→6.7，自评 8/10</div>
+      </div>
+    </div>
+
+    <!-- Efficiency -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:24px;font-weight:600;color:#D85A30;">5-10分钟</div>
+        <div style="font-size:12px;color:#888;">现在：纯人工问诊耗时</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:24px;font-weight:600;color:#EF9F27;">0分钟</div>
+        <div style="font-size:12px;color:#888;">v2：AI4题对话完成采集</div>
+      </div>
+      <div class="card teal" style="text-align:center;">
+        <div style="font-size:24px;font-weight:600;color:#1D9E75;">负耗时</div>
+        <div style="font-size:12px;color:#888;">v3：群聊自动抓取，顾问没聊档案已就绪</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== MODULE 2: LIFECYCLE CARE ======== -->
+  <div class="section">
+    <h2><span class="num">4</span>引擎二：AI生命周期关怀（任务系统驱动）</h2>
+    <p class="desc">v3的核心升级：从手动设计的线性格子 → 服务包驱动的任务引擎。下单即创建任务模板，顾问按任务类型集中处理。</p>
+
+    <!-- Service Pack → Task Template -->
+    <div class="flow" style="margin-top:16px;">
+      <h3 style="font-size:14px;font-weight:600;margin-bottom:16px;">服务包 → 任务模板 机制</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="dot blue">下单</div>
+          <div class="label">客户购买<br>镜脂套组</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot purple">触发</div>
+          <div class="label">自动创建<br>服务任务模板</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot teal">排程</div>
+          <div class="label">D3/D7/D14<br>D30/D45<br>自动排期</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot amber">执行</div>
+          <div class="label">AI定时发送<br>反馈自动分类</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot purple">聚合</div>
+          <div class="label">顾问任务视图<br>按类型集中处理</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline" style="margin-top:16px;">
+      <h3 style="font-size:14px;font-weight:600;margin-bottom:14px;">镜脂套组 · 服务任务模板</h3>
+      <div class="timeline-item">
+        <div class="dot-sm d0">D0</div>
+        <div class="info">
+          <div class="t">下单确认 + 使用引导</div>
+          <div class="d">"阻是餐前30分钟、轻是餐后30分钟，别搞混了~"<br>执行方式：AI自动发送 | 触发：订单确认</div>
+        </div>
+        <div class="tags"><span class="tag green">AI自动</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot-sm d3">D3</div>
+        <div class="info">
+          <div class="t">初体验检查</div>
+          <div class="d">"开始用了吗？前面几天肚子咕噜是菌群定植的正常反应~"</div>
+          <div class="d" style="color:#991B1B;">异常规则：未开始 / 明显不适 → 标记紧急 → 推顾问弹窗 → 30分钟超时升级主管</div>
+        </div>
+        <div class="tags"><span class="tag green">AI自动</span><span class="tag red">异常升级</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot-sm d7">D7</div>
+        <div class="info">
+          <div class="t">食欲信号检测</div>
+          <div class="d">"有没有发现对甜食没那么想了？这是菌群起作用的第一个信号~"</div>
+          <div class="d" style="color:#991B1B;">异常：完全没感觉 / 负面反馈 → 推顾问</div>
+        </div>
+        <div class="tags"><span class="tag green">AI自动</span><span class="tag amber">关注</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot-sm d14">D14</div>
+        <div class="info">
+          <div class="t">体重/效果数据采集</div>
+          <div class="d">"两周了！前两周定植期，3-4周才是加速期~今早体重多少？"</div>
+          <div class="d" style="color:#991B1B;">异常：体重完全没动 / 中断使用 → 顾问介入</div>
+        </div>
+        <div class="tags"><span class="tag green">AI自动</span><span class="tag amber">关注</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot-sm d30">D30</div>
+        <div class="info">
+          <div class="t">综合复盘 + AI月度报告</div>
+          <div class="d">"一个月了！体重/血糖/整体感觉打分" → AI专家团生成「月度健康报告」</div>
+          <div class="d" style="color:#991B1B;">异常：自评<5分 / 不想继续 → 顾问介入</div>
+        </div>
+        <div class="tags"><span class="tag purple">AI专家团</span><span class="tag amber">续单判断</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="dot-sm d45">D45</div>
+        <div class="info">
+          <div class="t">复购窗口</div>
+          <div class="d">"效果不错的话现在复购有专属优惠~" → 此节点AI不自动发，推顾问任务卡，由顾问判断时机</div>
+        </div>
+        <div class="tags"><span class="tag amber">顾问手动</span></div>
+      </div>
+    </div>
+
+    <!-- Advisor Task View -->
+    <div class="task-view" style="margin-top:16px;">
+      <div class="task-view-header">
+        <span>📋 顾问工作台 — 赵老师 · 06/12</span>
+        <div class="tags"><span class="tag red">3条待处理</span><span class="tag green">23条自动处理</span></div>
+      </div>
+      <div class="task-view-body">
+        <div class="task-section">
+          <div class="section-title">⚠️ 紧急待处理</div>
+          <div class="task-item">
+            <span class="task-priority urgent">紧急</span>
+            <span style="flex:1;">张先生 · 镜脂 · D7 · "肚子一直不舒服😣"</span>
+            <span class="tags"><span class="tag red">超时15分钟</span></span>
+          </div>
+          <div class="task-item">
+            <span class="task-priority urgent">紧急</span>
+            <span style="flex:1;">刘女士 · 轻路 · D3 · "还没开始吃"</span>
+            <span class="tags"><span class="tag amber">刚推送</span></span>
+          </div>
+        </div>
+        <div class="task-section">
+          <div class="section-title">📋 今日任务 · 按类型批量处理</div>
+          <div class="task-batch">
+            <div class="task-batch-card">
+              <div class="count">4</div>
+              <div class="type">D14 体重采集</div>
+              <div class="items">李女士✓ 周先生 郑女士 钱先生</div>
+              <div class="action"><span class="btn">批量处理</span></div>
+            </div>
+            <div class="task-batch-card">
+              <div class="count">3</div>
+              <div class="type">D7 食欲检查</div>
+              <div class="items">王先生 吴女士 孙先生</div>
+              <div class="action"><span class="btn">批量处理</span></div>
+            </div>
+            <div class="task-batch-card">
+              <div class="count">1</div>
+              <div class="type">到期续单提醒</div>
+              <div class="items">陈先生 · 剩余3天</div>
+              <div class="action"><span class="btn">联系续单</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lifecycle Stages -->
+    <div style="margin-top:20px;">
+      <h3 style="font-size:14px;font-weight:600;margin-bottom:12px;">生命周期三阶段管理</h3>
+      <div class="stages">
+        <div class="stage" style="border-top: 3px solid #378ADD;">
+          <div class="stage-icon">🧑‍💼</div>
+          <h4>潜客</h4>
+          <div class="stage-count">120人</div>
+          <p>未购买任何产品<br>AI建档 + 需求标记<br>定期科普推送保持触达</p>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" style="border-top: 3px solid #1D9E75;">
+          <div class="stage-icon">💚</div>
+          <h4>在管</h4>
+          <div class="stage-count">38人</div>
+          <p>购买了产品在服务期内<br>自动创建任务模板<br>⏰ 5人7天内到期</p>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" style="border-top: 3px solid #888;">
+          <div class="stage-icon">⏳</div>
+          <h4>出管</h4>
+          <div class="stage-count">12人</div>
+          <p>服务到期客户<br>AI生成历史使用报告<br>顾问发起续单沟通</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:10px;font-size:12px;color:#888;">
+        ↻ 出管续单成功 → 回到在管，开启新一轮服务周期
+      </div>
+    </div>
+
+    <!-- D0-D45 Deep Dive -->
+    <div style="margin-top:28px;">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:6px;">D0-D45 深度解析：为什么每个节点卡在这个时间点</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:18px;">这不只是"发6条消息"，而是覆盖"流失风险→效果信号→效果数据→续单决策"的完整漏斗。每个节点都有明确的检测目标和异常处理机制。</p>
+
+      <!-- Risk-Signal-Data Table -->
+      <table class="data-table" style="margin-bottom:20px;">
+        <tr><th>节点</th><th>检测目标</th><th>风险类型</th><th>执行方</th><th>异常处理</th></tr>
+        <tr>
+          <td style="font-weight:600;">D3 · 3天</td>
+          <td>定植反应</td>
+          <td><span class="tags"><span class="tag red">流失风险</span></span></td>
+          <td><span class="tags"><span class="tag green">AI</span></span></td>
+          <td style="font-size:12px;">AI安抚"正常反应" / 不适 → 顾问弹窗 → 30分钟超时升级</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">D7 · 1周</td>
+          <td>食欲信号</td>
+          <td><span class="tags"><span class="tag amber">效果焦虑</span></span></td>
+          <td><span class="tags"><span class="tag green">AI</span></span></td>
+          <td style="font-size:12px;">AI鼓励+教育"菌群信号" / 完全没感觉 → 推顾问了解原因</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">D14 · 2周</td>
+          <td>体重/血糖基线</td>
+          <td><span class="tags"><span class="tag amber">执行风险</span></span></td>
+          <td><span class="tags"><span class="tag blue">人+AI</span></span></td>
+          <td style="font-size:12px;">AI采集数据更新档案 / 体重不动+中断使用 → 顾问介入了解</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">D30 · 1月</td>
+          <td>效果数据+满意度</td>
+          <td><span class="tags"><span class="tag red">续单决策</span></span></td>
+          <td><span class="tags"><span class="tag blue">人+AI</span></span></td>
+          <td style="font-size:12px;">自评≥7分→AI生成月度报告 / 自评&lt;5分+不想继续→顾问介入</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">D45 · 1.5月</td>
+          <td>复购窗口</td>
+          <td><span class="tags"><span class="tag red">流失风险</span></span></td>
+          <td><span class="tags"><span class="tag amber">人主导</span></span></td>
+          <td style="font-size:12px;">顾问用月度报告转化 / 犹豫→D60再跟 / 沉默→出管→培育池</td>
+        </tr>
+      </table>
+
+      <!-- Node Breakdown Cards -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="card" style="border-top:3px solid #378ADD;">
+          <h3 style="color:#185FA5;">D0 — 使用引导 · 为什么是当天？</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            客户刚付钱，热情最高但也最容易"放着不用"。趁热打铁三件事：<br>
+            ① 说清用法（阻餐前30分、轻餐后30分）<br>
+            ② 打预防针（"前3天肚子咕噜是正常定植反应，别停"）<br>
+            ③ 埋钩子（"记得拍照记录变化"——给后续跟进建立合理性）<br>
+            <span style="color:#185FA5;">AI做：纯信息传递，无判断力要求。附48h未读提醒。</span>
+          </p>
+        </div>
+        <div class="card" style="border-top:3px solid #D85A30;">
+          <h3 style="color:#993C1D;">D3 — 初体验 · 第一个流失高危点</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            定植反应高峰期。客户胀气/咕噜/排气多到第3天最明显——<br>
+            没人解释他就会以为产品有问题，停了。<br>
+            AI分类回复：<br>
+            "有点咕噜" → AI安抚+归档<br>
+            "还没开始用" → <span style="color:#D85A30;">推顾问</span>（人在犹豫，AI催不动）<br>
+            "特别不舒服" → <span style="color:#991B1B;">紧急弹窗+30分钟超时升级主管</span>
+          </p>
+        </div>
+        <div class="card" style="border-top:3px solid #EF9F27;">
+          <h3 style="color:#854F0B;">D7 — 食欲信号 · 为什么要帮客户"发现"效果</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            菌群调理的第一个正向信号窗口：益生菌影响肠-脑轴，对甜食/油腻欲望下降。<br>
+            大部分人不会主动注意到"今天好像没想喝奶茶"，但如果你问他——<br>
+            他会想一下说"好像是"。<br>
+            <strong>这个瞬间被点醒，信心从"将信将疑"变成"有点意思"——这是续单的种子。</strong>
+          </p>
+        </div>
+        <div class="card" style="border-top:3px solid #1D9E75;">
+          <h3 style="color:#0F6E56;">D14 — 数据采集 · 为什么不是检查效果</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            前两周是定植期，体重变化通常第3周才加速。<br>
+            D14的定位不是"看效果"，而是<strong>建立数据基线</strong>——<br>
+            第一次采集体重/血糖数字，为D30的对比埋下伏笔。<br>
+            正常结果"体重还没动"也要安抚："前两周定植，3-4周加速期~"<br>
+            只有"中断使用+体重没动"才需顾问介入。
+          </p>
+        </div>
+        <div class="card purple" style="border-top:3px solid #534AB7;">
+          <h3 style="color:#534AB7;">D30 — 综合复盘 · 全生命周期最重要的节点</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            三重意义：① 效果已可见 ② D14基线可对比 ③ 1月装快用完，续单决策点。<br>
+            操作节奏：AI触发追问→正面反馈→<strong>AI专家团生成月度健康报告</strong><br>
+            （体重曲线/血糖变化/饮食回顾/续单建议）→报告推顾问→<br>
+            顾问用这份报告作为"数据武器"跟客户沟通。<br>
+            <span style="color:#534AB7;">这是人机交接的核心点：AI把数据整理好了，顾问直接形成说服力。</span>
+          </p>
+        </div>
+        <div class="card coral" style="border-top:3px solid #D85A30;">
+          <h3 style="color:#993C1D;">D45 — 复购窗口 · 为什么必须人做</h3>
+          <p style="font-size:12px;color:#666;line-height:1.7;">
+            D30复盘后让"效果很好"发酵一段时间，D37-45之间产品快用完，时机最自然。<br>
+            复购不是"提醒充值"，是<strong>一次新购买决策</strong>：<br>
+            ① 顾问用月度报告说服（"数据不会骗人"）<br>
+            ② 判断推什么组合（单续/升级镜脂+益衡/换轻路）<br>
+            ③ 专属优惠+话术转化 → AI不做金钱相关说服。<br>
+            三出口：续单→新周期 | 犹豫→D60再跟 | 沉默→出管→培育池
+          </p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:20px;">
+        <strong>这套体系的根本价值不在"发了消息"，在"不漏任何一个客户"。</strong><br>
+        现状：顾问忙了忘了→客户没人管。v3上线后：每个节点自动触发，执行纪律从30%（靠自觉）拉到100%（任务系统驱动）。这是复购率从8.1%提到25-30%的基础。
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== AI MONTHLY REPORT ======== -->
+  <div class="section">
+    <h2><span class="num">5</span>AI专家团月度健康报告（新增）</h2>
+    <p class="desc">深护智康已有功能。D30节点AI自动分析近月数据，生成可视化健康报告，顾问一键转发给客户——数据是最好的续单武器。</p>
+
+    <div class="report-card">
+      <div class="rc-header">📊 张先生 · 镜脂套组月度健康报告 · 2026.06.12</div>
+      <div class="report-grid">
+        <div class="report-item">
+          <div class="ri-title">📉 体重变化</div>
+          <div class="ri-data">月初 78.5kg → 月末 76.2kg<br>↓2.3kg（健康减重速度）</div>
+          <div class="ri-eval">✅ 菌群调理起效，趋势稳定</div>
+        </div>
+        <div class="report-item">
+          <div class="ri-title">🩸 血糖变化</div>
+          <div class="ri-data">空腹：8.2 → 6.7 (↓1.5)<br>餐后：已记录2次均下降</div>
+          <div class="ri-eval">✅ 药物配合产品，效果显著</div>
+        </div>
+        <div class="report-item">
+          <div class="ri-title">🍽 饮食回顾</div>
+          <div class="ri-data">夜宵频率减少<br>对甜食欲望明显降低<br>⚠️ 早餐偶尔不吃</div>
+          <div class="ri-eval">→ 建议加入早餐提醒</div>
+        </div>
+        <div class="report-item">
+          <div class="ri-title">💡 续单建议</div>
+          <div class="ri-data">效果良好，建议继续第二周期<br>下一周期可加购益衡<br>切入点：血糖8.2→6.7，保持可望减少药量</div>
+          <div class="ri-eval">📎 顾问：将此报告发给客户，自然引出续单</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SYNERGY ======== -->
+  <div class="section">
+    <h2><span class="num">6</span>双引擎协同闭环</h2>
+    <p class="desc">问诊→成交→关怀→复购，数据持续回流，档案越来越精准。</p>
+
+    <div class="flow">
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="dot blue">初筛</div>
+          <div class="label">AI生成<br>客户档案</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot purple">成交</div>
+          <div class="label">顾问深度<br>沟通转化</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot teal">关怀</div>
+          <div class="label">服务包触发<br>任务引擎</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot amber">复盘</div>
+          <div class="label">D30 AI报告<br>档案更新</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="dot purple">复购</div>
+          <div class="label">到期预警<br>续单触达</div>
+        </div>
+        <div class="flow-arrow">⟳</div>
+        <div class="flow-step">
+          <div class="dot teal">更准</div>
+          <div class="label">档案升级<br>越用越懂客户</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="text-align:center;">
+      <strong>数据飞轮效应：</strong>第1次建群→只知道关注血糖 → D7后知道价格敏感 → D14后知道最易动摇 → D30后知道体重↓2.3kg血糖8.2→6.7 → 复购时AI已知最佳升级组合「镜脂+益衡」
+    </div>
+  </div>
+
+  <!-- ======== ROI ======== -->
+  <div class="section">
+    <h2><span class="num">7</span>ROI 测算（升级版）</h2>
+
+    <div class="cards c3" style="margin-top:16px;">
+      <div class="card blue">
+        <h3>人力效率</h3>
+        <table class="data-table">
+          <tr><th>指标</th><th>现在</th><th>v3上线</th></tr>
+          <tr><td>日服务客户</td><td>10人</td><td class="hl-up">40-60人</td></tr>
+          <tr><td>信息采集耗时</td><td>5-10分钟</td><td class="hl-up">负耗时</td></tr>
+          <tr><td>售后覆盖率</td><td>~30%</td><td class="hl">100%</td></tr>
+          <tr><td>异常响应</td><td>几小时</td><td class="hl-up">&lt;30分钟</td></tr>
+          <tr><td>月度复盘</td><td>30分钟</td><td class="hl">5分钟</td></tr>
+        </table>
+      </div>
+      <div class="card teal">
+        <h3>收入增长预测</h3>
+        <table class="data-table">
+          <tr><th>指标</th><th>基线</th><th>6月</th></tr>
+          <tr><td>月订单量</td><td>~20单</td><td class="hl">80单</td></tr>
+          <tr><td>复购率</td><td>8.1%</td><td class="hl">28%</td></tr>
+          <tr><td>平均客单</td><td>¥463</td><td class="hl">¥580</td></tr>
+          <tr><td>月营收</td><td>~¥9K</td><td class="hl">¥46K</td></tr>
+          <tr><td>顾问数量</td><td>5人</td><td>5人</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>成本 & 投产比</h3>
+        <table class="data-table">
+          <tr><th>项目</th><th>月费</th></tr>
+          <tr><td>小诺×6</td><td>¥18,000</td></tr>
+          <tr><td>企微接入</td><td>¥0</td></tr>
+          <tr><td>知识库维护</td><td>¥0</td></tr>
+          <tr><td style="font-weight:600;">合计</td><td style="color:#534AB7;font-weight:600;">¥18,000</td></tr>
+        </table>
+        <p style="margin-top:8px;font-size:12px;color:#1D9E75;">月营收增量 ¥37K+，<strong>投产比 &gt; 1:2</strong><br>降本方案：先买2个小诺 ¥6,000/月灰度</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== ROADMAP ======== -->
+  <div class="section">
+    <h2><span class="num">8</span>分阶段落地路线图</h2>
+
+    <div class="cards c4" style="margin-top:16px;">
+      <div class="card">
+        <h3>Phase 0</h3>
+        <p style="color:#888;font-size:12px;">第1-2周 · 基础设施</p>
+        <p style="font-size:13px;">采购小诺×6账号<br>企微配置接入<br>档案字段 + 产品匹配规则<br>FAQ库（50+题）<br>6套服务任务模板</p>
+        <div class="tags" style="margin-top:8px;"><span class="tag blue">准备期</span></div>
+      </div>
+      <div class="card amber">
+        <h3>Phase 1</h3>
+        <p style="color:#888;font-size:12px;">第3-4周 · 灰度验证</p>
+        <p style="font-size:13px;">赵老师独享全流程<br>日新加5客户AI问诊<br>新成交客户AI关怀<br>验证：档案填充率&gt;60%<br>分类准确率&gt;85%</p>
+        <div class="tags" style="margin-top:8px;"><span class="tag amber">不追量，验证质量</span></div>
+      </div>
+      <div class="card teal">
+        <h3>Phase 2</h3>
+        <p style="color:#888;font-size:12px;">第5-8周 · 全量上线</p>
+        <p style="font-size:13px;">5位顾问绑定小诺<br>新客户100% AI建档<br>售后100%任务驱动<br>生命周期标签上线<br>数据看板上线</p>
+        <div class="tags" style="margin-top:8px;"><span class="tag green">里程碑：日服务×4</span></div>
+      </div>
+      <div class="card purple">
+        <h3>Phase 3</h3>
+        <p style="color:#888;font-size:12px;">第9周起 · 持续优化</p>
+        <p style="font-size:13px;">月度话术迭代<br>AI月度报告上线<br>复购自动化触达<br>存量40+客户回溯<br>新品类任务模板</p>
+        <div class="tags" style="margin-top:8px;"><span class="tag purple">增长飞轮</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== RISKS ======== -->
+  <div class="section">
+    <h2><span class="num">9</span>风险与应对</h2>
+
+    <div class="risk-grid" style="margin-top:16px;">
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">用户不接受AI</span><span class="risk-level high">高影响</span></div>
+        <div class="risk-desc">"助理"定位 + 随时转人工按钮 + 顾问可一键关闭AI + 顾问始终可见对话历史</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">AI漏判紧急情况</span><span class="risk-level high">极高影响</span></div>
+        <div class="risk-desc">三重保障：关键词+语义判断 + 手机弹窗 + 30分钟超时升级主管。宁可误报不可漏报</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">顾问抵触</span><span class="risk-level mid">中影响</span></div>
+        <div class="risk-desc">一键开关AI给予100%控制感 + 看效率提升带来业绩增长 + 强调"干杂活的是AI"</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">任务系统复杂</span><span class="risk-level mid">中影响</span></div>
+        <div class="risk-desc">Phase 1仅赵老师使用 → 简化版 → 验证后推广。逐顾问加入，不急推全员</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">成本过高</span><span class="risk-level mid">中影响</span></div>
+        <div class="risk-desc">降本方案：先买2个小诺 ¥6,000/月。1个给赵老师全流程，1个做团队问诊共享。验证后再扩展</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header"><span class="risk-title">数据隐私</span><span class="risk-level mid">中影响</span></div>
+        <div class="risk-desc">深护智康已有合规体系。健康数据加密存储，不采集身份证/手机号，合规删除机制</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== CUSTOMER JOURNEY ======== -->
+  <div class="section">
+    <h2><span class="num">10</span>完整客户旅程示例</h2>
+    <p class="desc">张先生从扫码添加到复购的全流程——AI执行了90%的动作，顾问只在两个高价值节点出手。</p>
+
+    <div class="journey" style="margin-top:16px;">
+      <div class="journey-step ai">
+        <div class="js-day">Day 0 · AI初筛</div>
+        <div class="js-content">张先生扫码添加 → 小诺发AI采集链接 → 完成4题结构化问诊 → 系统生成客户档案：主诉血糖+体重、用药二甲双胍、自评4/10 → 产品方向：镜脂套组 ★ → 档案推给赵老师</div>
+      </div>
+      <div class="journey-step human">
+        <div class="js-day">Day 0 · 顾问成交（15分钟）</div>
+        <div class="js-content">赵老师带档案直入深度沟通：「您这个情况很典型——血糖和体重互相影响…」→ 下单镜脂套组 → 自动创建服务任务模板</div>
+      </div>
+      <div class="journey-step ai">
+        <div class="js-day">Day 0-14 · AI自动服务</div>
+        <div class="js-content">D0：使用引导 D3：初体验检查（肚子咕噜→AI解释是定植反应） D7：食欲检查（对甜食没想法→AI鼓励） D14：体重采集（↓1.5kg→AI归档）——全程无顾问介入</div>
+      </div>
+      <div class="journey-step ai">
+        <div class="js-day">Day 30 · AI月度报告</div>
+        <div class="js-content">小诺发起D30复盘 → 张先生：血糖8.2→6.7，评分8/10 → AI专家团生成月度健康报告 → 推给赵老师："张先生效果很好，建议推续单"</div>
+      </div>
+      <div class="journey-step human">
+        <div class="js-day">Day 37 · 顾问续单（复购窗口）</div>
+        <div class="js-content">系统自动创建续单任务 → 赵老师把AI报告发给张先生："数据不会骗人，现在续单有优惠…" → 复购镜脂+加购益衡 → 进入新一轮服务周期</div>
+      </div>
+      <div class="journey-step result">
+        <div class="js-day">📊 结果</div>
+        <div class="js-content">1个客户，1次初筛，1次成交，1次复购。全程AI执行了90%的动作（建档+6次关怀+反馈分类+报告生成），顾问只在「深度沟通」和「续单转化」两个高价值节点出手。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== FOOTER ======== -->
+  <div style="text-align:center;margin-top:60px;padding:40px 0;border-top:1px solid #E8E8E8;">
+    <div style="font-size:14px;font-weight:600;color:#534AB7;">三诺×华大 AI项目规划 v3</div>
+    <div style="font-size:12px;color:#888;margin-top:6px;">2026年6月 · 基于深护智康「小诺」AI健管系统 · 系统落地版</div>
+    <div style="font-size:11px;color:#BBB;margin-top:4px;">双引擎：AI问诊初筛 + AI生命周期关怀 | 人机协同三把锁 | 服务包驱动任务引擎</div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诺诺·私域沟通诊断报告（300客户校正版）</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height:1.8; }
+.container { max-width: 960px; margin:0 auto; padding: 40px 20px; }
+.header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 50px 40px; border-radius: 16px; margin-bottom: 30px; }
+.header h1 { font-size: 32px; margin-bottom: 8px; }
+.header .subtitle { font-size: 16px; opacity: 0.85; }
+.header .meta { margin-top: 16px; font-size: 14px; opacity: 0.7; display:flex; gap: 24px; flex-wrap:wrap; }
+.banner-warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px; font-size: 14px; }
+.banner-warning strong { color: #856404; }
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 30px; }
+.kpi-card { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.kpi-card .num { font-size: 32px; font-weight: 700; color: #0f3460; }
+.kpi-card .label { font-size: 13px; color: #888; margin-top: 4px; }
+.kpi-card.alert .num { color: #e74c3c; }
+.kpi-card.good .num { color: #27ae60; }
+.section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 22px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; }
+.section h3 { font-size: 17px; margin: 20px 0 12px; color: #0f3460; }
+table { width:100%; border-collapse:collapse; margin: 16px 0; font-size: 14px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; font-weight: 600; color: #555; }
+td { vertical-align: top; }
+tr:hover td { background: #fafbfc; }
+.benchmark-bar { height: 8px; background: #e9ecef; border-radius: 4px; margin-top: 4px; position: relative; }
+.benchmark-bar .fill { height: 100%; border-radius: 4px; background: #0f3460; }
+.benchmark-bar .fill.low { background: #e74c3c; }
+.benchmark-bar .fill.mid { background: #f39c12; }
+.benchmark-bar .fill.high { background: #27ae60; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: 4px; }
+.tag.red { background: #fde8e8; color: #c0392b; }
+.tag.green { background: #d4edda; color: #155724; }
+.tag.yellow { background: #fff3cd; color: #856404; }
+.timeline { margin: 20px 0; }
+.timeline-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; align-items: flex-start; }
+.timeline-item .day { min-width: 80px; font-weight: 600; color: #0f3460; }
+.timeline-item .content { flex:1; font-size:14px; }
+blockquote { background: #f8f9fa; border-left: 4px solid #0f3460; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: 14px; }
+.badge { display: inline-block; background: #0f3460; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px; }
+ul.insights { margin: 12px 0 12px 20px; }
+ul.insights li { margin: 8px 0; font-size: 14px; }
+.contrast-box { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+.contrast-box .panel { border-radius: 10px; padding: 20px; }
+.contrast-box .red { background: #fff5f5; border: 1px solid #fecaca; }
+.contrast-box .green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.contrast-box h4 { margin-bottom: 10px; font-size: 15px; }
+.footer { text-align: center; color: #999; font-size: 13px; padding: 30px 0; }
+@media (max-width:768px) {
+  .kpi-grid { grid-template-columns: repeat(3,1fr); }
+  .contrast-box { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🔍 诺诺 · 私域沟通诊断报告</h1>
+  <div class="subtitle">数据驱动 · 对标分析 · 可执行改善方案</div>
+  <div class="meta">
+    <span>📅 2026-06-11</span>
+    <span>👤 300位客户</span>
+    <span>💬 5,564条消息</span>
+    <span>🏷️ v2.0 校正版</span>
+  </div>
+</div>
+
+<div class="banner-warning">
+  ⚠️ <strong>v1报告数据错误说明</strong>：初版报告将诺诺客户数统计为<strong>30人</strong>（仅扫描文件前5行），实际为<strong>300人</strong>（差距10倍）。本版已全量校正，诊断结论相应修正。
+</div>
+
+<!-- KPI -->
+<div class="kpi-grid">
+  <div class="kpi-card alert"><div class="num">¥0</div><div class="label">5/20至今销售额</div></div>
+  <div class="kpi-card"><div class="num">300</div><div class="label">触达客户总数</div></div>
+  <div class="kpi-card"><div class="num">5,564</div><div class="label">总消息量</div></div>
+  <div class="kpi-card good"><div class="num">31%</div><div class="label">零回复率 ⬇</div></div>
+  <div class="kpi-card alert"><div class="num">24%</div><div class="label">价格提及率 ⬇</div></div>
+</div>
+
+<!-- 核心结论 -->
+<div class="section">
+  <h2>🎯 一句话诊断</h2>
+  <blockquote>
+    <strong>诺诺不是不会聊，是只会"聊"不会"卖"。</strong><br>
+    300人中能聊起来的人比例最高（零回复率最低），但一旦聊起来就停在"信息交付"模式——发问卷、发文档、发案例，却极少转化为"您现在下单吗？"<br>
+    她的强项是<strong>开瓶器</strong>（engagement），弱项是<strong>瓶盖</strong>（conversion）。
+  </blockquote>
+</div>
+
+<!-- 数据全景 -->
+<div class="section">
+  <h2>📊 一、300客户数据全景</h2>
+  
+  <h3>1.1 互动深度分层</h3>
+  <table>
+    <tr><th>层级</th><th>客户数</th><th>占比</th><th>诺诺总消息</th><th>人均诺诺消息</th><th>诊断</th></tr>
+    <tr><td>🚫 零互动（客户≤1条）</td><td>93</td><td>31.0%</td><td>297条</td><td>3条</td><td><span class="tag yellow">群发触达未激活</span></td></tr>
+    <tr><td>🔹 极低互动（2-3条）</td><td>86</td><td>28.7%</td><td>338条</td><td>3条</td><td><span class="tag yellow">浅尝辄止</span></td></tr>
+    <tr><td>🔸 低互动（4-6条）</td><td>33</td><td>11.0%</td><td>238条</td><td>7条</td><td><span class="tag yellow">有来有回但未深入</span></td></tr>
+    <tr><td>🟡 中等互动（7-15条）</td><td>40</td><td>13.3%</td><td>753条</td><td>18条</td><td><span class="tag green">潜在机会层</span></td></tr>
+    <tr><td>🟢 高互动（16-40条）</td><td>43</td><td>14.3%</td><td>1475条</td><td>34条</td><td><span class="tag red">最该成交却未成交！</span></td></tr>
+    <tr><td>⭐ 深度互动（>40条）</td><td>5</td><td>1.7%</td><td>232条</td><td>46条</td><td><span class="tag red">all missed</span></td></tr>
+  </table>
+
+  <h3>1.2 话术阶段分布（严重失衡）</h3>
+  <table>
+    <tr><th>阶段</th><th>出现次数</th><th>占比</th><th>vs 需求挖掘</th><th>视觉</th></tr>
+    <tr><td>需求挖掘</td><td>3,578</td><td>48.0%</td><td>—</td><td><div class="benchmark-bar"><div class="fill high" style="width:100%"></div></div></td></tr>
+    <tr><td>破冰/自我介绍</td><td>1,433</td><td>19.2%</td><td>1 : 2.5</td><td><div class="benchmark-bar"><div class="fill mid" style="width:40%"></div></div></td></tr>
+    <tr><td>价值塑造</td><td>1,148</td><td>15.4%</td><td>1 : 3.1</td><td><div class="benchmark-bar"><div class="fill mid" style="width:32%"></div></div></td></tr>
+    <tr><td>产品推荐</td><td>813</td><td>10.9%</td><td>1 : 4.4</td><td><div class="benchmark-bar"><div class="fill low" style="width:23%"></div></div></td></tr>
+    <tr><td>售后关怀</td><td>351</td><td>4.7%</td><td>1 : 10.2</td><td><div class="benchmark-bar"><div class="fill low" style="width:10%"></div></div></td></tr>
+    <tr style="background:#fff5f5"><td><strong>价格/促成</strong></td><td><strong>129</strong></td><td><strong>1.7%</strong></td><td><strong>1 : 27.7</strong></td><td><div class="benchmark-bar"><div class="fill low" style="width:3.6%"></div></div></td></tr>
+  </table>
+  <p style="margin-top:8px; font-size:13px; color:#888;">💡 诺诺花了48%的话术在"了解需求"，但只花了1.7%在"谈价格和促成"。需求挖掘与成交引导的比例是 <strong>28:1</strong>。</p>
+
+  <h3>1.3 转化关键动作覆盖率</h3>
+  <table>
+    <tr><th>动作</th><th>覆盖客户数</th><th>占比</th></tr>
+    <tr><td>提及任何产品</td><td>91 / 300</td><td>30.3% <span class="tag red">70%客户从未听过产品推荐</span></td></tr>
+    <tr><td>提及价格/优惠/活动</td><td>71 / 300</td><td>23.7% <span class="tag red">76%客户从未听到价格信息</span></td></tr>
+    <tr><td>发送下单链接/促单</td><td>96 / 300</td><td>32.0%</td></tr>
+  </table>
+</div>
+
+<!-- 对标分析 -->
+<div class="section">
+  <h2>📈 二、顾问效能对标</h2>
+  <p style="margin-bottom:16px; font-size:14px; color:#555;">所有顾问均从同一聊天记录池中分析（三诺华大聊天记录 + 三诺成交用户），数据口径一致。</p>
+  
+  <table>
+    <tr><th>指标</th><th>赵老师<br><small>14单销冠</small></th><th>朱老师<br><small>6单标杆</small></th><th>姣姣<br><small>稳定产出</small></th><th style="background:#fff5f5">诺诺<br><small>0单</small></th></tr>
+    <tr><td>客户数</td><td>439</td><td>192</td><td>360</td><td style="background:#fff5f5">300</td></tr>
+    <tr><td>人均顾问消息</td><td>10条</td><td>11条</td><td>9条</td><td style="background:#fff5f5">11条</td></tr>
+    <tr><td>人均客户消息</td><td>7条</td><td>9条</td><td>8条</td><td style="background:#fff5f5">7条</td></tr>
+    <tr><td>零回复率</td><td>43%</td><td>30%</td><td>44%</td><td style="background:#e8f5e9">31% ✅ 最低</td></tr>
+    <tr><td>深度互动率</td><td>13%</td><td>15%</td><td>11%</td><td style="background:#e8f5e9">16% ✅ 最高</td></tr>
+    <tr style="background:#fff5f5"><td><strong>价格提及率</strong></td><td><strong>45%</strong></td><td>23%</td><td>32%</td><td><strong>24% ❌ 最低</strong></td></tr>
+    <tr style="background:#fff5f5"><td><strong>成交动作率</strong></td><td><strong>52%</strong></td><td>46%</td><td>42%</td><td><strong>32% ❌ 最低</strong></td></tr>
+    <tr><td>平均消息长度</td><td>85字</td><td>119字</td><td>111字</td><td style="background:#fff5f5">79字 ❌ 最短</td></tr>
+  </table>
+
+  <div class="contrast-box">
+    <div class="panel green">
+      <h4>✅ 诺诺的优势</h4>
+      <ul class="insights">
+        <li><strong>零回复率31%</strong> — 全团队最低，比销冠赵老师（43%）低12个百分点</li>
+        <li><strong>深度互动率16%</strong> — 全团队最高，说明她的对话质量不差</li>
+        <li>客户愿意和她聊，比大多数顾问更愿意</li>
+      </ul>
+    </div>
+    <div class="panel red">
+      <h4>❌ 诺诺的短板</h4>
+      <ul class="insights">
+        <li><strong>价格提及率24%</strong> — 全团队最低，比赵老师低21个百分点</li>
+        <li><strong>成交动作率32%</strong> — 全团队最低，比赵老师低20个百分点</li>
+        <li><strong>消息平均79字</strong> — 全团队最短，比朱老师少40字</li>
+        <li>会聊不会卖，漏斗在"推荐→成交"断裂</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 典型案例 -->
+<div class="section">
+  <h2>🔬 三、三类典型案例解剖</h2>
+
+  <h3>案例A：逍遥（王先生）— 聊得很好但差临门一脚</h3>
+  <p style="font-size:14px; color:#888; margin-bottom:12px;">诺诺53条 / 客户50条 · 肠胃+血糖需求 · 有价格提及 ✅ · 有促单动作 ✅ · 未成交 ❌</p>
+  <blockquote>
+    这是诺诺<strong>最接近成交的一次</strong>。她做了几乎所有对的事：需求挖掘（BMI=20.8正常）、产品匹配（畅青针对腹泻）、价格告知（三盒407元折上折）、处理异议（客户说在出差不方便收货→她提出延迟发货）。<br><br>
+    但最后一个关键动作没做：客户说"出差回来再说"之后，她只回了一个"嗯嗯好的呢"，<strong>没有设置定时跟进，没有锁价承诺，对话就此断掉</strong>。
+  </blockquote>
+
+  <h3>案例B：doki — 发链接机器，对话不是对话</h3>
+  <p style="font-size:14px; color:#888; margin-bottom:12px;">诺诺30条 / 客户94条 · 极高客户活跃度 · 有产品链接 ✅ · 未成交 ❌</p>
+  <blockquote>
+    doki是最活跃的客户之一（94条客户消息），但诺诺的30条消息里，大部分是<strong>转发其他客户的聊天记录作为案例</strong>（涉及隐私风险），以及各种产品的有赞链接。<br><br>
+    问题：<strong>她不是在和doki对话，她是在给doki喂资料</strong>。没有"你的情况适合镜脂套组因为..."，只有"这个我很喜欢分享给你看看"。客户被当成信息接收器而非决策者。
+  </blockquote>
+
+  <h3>案例C：Jeff Jiang — 遇到质疑就撤退</h3>
+  <p style="font-size:14px; color:#888; margin-bottom:12px;">诺诺47条 / 客户51条 · 科学型客户 · 质疑产品证据 · 未成交 ❌</p>
+  <blockquote>
+    Jeff是典型的理性决策型客户，质疑益生菌的RCT证据。诺诺应对得很好：解释了RCT、动物双歧杆菌的人体临床数据等。<br><br>
+    但最后一句话暴露了问题：<strong>"那您可以继续控制饮食结合运动作息哈"</strong>——她在客户提出异议后，不是继续说服，而是主动放弃。成交顾问的做法是：承认局限 + 重新锚定价值 + 再次促单。
+  </blockquote>
+</div>
+
+<!-- 根因分析 -->
+<div class="section">
+  <h2>🩺 四、根因诊断</h2>
+
+  <table>
+    <tr><th style="width:30px">#</th><th>问题</th><th>证据</th><th>严重度</th></tr>
+    <tr>
+      <td>1</td>
+      <td><strong>"信息交付型"而非"销售转化型"</strong></td>
+      <td>话术阶段：需求挖掘3578次 vs 价格促成129次（28:1）</td>
+      <td><span class="tag red">🔴 致命</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>遇异议即撤退</strong></td>
+      <td>Jeff Jiang案例："那您可以继续控制饮食结合运动作息哈"</td>
+      <td><span class="tag red">🔴 致命</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>不开口要成交</strong></td>
+      <td>成交动作率32%，全团队最低。68%的客户从未收到"您现在下单吗"类消息</td>
+      <td><span class="tag red">🔴 致命</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>消息说服力不足</strong></td>
+      <td>平均79字/条，全团队最短。信息密度低，缺少价值锚点</td>
+      <td><span class="tag yellow">🟡 重要</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>转发聊天记录当案例</strong></td>
+      <td>doki等多客户收到其他客户的完整聊天记录转发</td>
+      <td><span class="tag yellow">🟡 合规风险</span></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>无跟进体系</strong></td>
+      <td>93个零互动客户从无二次触达。聊完就断，无定时回访机制</td>
+      <td><span class="tag yellow">🟡 重要</span></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>70%客户从未听过产品</strong></td>
+      <td>300人中仅91人（30.3%）在对话中接触过任何产品信息</td>
+      <td><span class="tag yellow">🟡 重要</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 改善方案 -->
+<div class="section">
+  <h2>💡 五、改善方案：从"健康管家"到"健康销售"</h2>
+
+  <h3>🎯 核心转变：沟通目的从"提供信息"升级为"推动决策"</h3>
+  <p style="font-size:14px; color:#555; margin-bottom:20px;">诺诺不缺客户响应（零回复率最低），不缺深度对话（深度互动率最高），她缺的是<strong>每次对话结束时做一件事：开口要成交</strong>。</p>
+
+  <h3>动作一：每段对话强制三步闭环 <span class="tag red">立即执行</span></h3>
+  <table>
+    <tr><th style="width:60px">步骤</th><th>内容</th><th>话术示例</th></tr>
+    <tr>
+      <td><span class="badge">1</span></td>
+      <td><strong>锁定需求</strong></td>
+      <td>"王先生，根据您的情况（血糖偏高+肠道不适），我建议您先从畅青开始，它的双歧杆菌对腹泻和肠道调理特别对症。"</td>
+    </tr>
+    <tr>
+      <td><span class="badge">2</span></td>
+      <td><strong>价值+价格</strong></td>
+      <td>"现在刚好赶上周年庆活动，三盒畅青只要407元，折上折，而且咱们有三盒无效退款保障——吃完没效果，钱退给您，没任何风险。"</td>
+    </tr>
+    <tr>
+      <td><span class="badge">3</span></td>
+      <td><strong>直接促单</strong></td>
+      <td>"我把下单链接发您，您直接拍就行。拍完截图发我，我帮您登记好，后续服用方案和饮食建议我都一对一跟进。"</td>
+    </tr>
+  </table>
+
+  <h3>动作二：异议处理SOP — 客户说"不"不是结束 <span class="tag red">立即执行</span></h3>
+  <table>
+    <tr><th>客户说</th><th>以前诺诺回</th><th>改进后</th></tr>
+    <tr>
+      <td>"我再考虑考虑"</td>
+      <td><del>"嗯嗯好的呢"</del></td>
+      <td>"完全理解！您主要顾虑哪方面？是价格、效果还是担心不合适？我帮您具体分析一下。现在周年庆活动就这几天，我可以帮您先锁价。"</td>
+    </tr>
+    <tr>
+      <td>"我在出差/忙"</td>
+      <td><del>"嗯嗯好的呢"</del></td>
+      <td>"好的王哥，您先忙！活动到X号结束，您方便收货的时候我跟您说一声。要不咱们加个备注，到时间我提醒您，活动价帮您留着。"</td>
+    </tr>
+    <tr>
+      <td>"益生菌没科学依据"</td>
+      <td><del>"那您继续控制饮食吧"</del></td>
+      <td>"您说得对，益生菌不是药，不能宣传疗效。但华大的菌株是做过人体临床的（发RCT数据）。您可以先体验一盒试试，没感觉就当交个朋友，有感觉咱们再继续。"</td>
+    </tr>
+  </table>
+
+  <h3>动作三：客户分层运营（300→3层） <span class="tag green">本周规划</span></h3>
+  <table>
+    <tr><th style="width:80px">层级</th><th>人数</th><th>策略</th><th>预期产出</th></tr>
+    <tr>
+      <td><span class="badge">🔥 S级</span><br>深度+高互动</td>
+      <td>48人</td>
+      <td><strong>一对一三连击</strong>：24h内全部重新触达，需求锁定→活动催化→限时促单</td>
+      <td>目标8-10单</td>
+    </tr>
+    <tr>
+      <td><span class="badge">🟡 A级</span><br>中低互动</td>
+      <td>159人</td>
+      <td><strong>阶梯式激活</strong>：T+1 送健康小贴士 → T+3 周年庆活动通知 → T+7 限时优惠+产品推荐</td>
+      <td>目标5-8单</td>
+    </tr>
+    <tr>
+      <td><span class="badge">🔵 B级</span><br>零互动</td>
+      <td>93人</td>
+      <td><strong>重新破冰</strong>：换开场白（不群发同一模板），30%回复后转入A级流程</td>
+      <td>激活20-30人</td>
+    </tr>
+  </table>
+
+  <h3>动作四：禁止项 <span class="tag yellow">合规</span></h3>
+  <ul class="insights">
+    <li>❌ <strong>禁止转发其他客户的聊天记录</strong>作为案例（涉及隐私合规风险，且显得不专业）</li>
+    <li>❌ <strong>禁止在客户提出异议后主动撤退</strong>（"那您继续...吧"类话术一律禁用）</li>
+    <li>❌ <strong>禁止纯发产品链接不说话</strong>（每条链接必须带一句"这个为什么适合您"）</li>
+  </ul>
+</div>
+
+<!-- 执行日历 -->
+<div class="section">
+  <h2>📅 六、30天执行日历</h2>
+  
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="day">第1-3天</div>
+      <div class="content">
+        <strong>🔥 S级客户三连击</strong><br>
+        48个深度+高互动客户，逐一重新触达，执行"锁定需求→活动催化→直接促单"三步闭环。<br>
+        <span class="tag green">目标：3-5单 | 营收 ¥500-1500</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">第4-7天</div>
+      <div class="content">
+        <strong>🟡 A级客户首轮激活</strong><br>
+        159人中低互动客户，发送个性化健康提醒（根据之前聊过的健康问题定制），附周年庆活动信息。<br>
+        <span class="tag green">目标：回复率提升至40%+</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">第8-10天</div>
+      <div class="content">
+        <strong>A级客户第二轮：产品推荐</strong><br>
+        对首轮回复的客户，匹配产品推荐+价格方案。对未回复的换话题重试。<br>
+        <span class="tag green">目标：2-4单</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">第11-14天</div>
+      <div class="content">
+        <strong>🔵 B级客户破冰</strong><br>
+        93个零互动客户，用新版破冰话术重新触达（不发模板，问一个具体问题）。<br>
+        <span class="tag green">目标：30%回复率 → 27人进入A级池</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">第15-21天</div>
+      <div class="content">
+        <strong>全量第二轮跟进</strong><br>
+        对前两周已回复客户二次触达：效果回访+追加推荐。对仍未回复者发送最后一轮限时活动提醒。<br>
+        <span class="tag green">目标：累积8-12单</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">第22-30天</div>
+      <div class="content">
+        <strong>复盘+建立SOP</strong><br>
+        统计各层转化率，提炼出诺诺自己的最佳话术模板。建立"每日必做"清单：5个S级促单+10个A级跟进。<br>
+        <span class="tag green">目标：形成可复制的个人SOP</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 预期效果 -->
+<div class="section">
+  <h2>🎯 七、30天预期效果</h2>
+
+  <table>
+    <tr><th>指标</th><th>当前</th><th>30天目标</th><th>逻辑</th></tr>
+    <tr><td>月销售额</td><td style="color:#e74c3c">¥0</td><td style="color:#27ae60">¥3,000-6,000</td><td>S级48人×15%转化×¥500均单 = ¥3,600 + A级产出</td></tr>
+    <tr><td>成交动作率</td><td style="color:#e74c3c">32%</td><td style="color:#27ae60">55%</td><td>每段对话强制三步闭环</td></tr>
+    <tr><td>价格提及率</td><td style="color:#e74c3c">24%</td><td style="color:#27ae60">60%</td><td>产品推荐必须带价格</td></tr>
+    <tr><td>平均消息长度</td><td style="color:#e74c3c">79字</td><td style="color:#27ae60">100+字</td><td>减少纯链接，增加说服内容</td></tr>
+    <tr><td>零互动客户</td><td style="color:#e74c3c">93人</td><td style="color:#27ae60">≤50人</td><td>重新破冰激活43人</td></tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>三诺&华大 · 私域运营诊断报告 v2.0（300客户校正版）| 2026-06-11</p>
+  <p>数据来源：三诺华大聊天记录（1,597个文件）+ 三诺成交用户（38个文件）全量扫描</p>
+</div>
+
+</div>
+</body>
+</html>
