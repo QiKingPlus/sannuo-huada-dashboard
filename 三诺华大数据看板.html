@@ -74,6 +74,16 @@ tr:hover td { background: #fafbfc; }
         <div class="kpi-value">5</div>
         <div class="kpi-sub">最新成交: 赵老师</div>
     </div>
+    <div class="kpi-card">
+        <div class="kpi-label">👥 客户基盘</div>
+        <div class="kpi-value">3,564</div>
+        <div class="kpi-sub">5位顾问服务中</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">🎯 整体转化率</div>
+        <div class="kpi-value">2.0%</div>
+        <div class="kpi-sub">82单 / 3,564客户</div>
+    </div>
 </div>
 
 <div class="highlight">
@@ -88,6 +98,17 @@ tr:hover td { background: #fafbfc; }
     <div class="card">
         <div class="card-title">🏆 顾问业绩对比</div>
         <div class="chart-wrap"><canvas id="counselorChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card">
+        <div class="card-title">🎯 顾问转化率对比</div>
+        <div class="chart-wrap"><canvas id="conversionChart"></canvas></div>
+    </div>
+    <div class="card">
+        <div class="card-title">📊 顾问客均产出（¥/客户）</div>
+        <div class="chart-wrap"><canvas id="revPerCustChart"></canvas></div>
     </div>
 </div>
 
@@ -199,7 +220,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>轻体</td>
         <td>新疆维吾尔自治区 和田地区</td>
-        <td>益畅、镜脂·轻（单品）</td>
+        <td>镜脂·轻（单品）、益畅</td>
     </tr>
     <tr>
         <td>7</td>
@@ -209,7 +230,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>家人健康</td>
         <td>四川省  成都市</td>
-        <td>益家人、镜脂套组（轻+阻）</td>
+        <td>镜脂套组（轻+阻）、益家人</td>
     </tr>
     <tr>
         <td>8</td>
@@ -249,7 +270,7 @@ tr:hover td { background: #fafbfc; }
     <div class="card full-width">
         <div class="card-title">📋 顾问业绩明细</div>
         <table>
-            <thead><tr><th>顾问</th><th>订单数</th><th>营收</th><th>客单价</th><th>客户数</th><th>占比</th><th>人均产出</th></tr></thead>
+            <thead><tr><th>顾问</th><th>订单数</th><th>营收</th><th>客单价</th><th>成交客户</th><th>客户基盘</th><th>转化率</th><th>客均产出</th><th>流失率</th><th>营收占比</th></tr></thead>
             <tbody>
 
             <tr>
@@ -258,8 +279,11 @@ tr:hover td { background: #fafbfc; }
                 <td>¥13,546</td>
                 <td>¥564</td>
                 <td>19</td>
+                <td>827</td>
+                <td><strong>2.3%</strong></td>
+                <td>¥16.4</td>
+                <td>13.6%</td>
                 <td>35.0%</td>
-                <td>¥713/人</td>
             </tr>
             <tr>
                 <td><strong>吴老师</strong></td>
@@ -267,8 +291,11 @@ tr:hover td { background: #fafbfc; }
                 <td>¥8,372</td>
                 <td>¥399</td>
                 <td>21</td>
+                <td>745</td>
+                <td><strong>2.8%</strong></td>
+                <td>¥11.2</td>
+                <td>15.9%</td>
                 <td>21.6%</td>
-                <td>¥399/人</td>
             </tr>
             <tr>
                 <td><strong>王老师</strong></td>
@@ -276,8 +303,11 @@ tr:hover td { background: #fafbfc; }
                 <td>¥6,279</td>
                 <td>¥448</td>
                 <td>11</td>
+                <td>657</td>
+                <td><strong>1.7%</strong></td>
+                <td>¥9.6</td>
+                <td>19.3%</td>
                 <td>16.2%</td>
-                <td>¥571/人</td>
             </tr>
             <tr>
                 <td><strong>朱老师</strong></td>
@@ -285,8 +315,11 @@ tr:hover td { background: #fafbfc; }
                 <td>¥5,782</td>
                 <td>¥482</td>
                 <td>11</td>
+                <td>735</td>
+                <td><strong>1.5%</strong></td>
+                <td>¥7.9</td>
+                <td>19.0%</td>
                 <td>14.9%</td>
-                <td>¥526/人</td>
             </tr>
             <tr>
                 <td><strong>黎老师</strong></td>
@@ -294,8 +327,23 @@ tr:hover td { background: #fafbfc; }
                 <td>¥4,746</td>
                 <td>¥431</td>
                 <td>11</td>
+                <td>600</td>
+                <td><strong>1.8%</strong></td>
+                <td>¥7.9</td>
+                <td>20.9%</td>
                 <td>12.3%</td>
-                <td>¥431/人</td>
+            </tr>
+            <tr style="background:#f8f9fa; font-weight:600;">
+                <td>合计/均值</td>
+                <td>82</td>
+                <td>¥38,724</td>
+                <td>¥472</td>
+                <td>73</td>
+                <td>3,564</td>
+                <td><strong>2.0%</strong></td>
+                <td>¥10.9</td>
+                <td>17.6%</td>
+                <td>100%</td>
             </tr>
             </tbody>
         </table>
@@ -303,7 +351,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-07-02 | 自动生成于 2026-07-03 09:51
+    三诺&华大私域成交数据看板 | 数据截至 2026-07-02 | 自动生成于 2026-07-03 10:50
 </div>
 
 <script>
@@ -363,6 +411,49 @@ new Chart(document.getElementById('counselorChart'), {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: { y: { grid: { color: '#f0f0f0' } } }
+    }
+});
+
+// 顾问转化率对比
+new Chart(document.getElementById('conversionChart'), {
+    type: 'bar',
+    data: {
+        labels: ["赵老师", "吴老师", "王老师", "朱老师", "黎老师"],
+        datasets: [{
+            label: '转化率 (%)',
+            data: [2.3, 2.8, 1.7, 1.5, 1.8],
+            backgroundColor: COLORS.slice(0, 5),
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: function(ctx) { const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + [24, 21, 14, 12, 11][ci] + '单/' + [827, 745, 657, 735, 600][ci] + '客户)'; } } }
+        },
+        scales: {
+            y: { beginAtZero: true, max: 3.6399999999999997, grid: { color: '#f0f0f0' }, title: { display: true, text: '转化率 (%)' } }
+        }
+    }
+});
+
+// 客均产出
+new Chart(document.getElementById('revPerCustChart'), {
+    type: 'bar',
+    data: {
+        labels: ["赵老师", "吴老师", "王老师", "朱老师", "黎老师"],
+        datasets: [{
+            label: '客均产出 (¥)',
+            data: [16.4, 11.2, 9.6, 7.9, 7.9],
+            backgroundColor: COLORS.slice(0, 5),
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' }, title: { display: true, text: '营收/客户 (¥)' } } }
     }
 });
 

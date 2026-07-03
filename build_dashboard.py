@@ -50,6 +50,24 @@ for r in rows:
         except:
             r['date'] = 'unknown'
 
+# ─── 1.5 客户基盘数据 ─────────────────────────────────────
+wb2 = openpyxl.load_workbook(
+    '/Users/SaciNa/Documents/臻选&芥子/臻选私域/客户统计-按员工查看.xlsx',
+    data_only=True
+)
+ws2 = wb2.active
+base_data = {}
+for row in ws2.iter_rows(min_row=6, max_row=10, values_only=True):
+    name_raw = str(row[0]).strip()
+    base_data[name_raw] = {
+        'base': int(row[1]) if row[1] else 0,
+        'new': int(row[2]) if row[2] else 0,
+        'net': int(row[3]) if row[3] else 0,
+        'churn': int(row[4]) if row[4] else 0,
+    }
+total_base = sum(v['base'] for v in base_data.values())
+total_churn_all = sum(v['churn'] for v in base_data.values())
+
 # ─── 2. 产品分类简化 ───────────────────────────────────────
 def simplify_product(name):
     name = str(name)
@@ -221,6 +239,16 @@ csl_revenue = [round(c[1]['revenue'], 2) for c in counselor_sorted]
 csl_orders = [c[1]['orders'] for c in counselor_sorted]
 csl_customers = [len(c[1]['customers']) for c in counselor_sorted]
 
+# 顾问人效数据（客户基盘/转化率/客均产出/流失率）
+csl_base = [base_data.get(n, {}).get('base', 0) for n in csl_names]
+csl_churn = [base_data.get(n, {}).get('churn', 0) for n in csl_names]
+csl_conv_rate = [round(len(counselor_stats[n]['customers']) / b * 100, 1) if b else 0 for n, b in zip(csl_names, csl_base)]
+csl_rev_per_cust = [round(counselor_stats[n]['revenue'] / b, 1) if b else 0 for n, b in zip(csl_names, csl_base)]
+csl_churn_rate = [round(c / (b + c) * 100, 1) if (b + c) else 0 for n, b, c in zip(csl_names, csl_base, csl_churn)]
+overall_conv = round(unique_phones / total_base * 100, 1) if total_base else 0
+overall_rev_per_cust = round(total_revenue / total_base, 1) if total_base else 0
+overall_churn_rate = round(total_churn_all / (total_base + total_churn_all) * 100, 1) if (total_base + total_churn_all) else 0
+
 # 性别
 g_labels = [g[0] for g in gender_stats.most_common()]
 g_values = [g[1] for g in gender_stats.most_common()]
@@ -345,6 +373,16 @@ tr:hover td {{ background: #fafbfc; }}
         <div class="kpi-value">{len(counselor_stats)}</div>
         <div class="kpi-sub">最新成交: {csl_names[0] if csl_names else '-'}</div>
     </div>
+    <div class="kpi-card">
+        <div class="kpi-label">👥 客户基盘</div>
+        <div class="kpi-value">{total_base:,}</div>
+        <div class="kpi-sub">{len(counselor_stats)}位顾问服务中</div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">🎯 整体转化率</div>
+        <div class="kpi-value">{overall_conv}%</div>
+        <div class="kpi-sub">{total_orders}单 / {total_base:,}客户</div>
+    </div>
 </div>
 
 <div class="highlight">
@@ -359,6 +397,17 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="card">
         <div class="card-title">🏆 顾问业绩对比</div>
         <div class="chart-wrap"><canvas id="counselorChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card">
+        <div class="card-title">🎯 顾问转化率对比</div>
+        <div class="chart-wrap"><canvas id="conversionChart"></canvas></div>
+    </div>
+    <div class="card">
+        <div class="card-title">📊 顾问客均产出（¥/客户）</div>
+        <div class="chart-wrap"><canvas id="revPerCustChart"></canvas></div>
     </div>
 </div>
 
@@ -420,15 +469,15 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="card full-width">
         <div class="card-title">📋 顾问业绩明细</div>
         <table>
-            <thead><tr><th>顾问</th><th>订单数</th><th>营收</th><th>客单价</th><th>客户数</th><th>占比</th><th>人均产出</th></tr></thead>
+            <thead><tr><th>顾问</th><th>订单数</th><th>营收</th><th>客单价</th><th>成交客户</th><th>客户基盘</th><th>转化率</th><th>客均产出</th><th>流失率</th><th>营收占比</th></tr></thead>
             <tbody>
 """
-
-for cname in csl_names:
+for i, cname in enumerate(csl_names):
     s = counselor_stats[cname]
     share = s['revenue'] / total_revenue * 100
     asp = s['revenue'] / s['orders']
     c_count = len(s['customers'])
+    b = csl_base[i]
     html += f"""
             <tr>
                 <td><strong>{cname}</strong></td>
@@ -436,11 +485,26 @@ for cname in csl_names:
                 <td>¥{s['revenue']:,.0f}</td>
                 <td>¥{asp:,.0f}</td>
                 <td>{c_count}</td>
+                <td>{b:,}</td>
+                <td><strong>{csl_conv_rate[i]}%</strong></td>
+                <td>¥{csl_rev_per_cust[i]}</td>
+                <td>{csl_churn_rate[i]}%</td>
                 <td>{share:.1f}%</td>
-                <td>¥{s['revenue']/c_count:,.0f}/人</td>
             </tr>"""
 
 html += f"""
+            <tr style="background:#f8f9fa; font-weight:600;">
+                <td>合计/均值</td>
+                <td>{total_orders}</td>
+                <td>¥{total_revenue:,.0f}</td>
+                <td>¥{avg_order:,.0f}</td>
+                <td>{unique_phones}</td>
+                <td>{total_base:,}</td>
+                <td><strong>{overall_conv}%</strong></td>
+                <td>¥{overall_rev_per_cust}</td>
+                <td>{overall_churn_rate}%</td>
+                <td>100%</td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -507,6 +571,49 @@ new Chart(document.getElementById('counselorChart'), {{
         responsive: true, maintainAspectRatio: false,
         plugins: {{ legend: {{ display: false }} }},
         scales: {{ y: {{ grid: {{ color: '#f0f0f0' }} }} }}
+    }}
+}});
+
+// 顾问转化率对比
+new Chart(document.getElementById('conversionChart'), {{
+    type: 'bar',
+    data: {{
+        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08"],
+        datasets: [{{
+            label: '转化率 (%)',
+            data: [2.3, 2.8, 1.7, 1.5, 1.8],
+            backgroundColor: COLORS.slice(0, 5),
+            borderRadius: 6,
+        }}]
+    }},
+    options: {{
+        responsive: true, maintainAspectRatio: false,
+        plugins: {{
+            legend: {{ display: false }},
+            tooltip: {{ callbacks: {{ label: function(ctx) {{ const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + [24, 21, 14, 12, 11][ci] + '单/' + [827, 745, 657, 735, 600][ci] + '客户)'; }} }} }}
+        }},
+        scales: {{
+            y: {{ beginAtZero: true, max: 3.6399999999999997, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '转化率 (%)' }} }}
+        }}
+    }}
+}});
+
+// 客均产出
+new Chart(document.getElementById('revPerCustChart'), {{
+    type: 'bar',
+    data: {{
+        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08"],
+        datasets: [{{
+            label: '客均产出 (¥)',
+            data: [16.4, 11.2, 9.6, 7.9, 7.9],
+            backgroundColor: COLORS.slice(0, 5),
+            borderRadius: 6,
+        }}]
+    }},
+    options: {{
+        responsive: true, maintainAspectRatio: false,
+        plugins: {{ legend: {{ display: false }} }},
+        scales: {{ y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '营收/客户 (¥)' }} }} }}
     }}
 }});
 
