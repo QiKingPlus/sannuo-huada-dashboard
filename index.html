@@ -71,13 +71,13 @@ tr:hover td { background: #fafbfc; }
     </div>
     <div class="kpi-card">
         <div class="kpi-label">🛒 顾问数量</div>
-        <div class="kpi-value">6</div>
+        <div class="kpi-value">5</div>
         <div class="kpi-sub">最新成交: 赵老师</div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">👥 客户基盘</div>
         <div class="kpi-value">3,564</div>
-        <div class="kpi-sub">6位顾问服务中</div>
+        <div class="kpi-sub">5位顾问服务中</div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">🎯 整体转化率</div>
@@ -87,7 +87,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="highlight">
-    ⚠️ <strong>最新动态</strong>：<br>• 2026-07-03 吴老师 畅青 ¥169（吕明）<br>• 2026-07-03 未知 轻路 ¥139（小蔡）<br>• 2026-07-02 吴老师 轻路 ¥139（马小锐）
+    ⚠️ <strong>最新动态</strong>：<br>• 2026-07-03 吴老师 畅青 ¥169（吕明）<br>• 2026-07-03 朱老师 轻路 ¥139（小蔡）<br>• 2026-07-02 吴老师 轻路 ¥139（马小锐）
 </div>
 
 <div class="dashboard">
@@ -170,7 +170,7 @@ tr:hover td { background: #fafbfc; }
         <td>3单</td>
         <td>血糖</td>
         <td>四川省 成都市</td>
-        <td>轻路、益衡+轻路套组</td>
+        <td>益衡+轻路套组、轻路</td>
     </tr>
     <tr>
         <td>2</td>
@@ -230,7 +230,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>家人健康</td>
         <td>四川省  成都市</td>
-        <td>镜脂套组（轻+阻）、益家人</td>
+        <td>益家人、镜脂套组（轻+阻）</td>
     </tr>
     <tr>
         <td>8</td>
@@ -311,15 +311,15 @@ tr:hover td { background: #fafbfc; }
             </tr>
             <tr>
                 <td><strong>朱老师</strong></td>
+                <td>13</td>
+                <td>¥5,921</td>
+                <td>¥455</td>
                 <td>12</td>
-                <td>¥5,782</td>
-                <td>¥482</td>
-                <td>11</td>
                 <td>735</td>
-                <td><strong>1.5%</strong></td>
-                <td>¥7.9</td>
+                <td><strong>1.6%</strong></td>
+                <td>¥8.1</td>
                 <td>19.0%</td>
-                <td>14.8%</td>
+                <td>15.2%</td>
             </tr>
             <tr>
                 <td><strong>黎老师</strong></td>
@@ -332,18 +332,6 @@ tr:hover td { background: #fafbfc; }
                 <td>¥7.9</td>
                 <td>20.9%</td>
                 <td>12.2%</td>
-            </tr>
-            <tr>
-                <td><strong>未知</strong></td>
-                <td>1</td>
-                <td>¥139</td>
-                <td>¥139</td>
-                <td>1</td>
-                <td>0</td>
-                <td><strong>0%</strong></td>
-                <td>¥0</td>
-                <td>0%</td>
-                <td>0.4%</td>
             </tr>
             <tr style="background:#f8f9fa; font-weight:600;">
                 <td>合计/均值</td>
@@ -363,7 +351,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-07-03 | 自动生成于 2026-07-06 09:52
+    三诺&华大私域成交数据看板 | 数据截至 2026-07-03 | 自动生成于 2026-07-06 10:08
 </div>
 
 <script>
@@ -414,9 +402,9 @@ new Chart(document.getElementById('dailyChart'), {
 new Chart(document.getElementById('counselorChart'), {
     type: 'bar',
     data: {
-        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08", "\u672a\u77e5"],
+        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08"],
         datasets: [
-            { label: '营收 (¥)', data: [13546.33, 8540.85, 6278.95, 5781.67, 4745.8, 139.0], backgroundColor: COLORS.slice(0, 6), borderRadius: 6 }
+            { label: '营收 (¥)', data: [13546.33, 8540.85, 6278.95, 5920.67, 4745.8], backgroundColor: COLORS.slice(0, 5), borderRadius: 6 }
         ]
     },
     options: {
@@ -506,7 +494,7 @@ new Chart(document.getElementById('demandChart'), {
     type: 'polarArea',
     data: {
         labels: ["\u8840\u7cd6", "\u8f7b\u4f53", "\u80a0\u80c3", "\u7761\u7720", "\u4ee3\u8c22", "\u5bb6\u4eba\u5065\u5eb7"],
-        datasets: [{ data: [45, 18, 10, 8, 1, 1], backgroundColor: ['#667eea','#764ba2','#f093fb','#4facfe','#ff6b6b','#2ecc71','#f39c12'], borderWidth: 2, borderColor: '#fff' }]
+        datasets: [{ data: [46, 18, 10, 8, 1, 1], backgroundColor: ['#667eea','#764ba2','#f093fb','#4facfe','#ff6b6b','#2ecc71','#f39c12'], borderWidth: 2, borderColor: '#fff' }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,
@@ -519,7 +507,7 @@ new Chart(document.getElementById('genderChart'), {
     type: 'doughnut',
     data: {
         labels: ["\u7537", "\u5973"],
-        datasets: [{ data: [43, 40], backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }]
+        datasets: [{ data: [44, 40], backgroundColor: ['#4facfe','#f093fb'], borderWidth: 3, borderColor: '#fff' }]
     },
     options: {
         responsive: true, maintainAspectRatio: false,
@@ -528,7 +516,7 @@ new Chart(document.getElementById('genderChart'), {
 });
 
 // 性别×年龄堆叠柱状图（含总体）
-const gaMale = [2, 8, 13, 13, 6];
+const gaMale = [3, 8, 13, 13, 6];
 const gaFemale = [1, 5, 11, 10, 12];
 const gaTotal = gaMale.map((v,i) => v + gaFemale[i]);
 new Chart(document.getElementById('genderAgeChart'), {
