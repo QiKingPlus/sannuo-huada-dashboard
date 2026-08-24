@@ -52,3 +52,8 @@
 - 复制为 index.html，git commit & push 成功 (f8d4965)
 - 顾问：赵38.2%/吴24.5%/朱15.7%/黎13.1%/王8.5%
 - 益衡+轻路套组6单¥10,789仍为营收王，轻路28单为量王
+2026-08-19 17:23 自动更新看板: 重建三诺华大数据看板.html (133单/¥75,113.33, 截至8-19)，同步index.html，提交并推送 main@284ff86 成功。注: 原 update_dashboard.sh 缺失，已用 build_dashboard.py 等效重建。
+
+2026-08-20 17:20 自动更新看板: 运行 build_dashboard.py（原 update_dashboard.sh 仍缺失，等效重建），133单/¥75,113.33/118客户/复购14人（与8-19持平，8-19后无新单），同步index.html，提交并推送 main@d771a76 成功。
+2026-08-21 17:39 自动更新看板: 运行 build_dashboard.py（原 update_dashboard.sh 仍缺失，等效重建），133单/¥75,113.33/118客户/复购14人（与8-19持平，末单8-19后无新单），同步index.html，本地提交 main@a139d12。注意：git push 失败——本机网络对 github.com:443 完全阻断（ICMP通但HTTPS超时），需网络恢复后手动 `git push origin main`。
+2026-08-24 10:54 手动更新看板: 重跑 build_dashboard.py（源Excel已有新单），136单/¥76,264.68/121客户/复购14人（较8/21 +3单 +¥1,151.35），同步index.html，提交 main@f219a17。git push 成功（d771a76..f219a17，含此前8/21未推送的 a139d12 一并上线）。
