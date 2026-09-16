@@ -102,6 +102,58 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="dashboard">
+    <div class="card full-width">
+        <div class="card-title">📅 月度成交趋势</div>
+        <div class="chart-wrap" style="height: 320px;"><canvas id="monthlyChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card full-width">
+        <div class="card-title">📅 月度数据明细</div>
+        <table>
+            <thead><tr><th>月份</th><th>订单数</th><th>营收</th><th>成交客户</th><th>月均客单</th></tr></thead>
+            <tbody>
+    <tr>
+        <td>2026-05</td>
+        <td>15</td>
+        <td>¥6,461</td>
+        <td>13</td>
+        <td>¥431</td>
+    </tr>
+    <tr>
+        <td>2026-06</td>
+        <td>65</td>
+        <td>¥30,305</td>
+        <td>58</td>
+        <td>¥466</td>
+    </tr>
+    <tr>
+        <td>2026-07</td>
+        <td>37</td>
+        <td>¥29,106</td>
+        <td>35</td>
+        <td>¥787</td>
+    </tr>
+    <tr>
+        <td>2026-08</td>
+        <td>31</td>
+        <td>¥15,800</td>
+        <td>29</td>
+        <td>¥510</td>
+    </tr>
+    <tr>
+        <td>2026-09</td>
+        <td>15</td>
+        <td>¥21,086</td>
+        <td>15</td>
+        <td>¥1,406</td>
+    </tr></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="dashboard">
     <div class="card">
         <div class="card-title">🎯 顾问转化率对比</div>
         <div class="chart-wrap"><canvas id="conversionChart"></canvas></div>
@@ -215,7 +267,7 @@ tr:hover td { background: #fafbfc; }
         <td>2单</td>
         <td>血糖</td>
         <td>广西壮族自治区 河池市</td>
-        <td>轻路、镜脂套组（轻+阻）</td>
+        <td>镜脂套组（轻+阻）、轻路</td>
     </tr>
     <tr>
         <td>6</td>
@@ -361,7 +413,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-09-15 | 自动生成于 2026-09-16 10:48
+    三诺&华大私域成交数据看板 | 数据截至 2026-09-15 | 自动生成于 2026-09-16 10:54
 </div>
 
 <script>
@@ -626,6 +678,57 @@ new Chart(document.getElementById('cityChart'), {
             y: {
                 ticks: { font: { size: 12 }, autoSkip: false }
             }
+        }
+    }
+});
+
+// 月度成交趋势
+new Chart(document.getElementById('monthlyChart'), {
+    type: 'bar',
+    data: {
+        labels: ["2026-05", "2026-06", "2026-07", "2026-08", "2026-09"],
+        datasets: [
+            {
+                label: '营收 (¥)',
+                data: [6460.52, 30304.75, 29105.66, 15799.85, 21086.19],
+                backgroundColor: '#667eea',
+                borderRadius: 6,
+                yAxisID: 'y',
+                order: 1
+            },
+            {
+                label: '订单数',
+                data: [15, 65, 37, 31, 15],
+                type: 'line',
+                borderColor: '#f093fb',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: '#f093fb',
+                tension: 0.3,
+                yAxisID: 'y1',
+                order: 0
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+            legend: { position: 'top', labels: { usePointStyle: true } },
+            tooltip: {
+                callbacks: {
+                    afterBody: function(items) {
+                        const i = items[0].dataIndex;
+                        return '成交客户: ' + [13, 58, 35, 29, 15][i] + '人';
+                    }
+                }
+            }
+        },
+        scales: {
+            y: { position: 'left', title: { display: true, text: '营收 (¥)' }, grid: { color: '#f0f0f0' } },
+            y1: { position: 'right', title: { display: true, text: '订单数' }, grid: { display: false }, min: 0 }
         }
     }
 });
