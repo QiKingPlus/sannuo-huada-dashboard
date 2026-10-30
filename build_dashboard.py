@@ -4,6 +4,7 @@
 import openpyxl
 import json
 import math
+import os
 from datetime import datetime
 from collections import defaultdict, Counter
 
@@ -14,24 +15,126 @@ wb = openpyxl.load_workbook(
 )
 ws = wb.active
 
+# ─── 1.0 表头驱动的列映射 ───────────────────────────────────
+# 源表列顺序曾变动（新增过「收件人」列），硬编码 row[n] 会整体错位，
+# 导致年龄图取到「件数」、需求图取到「年龄」、省份图取到「需求」。
+# 改为按表头名称定位列，源表再插列也不会错位。
+HEADER_ALIASES = {
+    'sales':    ['销售', '销售顾问', '顾问'],
+    'time_raw': ['下单时间', '下单日期', '时间'],
+    'product':  ['产品名称', '商品名称', '产品'],
+    'amount':   ['产品价格', '金额', '实付金额'],
+    'wechat':   ['微信', '微信昵称', '微信名'],
+    'recipient': ['收件人', '收货人', '姓名'],
+    'phone':    ['手机', '手机号', '联系电话', '电话'],
+    'qty':      ['件数', '数量'],
+    'gender':   ['性别'],
+    'age':      ['年龄'],
+    'demand':   ['需求', '需求类型', '健康需求'],
+    'province': ['省份', '省'],
+    'city':     ['城市', '市'],
+}
+# 兜底：旧版 12 列布局（无「收件人」）
+LEGACY_IDX = {
+    'sales': 0, 'time_raw': 1, 'product': 2, 'amount': 3, 'wechat': 4,
+    'phone': 5, 'qty': 6, 'gender': 7, 'age': 8, 'demand': 9,
+    'province': 10, 'city': 11,
+}
+
+header = [str(c).strip() if c is not None else '' for c in
+          next(ws.iter_rows(min_row=1, max_row=1, values_only=True))]
+COL = {}
+for key, aliases in HEADER_ALIASES.items():
+    for a in aliases:
+        if a in header:
+            COL[key] = header.index(a)
+            break
+    else:
+        COL[key] = LEGACY_IDX.get(key)
+
+
+def cell(row, key):
+    i = COL.get(key)
+    if i is None or i >= len(row):
+        return None
+    return row[i]
+
+
+def clean_str(v):
+    """去首尾空白（含全角空格）与内部连续空白"""
+    if v is None:
+        return ''
+    return ' '.join(str(v).replace('　', ' ').split())
+
+
+PROV_KEYWORDS = ('北京', '天津', '上海', '重庆', '河北', '山西', '辽宁', '吉林',
+                 '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南',
+                 '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南',
+                 '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆', '内蒙古',
+                 '台湾', '香港', '澳门')
+
+
+def looks_like_region(s):
+    return any(p in s for p in PROV_KEYWORDS)
+
+
+def parse_age(v):
+    """年龄必须是 1~120 的整数，否则视为缺失"""
+    if v is None or isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        n = int(v)
+    else:
+        s = str(v).strip()
+        if not s or not s.lstrip('-').isdigit():
+            return None
+        n = int(s)
+    return n if 1 <= n <= 120 else None
+
+
+def infer_demand(demand):
+    """需求列被误填为省市时返回空串，交给后处理按产品主流需求推断"""
+    d = clean_str(demand)
+    if d == '胃肠':          # 与「肠胃」为同一需求口径，统一
+        d = '肠胃'
+    return '' if looks_like_region(d) else d
+
+
 rows = []
 for row in ws.iter_rows(min_row=2, values_only=True):
     # 跳过完全空行（产品名和金额都为空），允许顾问为空的行
-    if row[2] is None and row[3] is None:
+    if cell(row, 'product') is None and cell(row, 'amount') is None:
         continue
+
+    product = clean_str(cell(row, 'product'))
+    amount = cell(row, 'amount')
+    try:
+        amount = float(amount) if amount not in (None, '') else 0.0
+    except (TypeError, ValueError):
+        amount = 0.0
+
+    gender = clean_str(cell(row, 'gender'))
+    if gender not in ('男', '女'):
+        gender = ''
+
+    wechat = clean_str(cell(row, 'wechat'))
+    recipient = clean_str(cell(row, 'recipient'))
+
     rows.append({
-        'sales': row[0] if row[0] else '未知',
-        'time_raw': row[1],
-        'product': row[2],
-        'amount': float(row[3]) if row[3] else 0,
-        'name': row[4],
-        'phone': str(row[5]) if row[5] else '',
-        'qty': str(row[6]) if row[6] else '',
-        'gender': row[7],
-        'age': int(row[8]) if row[8] else None,
-        'demand': row[9],
-        'province': row[10],
-        'city': row[11],
+        'sales': clean_str(cell(row, 'sales')) or '未知',
+        'time_raw': cell(row, 'time_raw'),
+        'product': product,
+        'amount': amount,
+        'name': recipient or wechat,          # 展示名：收件人姓名优先（与 10/07 基线一致），缺失则用微信昵称
+        'wechat': wechat,
+        'recipient': recipient,
+        'phone': clean_str(cell(row, 'phone')),
+        'qty': str(cell(row, 'qty')) if cell(row, 'qty') else '',
+        'gender': gender,
+        'age': parse_age(cell(row, 'age')),
+        'demand': infer_demand(cell(row, 'demand')),
+        'province': clean_str(cell(row, 'province')),
+        'city': clean_str(cell(row, 'city')),
     })
 
 # Parse time
@@ -51,20 +154,41 @@ for r in rows:
             r['date'] = 'unknown'
 
 # ─── 1.5 客户基盘数据 ─────────────────────────────────────
-wb2 = openpyxl.load_workbook(
-    '/Users/SaciNa/Documents/臻选&芥子/臻选私域/客户统计-按员工查看.xlsx',
-    data_only=True
-)
-ws2 = wb2.active
+# 源文件位于 iCloud Drive，离线/未下载时仅为占位文件（openpyxl 报
+# "Need authenticator"）。加载失败时回退到上次成功缓存，保证看板核心
+# 成交指标仍可正常生成；文件恢复后下次成功运行会自动刷新缓存。
+BASE_XLSX = '/Users/SaciNa/Documents/臻选&芥子/臻选私域/客户统计-按员工查看.xlsx'
+BASE_CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'base_data_cache.json')
+
+
+def load_base_data(path):
+    wb2 = openpyxl.load_workbook(path, data_only=True)
+    ws2 = wb2.active
+    bd = {}
+    for row in ws2.iter_rows(min_row=6, max_row=10, values_only=True):
+        name_raw = str(row[0]).strip()
+        bd[name_raw] = {
+            'base': int(row[1]) if row[1] else 0,
+            'new': int(row[2]) if row[2] else 0,
+            'net': int(row[3]) if row[3] else 0,
+            'churn': int(row[4]) if row[4] else 0,
+        }
+    return bd
+
+
 base_data = {}
-for row in ws2.iter_rows(min_row=6, max_row=10, values_only=True):
-    name_raw = str(row[0]).strip()
-    base_data[name_raw] = {
-        'base': int(row[1]) if row[1] else 0,
-        'new': int(row[2]) if row[2] else 0,
-        'net': int(row[3]) if row[3] else 0,
-        'churn': int(row[4]) if row[4] else 0,
-    }
+try:
+    base_data = load_base_data(BASE_XLSX)
+    with open(BASE_CACHE, 'w', encoding='utf-8') as f:
+        json.dump(base_data, f, ensure_ascii=False)
+except Exception as e:
+    print(f"[WARN] 客户基盘文件加载失败（{e}），尝试使用本地缓存")
+    if os.path.exists(BASE_CACHE):
+        with open(BASE_CACHE, 'r', encoding='utf-8') as f:
+            base_data = json.load(f)
+        print("[INFO] 已使用上次成功缓存的客户基盘数据")
+    else:
+        print("[WARN] 无本地缓存，客户基盘数据将为空")
 total_base = sum(v['base'] for v in base_data.values())
 total_churn_all = sum(v['churn'] for v in base_data.values())
 
@@ -99,6 +223,16 @@ def simplify_product(name):
 for r in rows:
     r['category'] = simplify_product(r['product'])
 
+# 需求列异常行（误填省市）：按同类产品的需求众数推断
+_prod_demand = defaultdict(Counter)
+for r in rows:
+    if r['demand']:
+        _prod_demand[r['category']][r['demand']] += 1
+for r in rows:
+    if not r['demand']:
+        cands = _prod_demand.get(r['category'])
+        r['demand'] = cands.most_common(1)[0][0] if cands else '未标注'
+
 # ─── 3. 统计计算 ───────────────────────────────────────────
 total_orders = len(rows)
 total_revenue = sum(r['amount'] for r in rows)
@@ -129,6 +263,17 @@ for r in rows:
     daily[d]['orders'] += 1
     daily[d]['revenue'] += r['amount']
 
+# 月度趋势
+monthly = defaultdict(lambda: {'orders': 0, 'revenue': 0, 'customers': set()})
+for r in rows:
+    d = r['date']
+    if d == 'unknown':
+        continue
+    m = str(d)[:7]  # YYYY-MM
+    monthly[m]['orders'] += 1
+    monthly[m]['revenue'] += r['amount']
+    monthly[m]['customers'].add(r['phone'])
+
 # 产品结构
 product_stats = defaultdict(lambda: {'orders': 0, 'revenue': 0})
 for r in rows:
@@ -144,6 +289,8 @@ gender_stats = Counter(r['gender'] for r in rows if r['gender'])
 
 # 年龄分布
 ages = [r['age'] for r in rows if r['age'] is not None]
+age_known = len(ages)
+age_missing = len(rows) - age_known
 age_groups = {'<30': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60+': 0}
 for a in ages:
     if a < 30: age_groups['<30'] += 1
@@ -183,12 +330,13 @@ for r in rows:
         hour_stats[r['datetime'].hour] += 1
 
 # 高价值Top
-top_customers = defaultdict(lambda: {'total': 0, 'orders': 0, 'products': set()})
+top_customers = defaultdict(lambda: {'total': 0, 'orders': 0, 'products': set(), 'sales': set()})
 for r in rows:
     p = r['phone']
     top_customers[p]['total'] += r['amount']
     top_customers[p]['orders'] += 1
     top_customers[p]['products'].add(r['category'])
+    top_customers[p]['sales'].add(r['sales'])
     if 'name' not in top_customers[p]:
         top_customers[p]['name'] = r['name']
         top_customers[p]['demand'] = r['demand'] or ''
@@ -217,6 +365,27 @@ province_top = province_stats.most_common(10)
 date_labels_json = json.dumps([d[0] for d in daily_sorted])
 date_revenue_json = json.dumps([round(d[1]['revenue'], 2) for d in daily_sorted])
 date_orders_json = json.dumps([d[1]['orders'] for d in daily_sorted])
+
+# 月度标签与数据
+monthly_sorted = sorted(monthly.items())
+monthly_labels = [m[0] for m in monthly_sorted]
+monthly_labels_json = json.dumps(monthly_labels)
+monthly_revenue_json = json.dumps([round(m[1]['revenue'], 2) for m in monthly_sorted])
+monthly_orders_json = json.dumps([m[1]['orders'] for m in monthly_sorted])
+monthly_customers_json = json.dumps([len(m[1]['customers']) for m in monthly_sorted])
+
+# 月度明细表
+monthly_table_rows = ""
+for m, s in monthly_sorted:
+    avg = s['revenue'] / s['orders'] if s['orders'] else 0
+    monthly_table_rows += f"""
+    <tr>
+        <td>{m}</td>
+        <td>{s['orders']}</td>
+        <td>¥{s['revenue']:,.0f}</td>
+        <td>{len(s['customers'])}</td>
+        <td>¥{avg:,.0f}</td>
+    </tr>"""
 
 # 产品数据
 prod_labels = [p[0] for p in product_sorted]
@@ -281,6 +450,7 @@ for i, (phone, data) in enumerate(top_sorted[:10], 1):
     <tr>
         <td>{i}</td>
         <td>{name}</td>
+        <td>{'、'.join(sorted(data.get('sales', [])))}</td>
         <td>{phone[:3]}****{phone[-4:]}</td>
         <td>¥{data['total']:,.0f}</td>
         <td>{data['orders']}单</td>
@@ -322,6 +492,7 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC
 .card-title {{ font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #333; display: flex; align-items: center; gap: 8px; }}
 .chart-wrap {{ position: relative; width: 100%; }}
 .chart-wrap canvas {{ max-height: 280px; }}
+.chart-note {{ margin-top: 10px; font-size: 12px; color: #888; line-height: 1.5; }}
 .full-width {{ grid-column: 1 / -1; }}
 table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
 th {{ background: #f8f9fa; padding: 10px 12px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e9ecef; }}
@@ -401,6 +572,23 @@ tr:hover td {{ background: #fafbfc; }}
 </div>
 
 <div class="dashboard">
+    <div class="card full-width">
+        <div class="card-title">📅 月度成交趋势</div>
+        <div class="chart-wrap" style="height: 320px;"><canvas id="monthlyChart"></canvas></div>
+    </div>
+</div>
+
+<div class="dashboard">
+    <div class="card full-width">
+        <div class="card-title">📅 月度数据明细</div>
+        <table>
+            <thead><tr><th>月份</th><th>订单数</th><th>营收</th><th>成交客户</th><th>月均客单</th></tr></thead>
+            <tbody>{monthly_table_rows}</tbody>
+        </table>
+    </div>
+</div>
+
+<div class="dashboard">
     <div class="card">
         <div class="card-title">🎯 顾问转化率对比</div>
         <div class="chart-wrap"><canvas id="conversionChart"></canvas></div>
@@ -430,6 +618,7 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="card">
         <div class="card-title">👥 性别×年龄分布（堆叠）</div>
         <div class="chart-wrap"><canvas id="genderAgeChart"></canvas></div>
+        <div class="chart-note">基于 {age_known} 单有年龄记录的数据统计（{age_missing} 单未填年龄，不计入分组）</div>
     </div>
 </div>
 
@@ -459,7 +648,7 @@ tr:hover td {{ background: #fafbfc; }}
     <div class="card full-width">
         <div class="card-title">⭐ 高价值客户 Top10</div>
         <table>
-            <thead><tr><th>#</th><th>姓名</th><th>手机</th><th>累计消费</th><th>订单</th><th>需求</th><th>所在地</th><th>产品</th></tr></thead>
+            <thead><tr><th>#</th><th>姓名</th><th>服务顾问</th><th>手机</th><th>累计消费</th><th>订单</th><th>需求</th><th>所在地</th><th>产品</th></tr></thead>
             <tbody>{top_cust_rows}</tbody>
         </table>
     </div>
@@ -574,15 +763,15 @@ new Chart(document.getElementById('counselorChart'), {{
     }}
 }});
 
-// 顾问转化率对比
+// 顾问转化率对比（真实数据：成交客户/客户基盘）
 new Chart(document.getElementById('conversionChart'), {{
     type: 'bar',
     data: {{
-        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08"],
+        labels: {json.dumps(csl_names)},
         datasets: [{{
             label: '转化率 (%)',
-            data: [2.3, 2.8, 1.7, 1.5, 1.8],
-            backgroundColor: COLORS.slice(0, 5),
+            data: {json.dumps(csl_conv_rate)},
+            backgroundColor: COLORS.slice(0, {len(csl_names)}),
             borderRadius: 6,
         }}]
     }},
@@ -590,23 +779,23 @@ new Chart(document.getElementById('conversionChart'), {{
         responsive: true, maintainAspectRatio: false,
         plugins: {{
             legend: {{ display: false }},
-            tooltip: {{ callbacks: {{ label: function(ctx) {{ const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + [24, 21, 14, 12, 11][ci] + '单/' + [827, 745, 657, 735, 600][ci] + '客户)'; }} }} }}
+            tooltip: {{ callbacks: {{ label: function(ctx) {{ const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + {json.dumps(csl_customers)}[ci] + '成交客户/' + {json.dumps(csl_base)}[ci] + '客户基盘)'; }} }} }}
         }},
         scales: {{
-            y: {{ beginAtZero: true, max: 3.6399999999999997, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '转化率 (%)' }} }}
+            y: {{ beginAtZero: true, grid: {{ color: '#f0f0f0' }}, title: {{ display: true, text: '转化率 (%)' }} }}
         }}
     }}
 }});
 
-// 客均产出
+// 客均产出（真实数据：营收/客户基盘）
 new Chart(document.getElementById('revPerCustChart'), {{
     type: 'bar',
     data: {{
-        labels: ["\u8d75\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08"],
+        labels: {json.dumps(csl_names)},
         datasets: [{{
             label: '客均产出 (¥)',
-            data: [16.4, 11.2, 9.6, 7.9, 7.9],
-            backgroundColor: COLORS.slice(0, 5),
+            data: {json.dumps(csl_rev_per_cust)},
+            backgroundColor: COLORS.slice(0, {len(csl_names)}),
             borderRadius: 6,
         }}]
     }},
@@ -779,6 +968,57 @@ new Chart(document.getElementById('cityChart'), {{
         }}
     }}
 }});
+
+// 月度成交趋势
+new Chart(document.getElementById('monthlyChart'), {{
+    type: 'bar',
+    data: {{
+        labels: {monthly_labels_json},
+        datasets: [
+            {{
+                label: '营收 (¥)',
+                data: {monthly_revenue_json},
+                backgroundColor: '#667eea',
+                borderRadius: 6,
+                yAxisID: 'y',
+                order: 1
+            }},
+            {{
+                label: '订单数',
+                data: {monthly_orders_json},
+                type: 'line',
+                borderColor: '#f093fb',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 5,
+                pointBackgroundColor: '#f093fb',
+                tension: 0.3,
+                yAxisID: 'y1',
+                order: 0
+            }}
+        ]
+    }},
+    options: {{
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {{ mode: 'index', intersect: false }},
+        plugins: {{
+            legend: {{ position: 'top', labels: {{ usePointStyle: true }} }},
+            tooltip: {{
+                callbacks: {{
+                    afterBody: function(items) {{
+                        const i = items[0].dataIndex;
+                        return '成交客户: ' + {monthly_customers_json}[i] + '人';
+                    }}
+                }}
+            }}
+        }},
+        scales: {{
+            y: {{ position: 'left', title: {{ display: true, text: '营收 (¥)' }}, grid: {{ color: '#f0f0f0' }} }},
+            y1: {{ position: 'right', title: {{ display: true, text: '订单数' }}, grid: {{ display: false }}, min: 0 }}
+        }}
+    }}
+}});
 </script>
 </body>
 </html>
@@ -808,6 +1048,11 @@ print()
 print("── 日成交 ──")
 for d in daily_sorted:
     print(f"  {d[0]}: {d[1]['orders']}单 ¥{d[1]['revenue']:,.0f}")
+print()
+print("── 月度成交 ──")
+for m, s in monthly_sorted:
+    avg = s['revenue'] / s['orders'] if s['orders'] else 0
+    print(f"  {m}: {s['orders']}单 ¥{s['revenue']:,.0f} 客户{len(s['customers'])}人 客单¥{avg:,.0f}")
 print()
 print("── 需求分布 ──")
 for d, c in demand_sorted:
