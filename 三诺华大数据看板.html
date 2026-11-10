@@ -77,13 +77,13 @@ tr:hover td { background: #fafbfc; }
     </div>
     <div class="kpi-card">
         <div class="kpi-label">👥 客户基盘</div>
-        <div class="kpi-value">7,180</div>
+        <div class="kpi-value">9,779</div>
         <div class="kpi-sub">6位顾问服务中</div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">🎯 整体转化率</div>
-        <div class="kpi-value">2.3%</div>
-        <div class="kpi-sub">191单 / 7,180客户</div>
+        <div class="kpi-value">1.7%</div>
+        <div class="kpi-sub">191单 / 9,779客户</div>
     </div>
 </div>
 
@@ -357,10 +357,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥45,483</td>
                 <td>¥632</td>
                 <td>60</td>
-                <td>1,718</td>
-                <td><strong>3.5%</strong></td>
-                <td>¥26.5</td>
-                <td>15.3%</td>
+                <td>2,332</td>
+                <td><strong>2.6%</strong></td>
+                <td>¥19.5</td>
+                <td>2.3%</td>
                 <td>39.0%</td>
             </tr>
             <tr>
@@ -369,10 +369,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥27,660</td>
                 <td>¥814</td>
                 <td>31</td>
-                <td>1,582</td>
-                <td><strong>2.0%</strong></td>
-                <td>¥17.5</td>
-                <td>18.4%</td>
+                <td>1,943</td>
+                <td><strong>1.6%</strong></td>
+                <td>¥14.2</td>
+                <td>0.9%</td>
                 <td>23.7%</td>
             </tr>
             <tr>
@@ -381,10 +381,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥19,634</td>
                 <td>¥785</td>
                 <td>21</td>
-                <td>973</td>
-                <td><strong>2.2%</strong></td>
-                <td>¥20.2</td>
-                <td>25.3%</td>
+                <td>1,069</td>
+                <td><strong>2.0%</strong></td>
+                <td>¥18.4</td>
+                <td>6.3%</td>
                 <td>16.8%</td>
             </tr>
             <tr>
@@ -393,10 +393,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥14,570</td>
                 <td>¥383</td>
                 <td>36</td>
-                <td>1,439</td>
-                <td><strong>2.5%</strong></td>
-                <td>¥10.1</td>
-                <td>19.2%</td>
+                <td>2,336</td>
+                <td><strong>1.5%</strong></td>
+                <td>¥6.2</td>
+                <td>0.3%</td>
                 <td>12.5%</td>
             </tr>
             <tr>
@@ -405,10 +405,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥9,120</td>
                 <td>¥434</td>
                 <td>18</td>
-                <td>1,468</td>
-                <td><strong>1.2%</strong></td>
-                <td>¥6.2</td>
-                <td>19.5%</td>
+                <td>2,099</td>
+                <td><strong>0.9%</strong></td>
+                <td>¥4.3</td>
+                <td>3.5%</td>
                 <td>7.8%</td>
             </tr>
             <tr>
@@ -429,10 +429,10 @@ tr:hover td { background: #fafbfc; }
                 <td>¥116,606</td>
                 <td>¥611</td>
                 <td>165</td>
-                <td>7,180</td>
-                <td><strong>2.3%</strong></td>
-                <td>¥16.2</td>
-                <td>19.1%</td>
+                <td>9,779</td>
+                <td><strong>1.7%</strong></td>
+                <td>¥11.9</td>
+                <td>2.3%</td>
                 <td>100%</td>
             </tr>
             </tbody>
@@ -441,7 +441,7 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <div class="footer">
-    三诺&华大私域成交数据看板 | 数据截至 2026-11-10 | 自动生成于 2026-11-10 11:45
+    三诺&华大私域成交数据看板 | 数据截至 2026-11-10 | 自动生成于 2026-11-10 11:58
 </div>
 
 <script>
@@ -511,7 +511,7 @@ new Chart(document.getElementById('conversionChart'), {
         labels: ["\u8d75\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "ella"],
         datasets: [{
             label: '转化率 (%)',
-            data: [3.5, 2.0, 2.2, 2.5, 1.2, 0],
+            data: [2.6, 1.6, 2.0, 1.5, 0.9, 0],
             backgroundColor: COLORS.slice(0, 6),
             borderRadius: 6,
         }]
@@ -520,7 +520,7 @@ new Chart(document.getElementById('conversionChart'), {
         responsive: true, maintainAspectRatio: false,
         plugins: {
             legend: { display: false },
-            tooltip: { callbacks: { label: function(ctx) { const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + [60, 31, 21, 36, 18, 1][ci] + '成交客户/' + [1718, 1582, 973, 1439, 1468, 0][ci] + '客户基盘)'; } } }
+            tooltip: { callbacks: { label: function(ctx) { const ci = ctx.dataIndex; return ctx.raw.toFixed(1) + '% (' + [60, 31, 21, 36, 18, 1][ci] + '成交客户/' + [2332, 1943, 1069, 2336, 2099, 0][ci] + '客户基盘)'; } } }
         },
         scales: {
             y: { beginAtZero: true, grid: { color: '#f0f0f0' }, title: { display: true, text: '转化率 (%)' } }
@@ -535,7 +535,7 @@ new Chart(document.getElementById('revPerCustChart'), {
         labels: ["\u8d75\u8001\u5e08", "\u6731\u8001\u5e08", "\u9ece\u8001\u5e08", "\u5434\u8001\u5e08", "\u738b\u8001\u5e08", "ella"],
         datasets: [{
             label: '客均产出 (¥)',
-            data: [26.5, 17.5, 20.2, 10.1, 6.2, 0],
+            data: [19.5, 14.2, 18.4, 6.2, 4.3, 0],
             backgroundColor: COLORS.slice(0, 6),
             borderRadius: 6,
         }]
