@@ -456,7 +456,7 @@ for i, (phone, data) in enumerate(top_sorted[:10], 1):
         <td>{data['orders']}单</td>
         <td>{data.get('demand', '')}</td>
         <td>{data.get('province', '')} {data.get('city', '')}</td>
-        <td>{'、'.join(list(data['products'])[:3])}</td>
+        <td>{'、'.join(sorted(data['products'])[:3])}</td>
     </tr>"""
 
 latest_date = max(r['date'] for r in rows if r.get('date') != 'unknown')
